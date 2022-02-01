@@ -24,23 +24,18 @@ export class QuickbarComponent implements OnInit {
     {
       id: 1,
       name: 'To-do',
-      tooltip: 'Launch To-do-list',
+      tooltip: 'Lista de tareas',
       icon: 'flaticon-list'
     },{
       id: 2,
       name: 'Reminder',
-      tooltip: 'Launch Reminders',
+      tooltip: 'Recordatorios',
       icon: 'flaticon-bell'
     },{
       id: 3,
       name: 'Notes',
-      tooltip: 'Launch Notes',
+      tooltip: 'Notas',
       icon: 'flaticon-pencil'
-    },{
-      id: 4,
-      name: 'Invite',
-      tooltip: 'Invite Members',
-      icon: 'flaticon-share-1'
     },{
       id: 5,
       name: 'Settings',

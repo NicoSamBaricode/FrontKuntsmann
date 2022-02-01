@@ -9,12 +9,12 @@
                 <app-todolist *ngIf="item.name === 'To-do'"></app-todolist>
                 <app-reminders *ngIf="item.name === 'Reminder'"></app-reminders>
                 <app-notes *ngIf="item.name === 'Notes'"></app-notes>
-                <app-invite *ngIf="item.name === 'Invite'"></app-invite>
+                
                 <app-settings *ngIf="item.name === 'Settings'"></app-settings>
             </ng-template>
         </li>
     </ul>
-    <div class="ms-configure-qa" placement="left" ngbTooltip="Configure Quick Access">
+    <div class="ms-configure-qa" placement="left" ngbTooltip="Configurar Barra">
         <a href="javascript:void(0);" (click)="toggleConfigure()">
             <i class="flaticon-hammer"></i>
         </a>

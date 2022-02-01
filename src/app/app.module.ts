@@ -11,10 +11,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PreloaderComponent } from './preloader/preloader.component';
 
+import { CrearProveedorComponent } from './components/Proveedores/crear-proveedor/crear-proveedor.component';
+import { ListProveedorComponent } from './components/Proveedores/list-proveedor/list-proveedor.component';
+
+import { MainComponent } from './components/main/main.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+
 @NgModule({
   declarations: [
     AppComponent,
-    PreloaderComponent
+    PreloaderComponent,
+    
+    CrearProveedorComponent,
+    ListProveedorComponent,
+    
+    MainComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

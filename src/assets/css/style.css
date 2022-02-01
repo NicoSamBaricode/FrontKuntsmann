@@ -1,81 +1,5 @@
 @charset "utf-8";
-/*
-Template Name: Costic - Multipurpose Bootstra 4 Admin Dashboard
-Author: Metropolitantheme
-Author URL: https://themeforest.net/user/metropolitantheme/portfolio
-Version: 1.0.0 
-*/
-/*===========================
- =  Table of Contents
-    * Keyframes
-  	* Core Styles
-      - Colors
-      - Style Reset
-      - Typography
-      - Main Panel Module
-      - Body Content
-      - Navbar
-      - Aside Navigation
-        - Aside Right
-        - Quickbar
-      - Footer
-      - Dropdowns
-    * Widgets
-    * Forms
-      - Form Elements
-      - Form Validation
-      - Form Wizard
-    * UI Elements
-      - Accordions
-      - Alerts
-      - Breadcrumbs
-      - Cards
-      - Progress Bars
-      - Buttons
-      - Badges
-      - Pagination
-      - Prelaoders
-      - Tabs
-      - Tooltips
-      - Lists
-    * Advanced UI Elements
-      - Draggables
-      - Sliders
-      - Modals
-      - Rating
-      - Tour
-      - Croppable
-      - Range Sliders
-    * Animations
-    * Icons
-    * Tables
-      - Basic Tables
-      - Data Tables
-    * Maps
-      - Google Maps
-    * Prebuilt pages
-      - Default Login and Signup
-      - Modal Login and Signup
-      - Lock screen
-      - Error 404
-      - Coming Soon
-      - User Profile
-      - Portfolio
-      - Invoice
-    * Apps
-      - Chat
-      - To-do-list
-      - Email
-    * Dashboards
-      - Web Analytics
-      - Crypto Currency
-      - Social Media
-      - Client Management
-    * Dark Theme
-    ** SETTINGS PANEL **
-    ** WELCOME PAGE **
 
-===========================*/
 
 /* ============= Keyframes ================*/
 @-webkit-keyframes notesMembers {
@@ -975,14 +899,15 @@ pre{
 }
 .side-nav .logo-sn,
 .side-nav .menu-item ul {
-  background-color: #ebebeb;
+  background-color: #000000;
 }
 .side-nav .logo-sn a{
   display: block;
-  padding: 17px 0;
+  padding: 0px;
 }
 .logo-sn a img {
-  max-width: 150px;
+  max-width: -webkit-fill-available;
+  padding-bottom: 2px;
 }
 .side-nav ul li.menu-item {
   padding: 0;

@@ -74,8 +74,7 @@ const routes: Routes = [
   { path: 'prebuilt-pages/user-profile', loadChildren: () => import('./components/pages/prebuilt-pages/user-profile/user-profile.module').then(m => m.UserProfileModule), data: { breadcrumb: "User Profile" } },
   { path: 'prebuilt-pages/invoice', loadChildren: () => import('./components/pages/prebuilt-pages/invoice/invoice.module').then(m => m.InvoiceModule), data: { breadcrumb: "Invoice" } },
   // Apps
-  { path: 'apps/chat', loadChildren: () => import('./components/pages/apps/chat/chat.module').then(m => m.ChatModule), data: { breadcrumb: "Chat" } },
-  { path: 'apps/email', loadChildren: () => import('./components/pages/apps/email/email.module').then(m => m.EmailModule), data: { breadcrumb: "Email" } },
+ 
   { path: 'apps/to-do-list', loadChildren: () => import('./components/pages/apps/to-do-list/to-do-list.module').then(m => m.ToDoListModule), data: { breadcrumb: "To-Do-List" } },
   // Additional
   { path: 'orders', loadChildren: () => import('./components/pages/orders/orders.module').then(m => m.OrdersModule), data: { breadcrumb: "Orders" } },
