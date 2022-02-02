@@ -1,9 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CrearProveedorComponent } from './components/Proveedores/crear-proveedor/crear-proveedor.component';
+import { ListProveedorComponent } from './components/Proveedores/list-proveedor/list-proveedor.component';
 
 const routes: Routes = [
   // Home
   { path: '', loadChildren: () => import('./components/pages/home/home.module').then(m => m.HomeModule), data: { breadcrumb: "Homepage" } },
+ 
+  // ruteo de paginas propias
+  { path: 'Proveedores/crear-proveedor', component: CrearProveedorComponent},
+  { path: 'Proveedores/list-proveedor', component: ListProveedorComponent},
+
   // Product
   { path: 'product/product-catalogue', loadChildren: () => import('./components/pages/product/product-catalogue/product-catalogue.module').then(m => m.ProductCatalogueModule), data: { breadcrumb: "Product Catalogue" } },
   { path: 'product/product-list', loadChildren: () => import('./components/pages/product/product-list/product-list.module').then(m => m.ProductListModule), data: { breadcrumb: "Product List" } },
