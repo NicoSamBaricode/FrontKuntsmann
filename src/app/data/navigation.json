@@ -57,12 +57,12 @@
             {
                 "id": 3.1,
                 "linktext": "Ingresar Proveedor",
-                "link": "/Proveedores/crear-proveedor"
+                "link": "/proveedores-form"
             },
             {
                 "id": 2.2,
                 "linktext": "Listar Proveedores",
-                "link": "/Proveedores/list-proveedor"
+                "link": "/proveedores-list"
             }
         ]
     },
