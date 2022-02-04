@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -10,7 +11,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class ContentComponent implements OnInit {
 
   closeResult: string;
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal, private router:Router) { }
   open(content: any) {
     this.modalService.open(content, { centered: true, windowClass: 'modal-min' });
   } 
@@ -32,6 +33,7 @@ export class ContentComponent implements OnInit {
   }
   onSubmit() {
     console.log(this.loginForm);
+    this.router.navigate(['/home']);
   }
 
 }

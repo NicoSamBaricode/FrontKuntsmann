@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CrearProveedorComponent } from './components/Proveedores/crear-proveedor/crear-proveedor.component';
-import { ListProveedorComponent } from './components/Proveedores/list-proveedor/list-proveedor.component';
 
 const routes: Routes = [
   // Home
-  { path: '', loadChildren: () => import('./components/pages/home/home.module').then(m => m.HomeModule), data: { breadcrumb: "Homepage" } },
+  { path: 'home', loadChildren: () => import('./components/pages/home/home.module').then(m => m.HomeModule), data: { breadcrumb: "Homepage" } },
  
   // ruteo de paginas propias
   { path: 'proveedores-list', loadChildren: () => import('./components/pages/proveedores/proveedores-list/proveedores-list.module').then(m => m.ProveedoresListModule), data: { breadcrumb: "Listar Proveedores" } },
@@ -70,7 +68,7 @@ const routes: Routes = [
   { path: 'dashboard/project-management', loadChildren: () => import('./components/pages/dashboard/project-management/project-management.module').then(m => m.ProjectManagementModule), data: { breadcrumb: "Project Management" } },
   { path: 'dashboard/client-management', loadChildren: () => import('./components/pages/dashboard/client-management/client-management.module').then(m => m.ClientManagementModule), data: { breadcrumb: "Client Management" } },
   // Prebuilt-pages
-  { path: 'prebuilt-pages/default-login', loadChildren: () => import('./components/pages/prebuilt-pages/default-login/default-login.module').then(m => m.DefaultLoginModule), data: { breadcrumb: "Default Login" } },
+  { path: '', loadChildren: () => import('./components/pages/prebuilt-pages/default-login/default-login.module').then(m => m.DefaultLoginModule), data: { breadcrumb: "Default Login" } },
   { path: 'prebuilt-pages/modal-login', loadChildren: () => import('./components/pages/prebuilt-pages/modal-login/modal-login.module').then(m => m.ModalLoginModule), data: { breadcrumb: "Modal Login" } },
   { path: 'prebuilt-pages/default-register', loadChildren: () => import('./components/pages/prebuilt-pages/default-register/default-register.module').then(m => m.DefaultRegisterModule), data: { breadcrumb: "Default Register" } },
   { path: 'prebuilt-pages/modal-register', loadChildren: () => import('./components/pages/prebuilt-pages/modal-register/modal-register.module').then(m => m.ModalRegisterModule), data: { breadcrumb: "Modal Register" } },
