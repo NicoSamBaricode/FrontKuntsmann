@@ -10,6 +10,8 @@ const routes: Routes = [
   // ruteo de paginas propias
   { path: 'proveedores-list', loadChildren: () => import('./components/pages/proveedores/proveedores-list/proveedores-list.module').then(m => m.ProveedoresListModule), data: { breadcrumb: "Listar Proveedores" } },
   { path: 'proveedores-form', loadChildren: () => import('./components/pages/proveedores/proveedores-form/proveedores-form.module').then(m => m.ProveedoresFormModule), data: { breadcrumb: "Crear Proveedores" } },
+  { path: 'usuarios-form', loadChildren: () => import('./components/pages/usuarios/usuarios-form/usuarios-form.module').then(m => m.UsuariosFormModule), data: { breadcrumb: "Crear Usuarios" } },
+  
   // Product
   { path: 'product/product-catalogue', loadChildren: () => import('./components/pages/product/product-catalogue/product-catalogue.module').then(m => m.ProductCatalogueModule), data: { breadcrumb: "Product Catalogue" } },
   { path: 'product/product-list', loadChildren: () => import('./components/pages/product/product-list/product-list.module').then(m => m.ProductListModule), data: { breadcrumb: "Product List" } },
@@ -89,6 +91,7 @@ const routes: Routes = [
   { path: 'widgets', loadChildren: () => import('./components/pages/widgets/widgets.module').then(m => m.WidgetsModule), data: { breadcrumb: "Widgets" } },
   { path: 'animation', loadChildren: () => import('./components/pages/animation/animation.module').then(m => m.AnimationModule), data: { breadcrumb: "Animations" } },
   { path: 'proveedores-form', loadChildren: () => import('./components/pages/proveedores/proveedores-form/proveedores-form.module').then(m => m.ProveedoresFormModule) },
+  
 
 ];
 
