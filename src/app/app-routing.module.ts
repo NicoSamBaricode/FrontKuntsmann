@@ -89,6 +89,8 @@ const routes: Routes = [
   { path: 'widgets', loadChildren: () => import('./components/pages/widgets/widgets.module').then(m => m.WidgetsModule), data: { breadcrumb: "Widgets" } },
   { path: 'animation', loadChildren: () => import('./components/pages/animation/animation.module').then(m => m.AnimationModule), data: { breadcrumb: "Animations" } },
   { path: 'proveedores-form', loadChildren: () => import('./components/pages/proveedores/proveedores-form/proveedores-form.module').then(m => m.ProveedoresFormModule) },
+  { path: 'almacenes-form', loadChildren: () => import('./components/pages/Almacenes/almacenes-form/almacenes-form.module').then(m => m.AlmacenesFormModule) },
+  { path: 'almacenes-list', loadChildren: () => import('./components/pages/Almacenes/almacenes-list/almacenes-list.module').then(m => m.AlmacenesListModule) },
   
 
 ];

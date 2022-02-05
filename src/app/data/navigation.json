@@ -1,22 +1,47 @@
 [
+   
     {
-        "id": 1,
-        "linktext": "Dashboard",
-        "iconclass": "material-icons fs-16",
-        "icon": "dashboard",
+        "id": 3,
+        "linktext": "Usuarios",
+        "iconclass": "fa fa-users fs-16",
+        "icon": "",
         "child": true,
         "submenu": [
             {
-                "id": 1.1,
-                "linktext": "Tablero",
-                "link": "/home"
+                "id": 3.1,
+                "linktext": "Ingresar Usuario",
+                "link": "/usuarios-form"
+            },
+            {
+                "id": 3.2,
+                "linktext": "Listar Usuraios",
+                "link": "/usuarios-form"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "linktext": "Proveedores",
+        "iconclass": "fa fa-truck fs-16",
+        "icon": "",
+        "child": true,
+        "submenu": [
+            {
+                "id": 4.1,
+                "linktext": "Ingresar Proveedor",
+                "link": "/proveedores-form"
+            },
+            {
+                "id": 4.2,
+                "linktext": "Listar Proveedores",
+                "link": "/proveedores-list"
             }
         ]
     },
     {
         "id": 2,
         "linktext": "Menus",
-        "iconclass": "fa fa-archive fs-16",
+        "iconclass": "fa fa-tasks fs-16",
         "icon": "",
         "child": true,
         "submenu": [
@@ -45,41 +70,99 @@
                 "linktext": "Menu Detail",
                 "link": "/product/product-detail/1"
             }
+           
         ]
     },
     {
-        "id": 3,
-        "linktext": "Proveedores",
-        "iconclass": "fa fa-truck fs-16",
+        "id": 5,
+        "linktext": "Almacenes",
+        "iconclass": "fa fa-archive fs-16",
         "icon": "",
         "child": true,
         "submenu": [
             {
-                "id": 3.1,
-                "linktext": "Ingresar Proveedor",
-                "link": "/proveedores-form"
+                "id": 5.1,
+                "linktext": "Ingresar Nuevo Almacen",
+                "link": "/almacenes-form"
             },
             {
-                "id": 2.2,
-                "linktext": "Listar Proveedores",
-                "link": "/proveedores-list"
+                "id": 5.2,
+                "linktext": "Listado de Almacenes",
+                "link": "/almacenes-list"
             }
         ]
     },
     {
-        "id": 4,
-        "linktext": "Usuarios",
-        "iconclass": "fa fa-user fs-16",
+        "id": 6,
+        "linktext": "Categorias",
+        "iconclass": "fa fa-align-justify fs-16",
         "icon": "",
         "child": true,
         "submenu": [
             {
-                "id": 4.1,
+                "id": 6.1,
                 "linktext": "Ingresar Usuario",
                 "link": "/usuarios-form"
             },
             {
-                "id": 4.2,
+                "id": 6.2,
+                "linktext": "Listar Usuraios",
+                "link": "/usuarios-form"
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "linktext": "Etapas",
+        "iconclass": "fa fa-angle-double-right fs-16",
+        "icon": "",
+        "child": true,
+        "submenu": [
+            {
+                "id": 6.1,
+                "linktext": "Ingresar Usuario",
+                "link": "/usuarios-form"
+            },
+            {
+                "id": 6.2,
+                "linktext": "Listar Usuraios",
+                "link": "/usuarios-form"
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "linktext": "Productos",
+        "iconclass": "fa fa-shopping-cart fs-16",
+        "icon": "",
+        "child": true,
+        "submenu": [
+            {
+                "id": 6.1,
+                "linktext": "Ingresar Usuario",
+                "link": "/usuarios-form"
+            },
+            {
+                "id": 6.2,
+                "linktext": "Listar Usuraios",
+                "link": "/usuarios-form"
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "linktext": "Stock",
+        "iconclass": "fa fa-retweet fs-16",
+        "icon": "",
+        "child": true,
+        "submenu": [
+            {
+                "id": 6.1,
+                "linktext": "Ingresar Usuario",
+                "link": "/usuarios-form"
+            },
+            {
+                "id": 6.2,
                 "linktext": "Listar Usuraios",
                 "link": "/usuarios-form"
             }
@@ -88,7 +171,7 @@
     {
         "id": 40,
         "linktext": "Invoice",
-        "iconclass": "fas fa-file-invoice fs-16",
+        "iconclass": "fas fa-align-justify fs-16",
         "icon": "",
         "child": true,
         "submenu": [
