@@ -9,6 +9,17 @@ const routes: Routes = [
   { path: 'proveedores-list', loadChildren: () => import('./components/pages/proveedores/proveedores-list/proveedores-list.module').then(m => m.ProveedoresListModule), data: { breadcrumb: "Listar Proveedores" } },
   { path: 'proveedores-form', loadChildren: () => import('./components/pages/proveedores/proveedores-form/proveedores-form.module').then(m => m.ProveedoresFormModule), data: { breadcrumb: "Crear Proveedores" } },
   { path: 'usuarios-form', loadChildren: () => import('./components/pages/usuarios/usuarios-form/usuarios-form.module').then(m => m.UsuariosFormModule), data: { breadcrumb: "Crear Usuarios" } },
+  { path: 'almacenes-form', loadChildren: () => import('./components/pages/Almacenes/almacenes-form/almacenes-form.module').then(m => m.AlmacenesFormModule) },
+  { path: 'almacenes-list', loadChildren: () => import('./components/pages/Almacenes/almacenes-list/almacenes-list.module').then(m => m.AlmacenesListModule) },
+  { path: 'categorias-list', loadChildren: () => import('./components/pages/Categorias/categorias-list/categorias-list.module').then(m => m.CategoriasListModule) },
+  { path: 'categorias-form', loadChildren: () => import('./components/pages/Categorias/categorias-form/categorias-form.module').then(m => m.CategoriasFormModule) },
+  { path: 'etapas-form', loadChildren: () => import('./components/pages/Etapas/etapas-form/etapas-form.module').then(m => m.EtapasFormModule) },
+  { path: 'etapas-list', loadChildren: () => import('./components/pages/Etapas/etapas-list/etapas-list.module').then(m => m.EtapasListModule) },
+  { path: 'productos-list', loadChildren: () => import('./components/pages/productos/productos-list/productos-list.module').then(m => m.ProductosListModule) },
+  { path: 'productos-form', loadChildren: () => import('./components/pages/productos/productos-form/productos-form.module').then(m => m.ProductosFormModule) },
+  { path: 'stock-form', loadChildren: () => import('./components/pages/Stock/stock-form/stock-form.module').then(m => m.StockFormModule) },
+  { path: 'stock-list', loadChildren: () => import('./components/pages/Stock/stock-list/stock-list.module').then(m => m.StockListModule) },
+  { path: 'notificaciones-list', loadChildren: () => import('./components/pages/notificaciones/notificaciones-list/notificaciones-list.module').then(m => m.NotificacionesListModule) },
   
   // Product
   { path: 'product/product-catalogue', loadChildren: () => import('./components/pages/product/product-catalogue/product-catalogue.module').then(m => m.ProductCatalogueModule), data: { breadcrumb: "Product Catalogue" } },
@@ -88,11 +99,8 @@ const routes: Routes = [
   { path: 'sales', loadChildren: () => import('./components/pages/sales/sales.module').then(m => m.SalesModule), data: { breadcrumb: "Sales" } },
   { path: 'widgets', loadChildren: () => import('./components/pages/widgets/widgets.module').then(m => m.WidgetsModule), data: { breadcrumb: "Widgets" } },
   { path: 'animation', loadChildren: () => import('./components/pages/animation/animation.module').then(m => m.AnimationModule), data: { breadcrumb: "Animations" } },
-  { path: 'proveedores-form', loadChildren: () => import('./components/pages/proveedores/proveedores-form/proveedores-form.module').then(m => m.ProveedoresFormModule) },
-  { path: 'almacenes-form', loadChildren: () => import('./components/pages/Almacenes/almacenes-form/almacenes-form.module').then(m => m.AlmacenesFormModule) },
-  { path: 'almacenes-list', loadChildren: () => import('./components/pages/Almacenes/almacenes-list/almacenes-list.module').then(m => m.AlmacenesListModule) },
-  
-
+  { path: 'usuarios-list', loadChildren: () => import('./components/pages/usuarios/usuarios-list/usuarios-list.module').then(m => m.UsuariosListModule) },
+ 
 ];
 
 @NgModule({

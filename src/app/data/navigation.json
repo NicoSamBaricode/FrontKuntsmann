@@ -15,7 +15,7 @@
             {
                 "id": 3.2,
                 "linktext": "Listar Usuraios",
-                "link": "/usuarios-form"
+                "link": "/usuarios-list"
             }
         ]
     },
@@ -101,13 +101,13 @@
         "submenu": [
             {
                 "id": 6.1,
-                "linktext": "Ingresar Usuario",
-                "link": "/usuarios-form"
+                "linktext": "Ingresar Categoria",
+                "link": "/categorias-form"
             },
             {
                 "id": 6.2,
-                "linktext": "Listar Usuraios",
-                "link": "/usuarios-form"
+                "linktext": "Listar Categorias",
+                "link": "/categorias-list"
             }
         ]
     },
@@ -119,52 +119,52 @@
         "child": true,
         "submenu": [
             {
-                "id": 6.1,
-                "linktext": "Ingresar Usuario",
-                "link": "/usuarios-form"
+                "id": 7.1,
+                "linktext": "Ingresar Etapa",
+                "link": "/etapas-form"
             },
             {
-                "id": 6.2,
-                "linktext": "Listar Usuraios",
-                "link": "/usuarios-form"
+                "id": 7.2,
+                "linktext": "Listar Etapas",
+                "link": "/etapas-list"
             }
         ]
     },
     {
-        "id": 7,
+        "id": 8,
         "linktext": "Productos",
         "iconclass": "fa fa-shopping-cart fs-16",
         "icon": "",
         "child": true,
         "submenu": [
             {
-                "id": 6.1,
-                "linktext": "Ingresar Usuario",
-                "link": "/usuarios-form"
+                "id": 8.1,
+                "linktext": "Ingresar Producto",
+                "link": "/productos-form"
             },
             {
-                "id": 6.2,
-                "linktext": "Listar Usuraios",
-                "link": "/usuarios-form"
+                "id": 8.2,
+                "linktext": "Listar Productos",
+                "link": "/productos-list"
             }
         ]
     },
     {
-        "id": 8,
+        "id": 9,
         "linktext": "Stock",
         "iconclass": "fa fa-retweet fs-16",
         "icon": "",
         "child": true,
         "submenu": [
             {
-                "id": 6.1,
-                "linktext": "Ingresar Usuario",
-                "link": "/usuarios-form"
+                "id": 9.1,
+                "linktext": "Ingresar Stock",
+                "link": "/stock-form"
             },
             {
-                "id": 6.2,
-                "linktext": "Listar Usuraios",
-                "link": "/usuarios-form"
+                "id": 9.2,
+                "linktext": "Listar Stock",
+                "link": "/stock-list"
             }
         ]
     },
