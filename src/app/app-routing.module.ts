@@ -100,6 +100,10 @@ const routes: Routes = [
   { path: 'widgets', loadChildren: () => import('./components/pages/widgets/widgets.module').then(m => m.WidgetsModule), data: { breadcrumb: "Widgets" } },
   { path: 'animation', loadChildren: () => import('./components/pages/animation/animation.module').then(m => m.AnimationModule), data: { breadcrumb: "Animations" } },
   { path: 'usuarios-list', loadChildren: () => import('./components/pages/usuarios/usuarios-list/usuarios-list.module').then(m => m.UsuariosListModule) },
+  { path: 'ventas-form', loadChildren: () => import('./components/pages/Ventas/ventas-form/ventas-form.module').then(m => m.VentasFormModule) },
+  { path: 'ventas-list', loadChildren: () => import('./components/pages/Ventas/ventas-list/ventas-list.module').then(m => m.VentasListModule) },
+  { path: 'comprobantes-list', loadChildren: () => import('./components/pages/Comprobantes/comprobantes-list/comprobantes-list.module').then(m => m.ComprobantesListModule) },
+  { path: 'comprobantes-form', loadChildren: () => import('./components/pages/Comprobantes/comprobantes-form/comprobantes-form.module').then(m => m.ComprobantesFormModule) },
  
 ];
 

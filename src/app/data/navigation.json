@@ -169,6 +169,44 @@
         ]
     },
     {
+        "id": 10,
+        "linktext": "Ventas",
+        "iconclass": "fa fa-clipboard fs-16",
+        "icon": "",
+        "child": true,
+        "submenu": [
+            {
+                "id": 10.1,
+                "linktext": "Ingresar Venta Manual",
+                "link": "/ventas-form"
+            },
+            {
+                "id": 10.2,
+                "linktext": "Listar Ventas",
+                "link": "/ventas-list"
+            }
+        ]
+    },
+    {
+        "id": 11,
+        "linktext": "Comprobantes",
+        "iconclass": "fa fa-edit fs-16",
+        "icon": "",
+        "child": true,
+        "submenu": [
+            {
+                "id": 11.1,
+                "linktext": "Ingresar comprobante Manual",
+                "link": "/comprobantes-form"
+            },
+            {
+                "id": 11.2,
+                "linktext": "Listar Comprobantes",
+                "link": "/comprobantes-list"
+            }
+        ]
+    },
+    {
         "id": 40,
         "linktext": "Invoice",
         "iconclass": "fas fa-align-justify fs-16",
