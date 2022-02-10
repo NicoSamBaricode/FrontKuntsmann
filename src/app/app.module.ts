@@ -10,6 +10,8 @@ import { ToastrModule } from "ngx-toastr";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PreloaderComponent } from './preloader/preloader.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InterceptorService } from './services/interceptor.service';
 
 
 
@@ -33,7 +35,13 @@ import { PreloaderComponent } from './preloader/preloader.component';
     ToastrModule.forRoot(),
     SortablejsModule.forRoot({ animation: 150 })
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi:true
+    },
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
