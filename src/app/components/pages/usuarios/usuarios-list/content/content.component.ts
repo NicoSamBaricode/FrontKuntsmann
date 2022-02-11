@@ -65,7 +65,7 @@ settings = {
       },
       {
         name: 'deleteAction',
-        title: '<i class="far fa-trash-alt color-red" title="delete"></i>'
+        title: '<a class="far fa-trash-alt color-red" title="delete" ></a>' + '<a (click)="open($event, item)" ></a>'
       }
     ],
     add: false,
@@ -74,7 +74,11 @@ settings = {
   },
 };
 onSearch(query: string = '') {
-  this.source.setFilter([
+  if (query.length==0) {
+    //this.source.load(this.data);
+    this.source.reset();
+  }else{
+    this.source.setFilter([
     // fields we want to include in the search
     
     {
@@ -87,6 +91,11 @@ onSearch(query: string = '') {
     },
    
   ], false);
+  }
+  
+}
+pepito(){
+  alert("borrar loco");
 }
 
   ngOnInit(): void {
