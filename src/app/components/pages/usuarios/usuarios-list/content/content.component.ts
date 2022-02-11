@@ -91,11 +91,13 @@ onSearch(query: string = '') {
     },
    
   ], false);
-  }
-  
+
+  console.log(query, this.source);
+
 }
-pepito(){
-  alert("borrar loco");
+}
+onCustom(event) {
+  alert(event)
 }
 
   ngOnInit(): void {
