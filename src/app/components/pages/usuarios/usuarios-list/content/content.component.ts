@@ -87,6 +87,13 @@ onSearch(query: string = '') {
     },
    
   ], false);
+
+  console.log(query, this.source);
+
+}
+
+onCustom(event) {
+  alert(event)
 }
 
   ngOnInit(): void {
