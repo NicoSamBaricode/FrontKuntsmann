@@ -9,7 +9,7 @@ import { ToastrModule } from "ngx-toastr";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PreloaderComponent } from './preloader/preloader.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './services/interceptor.service';
 
 
@@ -32,6 +32,7 @@ import { InterceptorService } from './services/interceptor.service';
     BrowserAnimationsModule,
     BreadcrumbModule,
     NgbModule,
+    HttpClientModule,
     ToastrModule.forRoot(),
     SortablejsModule.forRoot({ animation: 150 })
   ],

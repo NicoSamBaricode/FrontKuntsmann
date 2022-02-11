@@ -20,8 +20,8 @@ export class AuthService {
 
   login(usuario:any){
     const authData = {
-      usuario : usuario.nombre,
-      password : usuario.password
+      usuario : usuario.Email,
+      password : usuario.Password
     }
     return this.http.post(`${this.url}login`,authData)
     .pipe(

@@ -34,7 +34,7 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     NgbModule,
     SortablejsModule,
     BreadcrumbModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   exports: [TopbarComponent, SidenavComponent, QuickbarComponent, BreadcrumbComponent, HttpClientModule],
   providers: [

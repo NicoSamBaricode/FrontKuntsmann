@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import data from '../../../../../data/usuarios.json';
 import { LocalDataSource } from 'ng2-smart-table';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
@@ -9,8 +10,8 @@ import { LocalDataSource } from 'ng2-smart-table';
 export class ContentComponent implements OnInit {
 // Table
 public data = data;
-constructor() {
-  this.source = new LocalDataSource(this.data);
+constructor(private usuariosService: UsuariosService) {
+
 }
 source: LocalDataSource;
 settings = {
@@ -29,19 +30,19 @@ settings = {
       },
       filter: true
     },
-    Nombre: {
+    nombre: {
       title: 'Nombre',
       filter: true
     },
-    Apellido: {
+    apellido: {
       title: 'Apellido',
       filter: true
     },
-    Tipo: {
+    rol: {
       title: 'Tipo',
       filter: true
     },
-    Estado: {
+    estado: {
       title: 'Status',
       filter: true
     },
@@ -75,7 +76,7 @@ settings = {
 };
 onSearch(query: string = '') {
   if (query.length==0) {
-    //this.source.load(this.data);
+
     this.source.reset();
   }else{
     this.source.setFilter([
@@ -107,6 +108,12 @@ onCustom(event) {
 }
 
   ngOnInit(): void {
+    this.usuariosService.list().subscribe(
+    (resp:any)=>{
+        this.source=resp.result;
+        console.log(this.source);
+    }
+      )
   }
 
 }
