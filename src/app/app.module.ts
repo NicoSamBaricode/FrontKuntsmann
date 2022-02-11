@@ -6,12 +6,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SortablejsModule } from 'ngx-sortablejs';
 import { BreadcrumbModule } from 'angular-crumbs';
 import { ToastrModule } from "ngx-toastr";
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PreloaderComponent } from './preloader/preloader.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './services/interceptor.service';
+
 
 
 

@@ -6,7 +6,7 @@ import { PerfectScrollbarModule, PerfectScrollbarConfigInterface, PERFECT_SCROLL
 import { SortablejsModule } from 'ngx-sortablejs';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BreadcrumbModule } from 'angular-crumbs';
-
+import { HttpClientModule } from '@angular/common/http';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
@@ -33,9 +33,10 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     PerfectScrollbarModule,
     NgbModule,
     SortablejsModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    HttpClientModule
   ],
-  exports: [TopbarComponent, SidenavComponent, QuickbarComponent, BreadcrumbComponent],
+  exports: [TopbarComponent, SidenavComponent, QuickbarComponent, BreadcrumbComponent, HttpClientModule],
   providers: [
     {
       provide: PERFECT_SCROLLBAR_CONFIG,

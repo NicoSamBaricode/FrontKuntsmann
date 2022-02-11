@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Router } from '@angular/router';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-content',
@@ -9,8 +11,10 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 export class ContentComponent implements OnInit {
   defaultForm: FormGroup;
 
-  constructor() { }
-  
+  constructor(private usuariosService: UsuariosService, private router: Router) {
+
+  }
+
   ngOnInit(): void {
     // Default Form
     this.defaultForm = new FormGroup({
@@ -36,5 +40,13 @@ export class ContentComponent implements OnInit {
   }
   onSubmit() {
     console.log(this.defaultForm);
+    this.usuariosService.create(this.defaultForm)
+      .subscribe(response => {
+        console.log(response);
+        this.router.navigate(['usuarios-list']);
+      }, error => {
+        console.log(error);
+      });
+
   }
 }
