@@ -62,6 +62,7 @@ export class AuthService {
 
   isAuthenticated(): boolean{
     if ( this.userToken.length < 2 ) {
+      this.logout()
       return false;
     }
 
@@ -72,6 +73,7 @@ export class AuthService {
     if ( expiraDate > new Date() ) {
       return true;
     } else {
+      this.logout()
       return false;
     }
   }

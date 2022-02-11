@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-topbar',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private auth:AuthService) { }
   navToggle = () => {
     document.getElementById('body').classList.toggle('ms-aside-left-open');
     document.getElementById('ms-side-nav').classList.toggle('ms-aside-open');
@@ -18,6 +19,7 @@ export class TopbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.auth.isAuthenticated()
   }
 
 }

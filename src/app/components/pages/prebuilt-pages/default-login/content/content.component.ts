@@ -19,6 +19,11 @@ export class ContentComponent implements OnInit {
   loginForm: FormGroup;
 
   ngOnInit(): void {
+    if(this.auth.isAuthenticated()){
+    this.router.navigate(['/home']);
+    }
+
+
     // Login Form
     this.loginForm = new FormGroup({
       Email: new FormControl('', [
