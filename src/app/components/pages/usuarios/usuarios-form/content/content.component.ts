@@ -29,7 +29,7 @@ export class ContentComponent implements OnInit {
       pasword: new FormControl('', [
         Validators.required
       ]),
-      tipo: new FormControl('', [
+      tipo: new FormControl('1', [
         Validators.required
       ])
     });

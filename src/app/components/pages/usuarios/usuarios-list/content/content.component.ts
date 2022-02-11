@@ -65,7 +65,7 @@ settings = {
       },
       {
         name: 'deleteAction',
-        title: '<a class="far fa-trash-alt color-red" title="delete" ></a>' + '<a (click)="open($event, item)" ></a>'
+        title: '<i class="far fa-trash-alt color-red" title="delete" ></i>'
       }
     ],
     add: false,
@@ -97,7 +97,13 @@ onSearch(query: string = '') {
 }
 }
 onCustom(event) {
-  alert(event)
+  if (event.action=='deleteAction') {
+    alert("borro");
+  }
+  if (event.action=='editAction') {
+    alert("edito");
+  }
+  
 }
 
   ngOnInit(): void {
