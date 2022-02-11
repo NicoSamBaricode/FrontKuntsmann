@@ -1,0 +1,49 @@
+[
+    {
+        "id": 1,
+        "imagen": [
+            "assets/img/costic/pizza.jpg"
+            
+        ],
+        "Nombre": "Nico",
+        "Apellido": "Sammarco",
+        "Tipo": "Administrador",
+        "Estado": "Activo"
+        
+    },
+    {
+        "id": 12,
+        "imagen": [
+            "assets/img/costic/pizza.jpg"
+        ],
+        "Nombre": "Adriano",
+        "Apellido": "Geraci",
+        "Tipo": "Administrador",
+        "Estado": "Activo"
+        
+    },
+    {
+        "id": 13,
+        "imagen": [
+            "assets/img/costic/pizza.jpg"
+        ],
+        "Nombre": "Pepe",
+        "Apellido": "Argento",
+        "Tipo": "Usuario",
+        "Estado": "Activo"
+        
+    },
+    {
+        "id": 14,
+        "imagen": [
+            "assets/img/costic/pizza.jpg"
+        ],
+        "Nombre": "Jose",
+        "Apellido": "Perez",
+        "Tipo": "Gerente",
+        "Estado": "Activo"
+        
+    }
+    
+   
+]

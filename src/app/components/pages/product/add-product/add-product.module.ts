@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgBootstrapFormValidationModule } from 'ng-bootstrap-form-validation';
 
 import { AddProductRoutingModule } from './add-product-routing.module';
 import { AddProductComponent } from './add-product.component';
@@ -14,7 +16,11 @@ import { ContentComponent } from './content/content.component';
     CommonModule,
     AddProductRoutingModule,
     SharedModule,
-    NgbModule
+    NgbModule,
+    FormsModule,    
+    ReactiveFormsModule,
+    NgBootstrapFormValidationModule.forRoot(),
+    NgBootstrapFormValidationModule
   ]
 })
 export class AddProductModule { }

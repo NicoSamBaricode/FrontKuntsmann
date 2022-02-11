@@ -1,1 +1,89 @@
-<p>content usuarios form works!</p>
+<div class="ms-content-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <app-breadcrumb></app-breadcrumb>
+            <div class="ms-panel">
+                <div class="ms-panel-header">
+                    <h6>Crear Nuevo Usuario</h6>
+                </div>
+                <div class="ms-panel-body">
+                    <form [formGroup]="defaultForm" (validSubmit)="onSubmit()">
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom01">Nombre</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Ingrese Nombre"
+                                        formControlName="nombre" id="validationCustom01">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>Apellido</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Ingrese Apellido"
+                                        formControlName="apellido">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label>Email</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">@</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Ingrese Email"
+                                        formControlName="usuario">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>Contraseña</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" placeholder="Ingrese Contraseña"
+                                        formControlName="pasword">
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="form-row ">
+                            <div class="col-md-4 mb-3">
+                                <label>Tipo de usuario</label>
+                                <select class="form-control" placeholder="Tipo" formControlName="tipo">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustom12">Imagen Usuario</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="validatedCustomFile">
+                                    <label class="custom-file-label" for="validatedCustomFile">Cargar Foto</label>
+                                    <div class="invalid-feedback">Example invalid custom file feedback</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3 " style="text-align: center;">
+                                <label>Habilitar Usuario</label>
+                                <div class="sitwchCentrar">
+                                    <label class="ms-switch">
+                                        <input type="checkbox">
+                                        <span class="ms-switch-slider round"></span>
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 derecha">
+                                <button class="btn btn-primary" type="submit">Guardar</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

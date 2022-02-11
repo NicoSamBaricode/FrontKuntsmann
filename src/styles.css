@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-
+.derecha{
+	text-align: right;
+}
 @import '~perfect-scrollbar/css/perfect-scrollbar.css';
 @import '~ngx-toastr/toastr.css';
 :focus {
