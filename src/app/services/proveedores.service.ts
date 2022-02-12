@@ -14,6 +14,10 @@ export class ProveedoresService {
     return this.http.get(`${this.url}proveedores`)
   }
 
+  public getOne(id:string){
+    return this.http.get(`${this.url}proveedores/one/${id}`)
+  }
+
   public create(data:any){
     return this.http.post(`${this.url}proveedores`,data)
   }

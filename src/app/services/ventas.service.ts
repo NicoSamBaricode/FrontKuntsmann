@@ -13,6 +13,9 @@ export class VentasService {
   public list(){
     return this.http.get(`${this.url}ventas`)
   }
+  public getOne(id:string){
+    return this.http.get(`${this.url}ventas/one/${id}`)
+  }
 
   public create(data:any){
     return this.http.post(`${this.url}ventas`,data)

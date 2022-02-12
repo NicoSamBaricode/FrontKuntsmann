@@ -4,6 +4,7 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import Swal, { SweetAlertOptions } from 'sweetalert2';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
@@ -12,7 +13,7 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 export class ContentComponent implements OnInit {
   // Table
   public data = data;
-  constructor(private usuariosService: UsuariosService) {
+  constructor(private usuariosService: UsuariosService, private router:Router) {
 
   }
   @ViewChild('successSwal') public successSwal: SwalComponent;
@@ -136,7 +137,7 @@ export class ContentComponent implements OnInit {
       
     }
     if (event.action == 'editAction') {
-      alert("edito");
+      this.router.navigate(['/usuarios-form/update/'+event.data["user_id"]]);
     }
 
   }

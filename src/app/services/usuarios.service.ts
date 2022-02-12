@@ -14,6 +14,10 @@ export class UsuariosService {
     return this.http.get(`${this.url}usuarios`)
   }
 
+  public getOne(id:string){
+    return this.http.get(`${this.url}usuarios/one/${id}`)
+  }
+
   public listRoles(){
     return this.http.get(`${this.url}usuarios/roles`)
   }

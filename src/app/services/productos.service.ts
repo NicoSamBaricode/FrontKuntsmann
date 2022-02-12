@@ -14,6 +14,10 @@ export class ProductosService {
     return this.http.get(`${this.url}productos`)
   }
 
+  public getOne(id:string){
+    return this.http.get(`${this.url}productos/one/${id}`)
+  }
+
   public create(data:any){
     return this.http.post(`${this.url}productos`,data)
   }

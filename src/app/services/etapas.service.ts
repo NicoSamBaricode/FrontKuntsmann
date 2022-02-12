@@ -13,7 +13,9 @@ export class EtapasService {
   public list(){
     return this.http.get(`${this.url}etapas`)
   }
-
+  public getOne(id:string){
+    return this.http.get(`${this.url}etapas/one/${id}`)
+  }
   public create(data:any){
     return this.http.post(`${this.url}etapas`,data)
   }

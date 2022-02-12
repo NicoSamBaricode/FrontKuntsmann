@@ -14,6 +14,10 @@ export class CategoriasService {
     return this.http.get(`${this.url}categorias`)
   }
 
+  public getOne(id:string){
+    return this.http.get(`${this.url}categorias/one/${id}`)
+  }
+
   public create(data:any){
     return this.http.post(`${this.url}categorias`,data)
   }
