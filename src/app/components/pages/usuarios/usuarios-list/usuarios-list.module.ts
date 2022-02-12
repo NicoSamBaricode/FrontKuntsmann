@@ -20,7 +20,8 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     SharedModule,
     NgbModule,
     FormsModule,
-    Ng2SmartTableModule
+    Ng2SmartTableModule,
+    
   ]
 })
 export class UsuariosListModule { }
