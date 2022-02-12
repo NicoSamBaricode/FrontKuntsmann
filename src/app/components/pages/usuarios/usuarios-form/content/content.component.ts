@@ -26,16 +26,18 @@ export class ContentComponent implements OnInit {
         Validators.required,
         Validators.minLength(4),
       ]),
-      usuario: new FormControl('', [
+      email: new FormControl('', [
         Validators.required,
         Validators.minLength(4),
       ]),
-      pasword: new FormControl('', [
+      password: new FormControl('', [
         Validators.required
       ]),
-      tipo: new FormControl('1', [
+      rol: new FormControl('1', [
         Validators.required
-      ])
+      ]),
+      estado: new FormControl('1')
+      
     });
   }
   onSubmit() {
@@ -49,4 +51,5 @@ export class ContentComponent implements OnInit {
       });
 
   }
+  
 }
