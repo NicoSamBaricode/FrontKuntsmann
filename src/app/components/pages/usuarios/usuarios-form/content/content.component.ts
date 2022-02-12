@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
@@ -11,12 +11,18 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 export class ContentComponent implements OnInit {
   defaultForm: FormGroup;
 
-  constructor(private usuariosService: UsuariosService, private router: Router) {
+  constructor(private usuariosService: UsuariosService, private router: Router, private activatedRoute: ActivatedRoute) { 
 
   }
 
   ngOnInit(): void {
     // Default Form
+    const params = this.activatedRoute.snapshot.params;
+
+    if (params.id) {
+    console.log(params.id)
+    }
+
     this.defaultForm = new FormGroup({
       nombre: new FormControl('', [
         Validators.required,

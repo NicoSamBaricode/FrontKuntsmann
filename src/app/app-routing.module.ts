@@ -85,7 +85,7 @@ const routes: Routes = [
   { path: 'prebuilt-pages/modal-register', loadChildren: () => import('./components/pages/prebuilt-pages/modal-register/modal-register.module').then(m => m.ModalRegisterModule), data: { breadcrumb: "Modal Register" } },
   { path: 'prebuilt-pages/lock-screen', loadChildren: () => import('./components/pages/prebuilt-pages/lock-screen/lock-screen.module').then(m => m.LockScreenModule), data: { breadcrumb: "Lock Screen" } },
   { path: 'prebuilt-pages/coming-soon', loadChildren: () => import('./components/pages/prebuilt-pages/coming-soon/coming-soon.module').then(m => m.ComingSoonModule), data: { breadcrumb: "Coming Soon" } },
-  { path: 'prebuilt-pages/error', loadChildren: () => import('./components/pages/prebuilt-pages/error/error.module').then(m => m.ErrorModule), data: { breadcrumb: "Error 404" } },
+  { path: '**', loadChildren: () => import('./components/pages/prebuilt-pages/error/error.module').then(m => m.ErrorModule), data: { breadcrumb: "Error 404" } },
   { path: 'prebuilt-pages/faqs', loadChildren: () => import('./components/pages/prebuilt-pages/faqs/faqs.module').then(m => m.FaqsModule), data: { breadcrumb: "FAQ's" } },
   { path: 'prebuilt-pages/portfolio', loadChildren: () => import('./components/pages/prebuilt-pages/portfolio/portfolio.module').then(m => m.PortfolioModule), data: { breadcrumb: "Portfolio" } },
   { path: 'prebuilt-pages/user-profile', loadChildren: () => import('./components/pages/prebuilt-pages/user-profile/user-profile.module').then(m => m.UserProfileModule), data: { breadcrumb: "User Profile" } },
