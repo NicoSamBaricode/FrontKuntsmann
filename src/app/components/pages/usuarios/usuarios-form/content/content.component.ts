@@ -40,7 +40,7 @@ export class ContentComponent implements OnInit {
   }
   onSubmit() {
     console.log(this.defaultForm);
-    this.usuariosService.create(this.defaultForm)
+    this.usuariosService.create(this.defaultForm.value)
       .subscribe(response => {
         console.log(response);
         this.router.navigate(['usuarios-list']);
