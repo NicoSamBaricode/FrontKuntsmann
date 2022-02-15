@@ -91,6 +91,8 @@ export class ContentComponent implements OnInit {
         this.defaultForm.controls["email"].setValue(data["email"]);
         this.defaultForm.controls["rol"].setValue(data["rol_id"]);
         this.defaultForm.controls["estado"].setValue(data["estado"]);
+
+        this.defaultForm.controls['password'].setValidators(null)
         console.log(response);
       }, error => {
         console.log(error);
