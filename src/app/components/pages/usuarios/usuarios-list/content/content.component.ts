@@ -18,19 +18,19 @@ export class ContentComponent implements OnInit {
   }
   @ViewChild('successSwal') public successSwal: SwalComponent;
   Step1: SweetAlertOptions = {
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
+    title: 'Esta por eliminar un usuario',
+    text: "Esta seguro?",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete it!'
+    confirmButtonText: 'Si, Borrar!'
   };
   // Opciones del Swal exitoso
   Step2: SweetAlertOptions = {
-    title: 'Deleted!',
+    title: 'Usuario Borrado!',
     icon: 'success',
-    text: 'Your file has been deleted.'
+    text: ''
   };
   deleteQuestion() {
    
@@ -114,20 +114,22 @@ export class ContentComponent implements OnInit {
   onCustom(event) {
     if (event.action == 'deleteAction') { 
       Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        title: 'Esta por eliminar un usuario',
+        text: "Esta seguro?",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Si, Borrar!',
+        cancelButtonText: 'Cancelar'
+
       }).then((result) => {
         if (result.isConfirmed) {
           this.deleteAceptado(event.data["user_id"]);
           
           Swal.fire(
-            'Deleted!',
-            'Your file has been deleted.',
+            'Usuario eliminado con exito!',
+            '',
             'success'
           )
         }
