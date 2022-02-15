@@ -82,7 +82,7 @@ export class ContentComponent implements OnInit {
         this.defaultForm.controls["nombre"].setValue(data["nombre"]);
         this.defaultForm.controls["apellido"].setValue(data["apellido"]);
         this.defaultForm.controls["email"].setValue(data["email"]);
-        this.defaultForm.controls["rol"].setValue(data["rol"]);
+        this.defaultForm.controls["rol"].setValue(data["rol_id"]);
         this.defaultForm.controls["estado"].setValue(data["estado"]);
         console.log(response);
       }, error => {
