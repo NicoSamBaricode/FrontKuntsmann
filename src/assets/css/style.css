@@ -1439,7 +1439,7 @@ a.ms-confirm-trigger:hover{
 .dropdown-menu.show{
   visibility: visible;
      opacity: 1;
-     top: 100%!important;
+     top: 2.6rem!important;
      transform: none!important;
 }
 .dropdown-menu-right{
