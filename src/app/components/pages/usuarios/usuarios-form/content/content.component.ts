@@ -49,8 +49,7 @@ export class ContentComponent implements OnInit {
       rol: new FormControl('1', [
         Validators.required
       ]),
-      estado: new FormControl(1)
-      
+      estado: new FormControl(1)      
     });
 
     this.usuariosService.listRoles()
@@ -84,6 +83,16 @@ export class ContentComponent implements OnInit {
 
   }
 
+
+  checkIfMatchingPasswords() {
+    if(this.defaultForm.controls['password'].value == this.defaultForm.controls['password2'].value){
+      return true
+    }else{
+      return false
+    }  
+  }
+
+
   getUsusario(id:string) {
     this.usuariosService.getOne(id)
       .subscribe((response:any) => {
@@ -96,7 +105,13 @@ export class ContentComponent implements OnInit {
         this.defaultForm.controls["estado"].setValue(data["estado"]);
 
         this.defaultForm.controls['password'].setValidators(null);
-        this.defaultForm.controls['password2'].setValidators(null)
+        this.defaultForm.controls['password2'].setValidators(null);
+
+        if(data["id"]==1){
+          this.defaultForm.controls['rol'].disable();
+          this.defaultForm.controls['estado'].disable();
+        }
+
         console.log(response);
       }, error => {
         console.log(error);
