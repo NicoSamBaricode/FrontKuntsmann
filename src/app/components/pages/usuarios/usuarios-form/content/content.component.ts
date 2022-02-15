@@ -10,7 +10,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class ContentComponent implements OnInit {
   defaultForm: FormGroup;
-
+  roles:any = []
   update = false // para saber si es crear o actualizar
   constructor(private usuariosService: UsuariosService, private router: Router, private activatedRoute: ActivatedRoute) { 
 
@@ -49,6 +49,14 @@ export class ContentComponent implements OnInit {
       estado: new FormControl('1')
       
     });
+
+    this.usuariosService.listRoles()
+    .subscribe((response:any) => {
+        this.roles=response.result;
+    },(err:any)=>{
+        console.log(err);
+    }
+    )
   }
   onSubmit() {
     if (this.update) {
@@ -65,7 +73,6 @@ export class ContentComponent implements OnInit {
 
       this.usuariosService.create(this.defaultForm.value)
       .subscribe(response => {
-        console.log(response);
         this.router.navigate(['usuarios-list']);
       }, error => {
         console.log(error);
