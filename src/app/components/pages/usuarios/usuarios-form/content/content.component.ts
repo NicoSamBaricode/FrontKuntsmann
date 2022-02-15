@@ -46,7 +46,7 @@ export class ContentComponent implements OnInit {
       rol: new FormControl('1', [
         Validators.required
       ]),
-      estado: new FormControl('1')
+      estado: new FormControl(1)
       
     });
 
