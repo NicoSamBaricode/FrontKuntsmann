@@ -43,6 +43,9 @@ export class ContentComponent implements OnInit {
       password: new FormControl('', [
         Validators.required
       ]),
+      password2: new FormControl('', [
+        Validators.required
+      ]),
       rol: new FormControl('1', [
         Validators.required
       ]),
@@ -92,7 +95,8 @@ export class ContentComponent implements OnInit {
         this.defaultForm.controls["rol"].setValue(data["rol_id"]);
         this.defaultForm.controls["estado"].setValue(data["estado"]);
 
-        this.defaultForm.controls['password'].setValidators(null)
+        this.defaultForm.controls['password'].setValidators(null);
+        this.defaultForm.controls['password2'].setValidators(null)
         console.log(response);
       }, error => {
         console.log(error);
