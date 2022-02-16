@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
@@ -12,7 +12,9 @@ export class ContentComponent implements OnInit {
   defaultForm: FormGroup;
   roles:any = []
   update = false // para saber si es crear o actualizar
-  constructor(private usuariosService: UsuariosService, private router: Router, private activatedRoute: ActivatedRoute) { 
+  constructor(private usuariosService: UsuariosService,
+             private router: Router, 
+             private activatedRoute: ActivatedRoute) { 
 
   }
 
@@ -50,7 +52,9 @@ export class ContentComponent implements OnInit {
         Validators.required
       ]),
       estado: new FormControl(1)      
-    });
+    },
+      {validators : this.checkPasswords}
+    );
 
     this.usuariosService.listRoles()
     .subscribe((response:any) => {
@@ -60,6 +64,20 @@ export class ContentComponent implements OnInit {
     }
     )
   }
+
+  checkPasswords: ValidatorFn = (group: AbstractControl):  ValidationErrors | null => { 
+    let pass = group.get('password').value;
+    let confirmPass = group.get('password2').value
+
+    if(pass === confirmPass){
+      return null
+    }else {
+        // aca dispara el error
+      return {noIgual: true}
+    }
+  } 
+ 
+
   onSubmit() {
     if (this.update) {
 
