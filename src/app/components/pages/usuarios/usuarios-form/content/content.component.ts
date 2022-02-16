@@ -84,7 +84,7 @@ export class ContentComponent implements OnInit {
   }
 
 
-  checkIfMatchingPasswords() {
+  passwordIguales() {
     if(this.defaultForm.controls['password'].value == this.defaultForm.controls['password2'].value){
       return true
     }else{
