@@ -35,7 +35,7 @@ export class ContentComponent implements OnInit {
   deleteQuestion() {
    
   };
-  source: LocalDataSource;
+  source: any;  
   settings = {
     hideSubHeader: true,
     pager: {
@@ -70,8 +70,9 @@ export class ContentComponent implements OnInit {
       cancelButtonContent: 'Cancelar'
     },
     actions: {
-      columnTitle: "Acciones",
+      columnTitle:"Acciones",
       position: "right",
+      
       custom: [
 
         {
@@ -86,6 +87,7 @@ export class ContentComponent implements OnInit {
       add: false,
       edit: false,
       delete: false,
+      defaultStyle:false
     },
   };
   onSearch(query: string = '') {
@@ -148,6 +150,17 @@ export class ContentComponent implements OnInit {
     this.usuariosService.list().subscribe(
       (resp: any) => {
         this.source = resp.result;
+        this.source = this.source.map((element)=>{
+          if (element.estado==0) {
+            element.estado='Inactivo'
+           return element
+            
+          }else{
+            element.estado='Activo'
+            return element
+          }
+          
+        })
         console.log(this.source);
       }
     )
