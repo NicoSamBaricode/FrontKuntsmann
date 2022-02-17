@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 export class ContentComponent implements OnInit {
   defaultForm: FormGroup;
   update = false // para saber si es crear o actualizar
-  titulo = 'Agregar Nuevo'
+  titulo = 'Agregar'
 
   constructor(private almacenesServices: AlmacenesService,
     private router: Router,
@@ -26,6 +26,7 @@ export class ContentComponent implements OnInit {
     const params = this.activatedRoute.snapshot.params; // para obtener la id del usuario
 
     if (params.id) {
+      this.titulo="Modificar"
       this.getDatos(params.id) // para obtener los datos
       this.update = true
     } else {

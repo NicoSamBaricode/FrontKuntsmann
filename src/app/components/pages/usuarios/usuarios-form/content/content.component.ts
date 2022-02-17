@@ -13,7 +13,7 @@ export class ContentComponent implements OnInit {
   defaultForm: FormGroup;
   roles: any = []
   update = false // para saber si es crear o actualizar
-
+  titulo="Agregar"
   constructor(private usuariosService: UsuariosService,
     private router: Router,
     private activatedRoute: ActivatedRoute) {
@@ -26,6 +26,7 @@ export class ContentComponent implements OnInit {
     const params = this.activatedRoute.snapshot.params; // para obtener la id del usuario
 
     if (params.id) {
+      this.titulo = "Modificar"
       this.getUsusario(params.id) // para obtener el usuario
       this.update = true
     } else {
@@ -92,7 +93,7 @@ export class ContentComponent implements OnInit {
       })
     }
     if (this.update) {
-
+      
       this.usuariosService.update(this.activatedRoute.snapshot.params.id, this.defaultForm.value)
         .subscribe((response: any) => {
           this.router.navigate(['/usuarios-list']);
