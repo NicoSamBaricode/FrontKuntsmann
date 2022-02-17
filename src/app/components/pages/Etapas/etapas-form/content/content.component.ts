@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlmacenesService } from 'src/app/services/almacenes.service';
 import { EtapasService } from 'src/app/services/etapas.service';
 import Swal from 'sweetalert2';
 
@@ -13,8 +14,8 @@ export class ContentComponent implements OnInit {
   defaultForm: FormGroup;
   update = false // para saber si es crear o actualizar
   titulo = 'Agregar Nueva'
-
-  constructor(private etapasServices: EtapasService,
+  lugares: any = []
+  constructor(private etapasServices: EtapasService,private almacenesServices: AlmacenesService,
     private router: Router,
     private activatedRoute: ActivatedRoute) {
 
@@ -26,6 +27,7 @@ export class ContentComponent implements OnInit {
     const params = this.activatedRoute.snapshot.params; // para obtener la id del usuario
 
     if (params.id) {
+      this.titulo = 'Modificar'
       this.getDatos(params.id) // para obtener los datos
       this.update = true
     } else {
@@ -37,14 +39,21 @@ export class ContentComponent implements OnInit {
         Validators.required,
         Validators.minLength(4),
       ]),
-      lugar: new FormControl('', [
+      lugar: new FormControl(1, [
         Validators.required,
         Validators.minLength(1),
       ]),
-     
+
     }
 
     );
+    this.almacenesServices.list()
+      .subscribe((response: any) => {
+        this.lugares = response.result;
+      }, (err: any) => {
+        console.log(err);
+      }
+      )
   }
 
 
@@ -97,9 +106,9 @@ export class ContentComponent implements OnInit {
         let data = response.result[0]
 
         this.defaultForm.controls["descripcion"].setValue(data["descripcion"]);
-        this.defaultForm.controls["lugar"].setValue(data["lugar"]);
-        
+        this.defaultForm.controls["lugar"].setValue(data["lugar_id"]);
 
+      console.log(data+'data')
 
         console.log(response);
       }, error => {

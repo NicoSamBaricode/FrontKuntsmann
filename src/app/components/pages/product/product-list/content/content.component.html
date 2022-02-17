@@ -1,10 +1,9 @@
 <div class="ms-content-wrapper">
     <div class="row">
-        <div class="col-md-12">
-            <app-breadcrumb></app-breadcrumb>
+        <div class="col-md-12">            
             <div class="ms-panel">
                 <div class="ms-panel-header">
-                    <h6>Product List</h6>
+                    <h6>Listado de Menús</h6>
                 </div>
                 <div class="ms-panel-body">
                     <div class="table-responsive">
@@ -12,11 +11,11 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-3 col-md-6">
-                            <input #search class="search" class="form-control" type="text" placeholder="Search..." (keydown.enter)="onSearch(search.value)">
+                            <input #search class="search" class="form-control" type="text" placeholder="Buscar..." (keyup)="onSearch(search.value)">
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <ng2-smart-table [settings]="settings" [source]="source" class="table w-100 thead-primary"></ng2-smart-table>
+                        <ng2-smart-table [settings]="settings" [source]="source" (custom)="onCustom($event)" class="table w-100 thead-primary"></ng2-smart-table>
                     </div>
                 </div>
             </div>

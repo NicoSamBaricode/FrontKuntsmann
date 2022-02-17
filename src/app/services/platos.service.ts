@@ -14,7 +14,7 @@ export class PlatosService {
     return this.http.get(`${this.url}platos`)
   }
   public getOne(id:string){
-    return this.http.get(`${this.url}platos/${id}`)
+    return this.http.get(`${this.url}platos/one/${id}`)
   }
 
   public create(data:any){

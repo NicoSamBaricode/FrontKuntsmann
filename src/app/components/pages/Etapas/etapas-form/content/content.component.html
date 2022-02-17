@@ -16,12 +16,13 @@
                                         formControlName="descripcion" id="validationCustom01">
                                 </div>
                             </div>
+                            
                             <div class="col-md-6 mb-3">
-                                <label>Ubicación</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Ingrese Ubicacion"
-                                        formControlName="lugar">
-                                </div>
+                                <label>Almacen</label>
+                                <select class="form-control" formControlName="lugar">
+                                    <option [value]=lugar.id *ngFor ="let lugar of lugares" >{{lugar.descripcion}}</option>
+
+                                </select>
                             </div>
 
                         </div>
