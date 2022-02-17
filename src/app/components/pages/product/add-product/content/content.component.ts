@@ -84,9 +84,9 @@ export class ContentComponent implements OnInit {
         console.log(err);
       }
       )
-      this.platosService.create
+      this.platosService.listUnidades()
       .subscribe((response: any) => {
-        this.productos = response.result;
+        this.unidades = response.result;
       }, (err: any) => {
         console.log(err);
       }

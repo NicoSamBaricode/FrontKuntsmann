@@ -111,11 +111,13 @@
                     <div class="form-row ">
                         <div class="col-md-3 mb-3">
                             <label>Ingrediente</label>
-                            <select class="form-control" [(ngModel)]="ingredientes.producto_id">
-                                <option [value]=producto.id *ngFor="let producto  of productos">
+                            <select class="form-control" [(ngModel)]="ingredientes.producto_id"  >                                
+                                <option  [value]=producto.id *ngFor="let producto  of productos">
                                     {{producto.descripcion}}</option>
+                                    
 
                             </select>
+                            
                         </div>
                         <div class="col-md-3 mb-3">
                             <label>Cantidad</label>
@@ -134,7 +136,7 @@
                             </select>
                         </div>
                         <div class="col-md-3 mb-3" style="text-align: center;">
-                            <a class="btn btn-outline-danger " style="min-width: 0;margin-top: 23px;">
+                            <a class="btn btn-outline-danger " style="min-width: 0;margin-top: 23px;" (click)="agregarIngredientes()">
                                 <i class="fas fa-plus"></i></a>
                         </div>
 
