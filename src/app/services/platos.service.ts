@@ -13,6 +13,11 @@ export class PlatosService {
   public list(){
     return this.http.get(`${this.url}platos`)
   }
+
+  public listUnidades(){
+    return this.http.get(`${this.url}unidades`)
+  }
+
   public getOne(id:string){
     return this.http.get(`${this.url}platos/${id}`)
   }
