@@ -108,9 +108,6 @@ export class ContentComponent implements OnInit {
         },
 
       ], false);
-
-      console.log(query, this.source);
-
     }
   }
   onCustom(event) {
@@ -161,7 +158,6 @@ export class ContentComponent implements OnInit {
           }
           
         })
-        console.log(this.source);
       }
     )
   }

@@ -23,6 +23,6 @@ export class IngredientesService {
   }
 
   public delete(id:string){
-    return this.http.get(`${this.url}ingredientes/${id}`)
+    return this.http.delete(`${this.url}ingredientes/${id}`)
   }
 }

@@ -61,7 +61,6 @@ export class ContentComponent implements OnInit {
     },
       { validators: this.checkPasswords }
     );
-    console.log(this.defaultForm)
     this.usuariosService.listRoles()
       .subscribe((response: any) => {
         this.roles = response.result;
@@ -96,7 +95,6 @@ export class ContentComponent implements OnInit {
 
       this.usuariosService.update(this.activatedRoute.snapshot.params.id, this.defaultForm.value)
         .subscribe((response: any) => {
-          console.log(response);
           this.router.navigate(['/usuarios-list']);
         }, err => {
           console.log(err);
@@ -151,8 +149,6 @@ export class ContentComponent implements OnInit {
           this.defaultForm.controls['rol'].disable();
           this.defaultForm.controls['estado'].disable();
         }
-
-        console.log(response);
       }, error => {
         console.log(error);
         Swal.fire({

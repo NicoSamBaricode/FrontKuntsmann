@@ -24,10 +24,13 @@ export class TopbarComponent implements OnInit {
     this.usuarioService.getName()
       .subscribe((response:any) => {
         this.nombre = response.result[0]
-        console.log(this.nombre)
       },(err:any)=>{
         console.log(err);
       })
+  }
+
+  logout(){
+    this.auth.logout()
   }
 
 }

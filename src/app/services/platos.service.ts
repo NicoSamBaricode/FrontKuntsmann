@@ -26,7 +26,7 @@ export class PlatosService {
   }
 
   public delete(id:string){
-    return this.http.get(`${this.url}platos/${id}`)
+    return this.http.delete(`${this.url}platos/${id}`)
   }
 
   public imagen(data:any){
