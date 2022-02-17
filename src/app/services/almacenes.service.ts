@@ -29,6 +29,6 @@ export class AlmacenesService {
   }
 
   public delete(id:string){
-    return this.http.get(`${this.url}lugar/${id}`)
+    return this.http.delete(`${this.url}lugar/${id}`)
   }
 }

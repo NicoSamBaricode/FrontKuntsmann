@@ -50,8 +50,15 @@ export class ContentComponent implements OnInit {
 
       this.almacenesServices.update(this.activatedRoute.snapshot.params.id, this.defaultForm.value)
         .subscribe((response: any) => {
+          
+          Swal.fire({
+            title: 'Atencion',
+            text: 'Guardado exitoso',
+            icon: 'success',
+          })
           console.log(response);
           this.router.navigate(['/almacenes-list']);
+          
         }, err => {
           console.log(err);
           Swal.fire({
@@ -65,6 +72,11 @@ export class ContentComponent implements OnInit {
 
       this.almacenesServices.create(this.defaultForm.value)
         .subscribe(response => {
+          Swal.fire({
+            title: 'Atencion',
+            text: 'Guardado exitoso',
+            icon: 'success',
+          })
           this.router.navigate(['almacenes-list']);
         }, error => {
           console.log(error);
