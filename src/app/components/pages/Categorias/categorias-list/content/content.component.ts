@@ -1,10 +1,10 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
-
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CategoriasService } from 'src/app/services/categorias.service';
 import Swal, { SweetAlertOptions } from 'sweetalert2';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { Router } from '@angular/router';
 import { LocalDataSource } from 'ng2-smart-table';
+
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
@@ -13,37 +13,30 @@ import { LocalDataSource } from 'ng2-smart-table';
 export class ContentComponent implements OnInit {
   // Table
   
-  constructor(private categoriasService: CategoriasService, private router:Router) {
-
+  constructor(private categoriasService: CategoriasService, private router: Router) {
+   
   }
-  
-  source:  LocalDataSource;  
+  source: LocalDataSource;
   settings = {
     hideSubHeader: true,
     pager: {
-      perPage:10,
+      perPage: 10,
     },
-
     columns: {
-
       descripcion: {
         title: 'Nombre',
         filter: true
-      }
-     
-
+      },
     },
     delete: {
       confirmDelete: true,
-
       deleteButtonContent: 'Borrar Fila',
       saveButtonContent: 'Guardar',
       cancelButtonContent: 'Cancelar'
     },
     actions: {
-      columnTitle:"Acciones",
+      columnTitle: "Acciones",
       position: "right",
-      
       custom: [
 
         {
@@ -58,8 +51,8 @@ export class ContentComponent implements OnInit {
       add: false,
       edit: false,
       delete: false,
-      defaultStyle:false
-    },
+      defaultStyle: false
+    }
   };
   onSearch(query: string = '') {
     if (query.length == 0) {
@@ -68,20 +61,22 @@ export class ContentComponent implements OnInit {
     } else {
       this.source.setFilter([
         // fields we want to include in the search
+
         {
           field: 'descripcion',
           search: query
         },
-       
+
 
       ], false);
 
       console.log(query, this.source);
 
     }
+
   }
   onCustom(event) {
-    if (event.action == 'deleteAction') { 
+    if (event.action == 'deleteAction') {
       Swal.fire({
         title: 'Esta por eliminar un registro',
         text: "Esta seguro?",
@@ -95,7 +90,7 @@ export class ContentComponent implements OnInit {
       }).then((result) => {
         if (result.isConfirmed) {
           this.deleteAceptado(event.data["id"]);
-          
+
           Swal.fire(
             'Registro eliminado con exito!',
             '',
@@ -103,12 +98,12 @@ export class ContentComponent implements OnInit {
           )
         }
       })
-      
-        
-      
+
+
+
     }
     if (event.action == 'editAction') {
-      this.router.navigate(['/categorias-form/update/'+event.data["id"]]);
+      this.router.navigate(['/categorias-form/update/' + event.data["id"]]);
     }
 
   }
@@ -116,20 +111,20 @@ export class ContentComponent implements OnInit {
   ngOnInit(): void {
     this.categoriasService.list().subscribe(
       (resp: any) => {
-        this.source = resp.result;
-        
+        this.source = new LocalDataSource(resp.result);
+
         console.log(this.source);
       }
     )
   }
-  deleteAceptado(id:string){
+  deleteAceptado(id: string) {
     this.categoriasService.delete(id).subscribe(
       (resp: any) => {
         this.ngOnInit();
-      },error => {
+      }, error => {
         console.log(error);
       }
-      
+
     )
   }
 

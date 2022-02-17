@@ -4,6 +4,7 @@ import { AlmacenesService } from 'src/app/services/almacenes.service';
 import Swal, { SweetAlertOptions } from 'sweetalert2';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { Router } from '@angular/router';
+import { LocalDataSource } from 'ng2-smart-table';
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
@@ -16,7 +17,7 @@ export class ContentComponent implements OnInit {
 
   }
   
-  source: any;  
+  source: LocalDataSource;  
   settings = {
     hideSubHeader: true,
     pager: {
@@ -69,7 +70,7 @@ export class ContentComponent implements OnInit {
         // fields we want to include in the search
 
         {
-          field: 'Descripcion',
+          field: 'descripcion',
           search: query
         },
        
@@ -116,12 +117,13 @@ export class ContentComponent implements OnInit {
   ngOnInit(): void {
     this.almacenesService.list().subscribe(
       (resp: any) => {
-        this.source = resp.result;
+        this.source = new LocalDataSource(resp.result);
         
         console.log(this.source);
       }
     )
   }
+  
   deleteAceptado(id:string){
     this.almacenesService.delete(id).subscribe(
       (resp: any) => {
