@@ -144,6 +144,7 @@ export class ContentComponent implements OnInit {
     this.platosService.getOne(id)
       .subscribe((response: any) => {
         let data = response.result[0]
+        console.log(data);
         this.items = response.ingredientes;
         this.defaultForm.controls["descripcion"].setValue(data["descripcion"]);
         this.defaultForm.controls["articulo_id"].setValue(data["articulo_id"]);
@@ -172,8 +173,18 @@ export class ContentComponent implements OnInit {
         
         this.ingredientesService.create(ji)
         .subscribe((response: any) => {
-          console.log(response);
-          this.getData(this.id);
+          this.platosService.update(this.id, this.defaultForm.value)
+          .subscribe((response: any) => {
+            this.getData(this.id);
+          }, err => {
+            console.log(err);
+            Swal.fire({
+              title: 'Atencion',
+              text: 'No se puede guardar' + err.error.descripcion,
+              icon: 'warning',
+            })
+          })
+          
         },(err:any)=>{
           console.log(err)
         }
