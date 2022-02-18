@@ -68,7 +68,6 @@ export class ContentComponent implements OnInit {
 
       ]),
       costo: new FormControl(null, [
-        Validators.required
       ]),
       auto: new FormControl(null, [
 
@@ -101,7 +100,7 @@ export class ContentComponent implements OnInit {
 
   onSubmit() {
 
-    if (this.update) {
+    if (this.update || this.id) {
 
       this.platosService.update(this.activatedRoute.snapshot.params.id, this.defaultForm.value)
         .subscribe((response: any) => {
