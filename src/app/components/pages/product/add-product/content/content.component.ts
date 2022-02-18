@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from '@angular/router';
+import { IngredientesService } from 'src/app/services/ingredientes.service';
 import { PlatosService } from 'src/app/services/platos.service';
 import { ProductosService } from 'src/app/services/productos.service';
 
@@ -12,6 +13,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./content.component.css']
 })
 export class ContentComponent implements OnInit {
+  id = null
   defaultForm: FormGroup;
   unidades: any = []
   ingredientes: any = []
@@ -19,9 +21,11 @@ export class ContentComponent implements OnInit {
   items: any = []
   update = false // para saber si es crear o actualizar
   titulo = "Agregar"
-  constructor(private platosService: PlatosService, private productosServices: ProductosService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute) {
+  constructor(  private platosService: PlatosService,
+                private productosService: ProductosService,
+                private ingredientesService: IngredientesService,
+                private router: Router,
+                private activatedRoute: ActivatedRoute) {
 
   }
   defaultslide = [
@@ -31,53 +35,54 @@ export class ContentComponent implements OnInit {
   ngOnInit(): void {
     // Default Form
 
-    const params = this.activatedRoute.snapshot.params; // para obtener la id del usuario
+    const params = this.activatedRoute.snapshot.params; 
 
     if (params.id) {
+      this.id= params.id;
       this.titulo = "Modificar"
-      this.getData(params.id) // para obtener el usuario
+      this.getData(params.id) 
       this.update = true
     } else {
       this.update = false
     }
 
     this.defaultForm = new FormGroup({
-      descripcion: new FormControl('', [
+      descripcion: new FormControl(null, [
         Validators.required,
         Validators.minLength(4),
       ]),
-      plato_id: new FormControl('', [
+      articulo_id: new FormControl(null, [
         Validators.required,
         Validators.minLength(1),
       ]),
-      imagen: new FormControl('', [
+      imagen: new FormControl(null, [
 
 
       ]),
-      info: new FormControl('', [
+      info: new FormControl(null, [
 
       ]),
-      preparacion: new FormControl('', [
+      preparacion: new FormControl(null, [
 
 
 
       ]),
-      costo: new FormControl('', [
+      costo: new FormControl(null, [
         Validators.required
       ]),
-      auto: new FormControl('', [
+      auto: new FormControl(null, [
 
       ]),
-      precio: new FormControl('', [
+      precio: new FormControl(null, [
         Validators.required
       ]),
-      margen: new FormControl('', [
+      margen: new FormControl(null, [
 
       ]),
     },
 
     );
-    this.productosServices.list()
+    this.productosService.list()
       .subscribe((response: any) => {
         this.productos = response.result;
       }, (err: any) => {
@@ -140,9 +145,9 @@ export class ContentComponent implements OnInit {
     this.platosService.getOne(id)
       .subscribe((response: any) => {
         let data = response.result[0]
-
+        this.items = response.ingredientes;
         this.defaultForm.controls["descripcion"].setValue(data["descripcion"]);
-        this.defaultForm.controls["plato_id"].setValue(data["plato_id"]);
+        this.defaultForm.controls["articulo_id"].setValue(data["articulo_id"]);
         this.defaultForm.controls["imagen"].setValue(data["imagen"]);
         this.defaultForm.controls["info"].setValue(data["info"]);
         this.defaultForm.controls["preparacion"].setValue(data["preparacion"]);
@@ -150,12 +155,6 @@ export class ContentComponent implements OnInit {
         this.defaultForm.controls["precio"].setValue(data["precio"]);
         this.defaultForm.controls["margen"].setValue(data["margen"]);
         this.defaultForm.controls["auto"].setValue(data["auto"]);
-
-
-
-        this.defaultForm.controls['plato_id'].disable();
-
-
       }, error => {
         console.log(error);
         Swal.fire({
@@ -166,6 +165,63 @@ export class ContentComponent implements OnInit {
       });
   }
   agregarIngredientes() {
-   console.log(this.ingredientes)
+    if(this.id){
+      if (!!this.ingredientes.producto_id && !!this.ingredientes.cantidad && !!this.ingredientes.unidad) {
+
+        let ji = {"plato_id":this.id,"producto_id":this.ingredientes.producto_id,"cantidad":this.ingredientes.cantidad,"unidad":this.ingredientes.unidad}
+        console.log(ji)
+        
+        this.ingredientesService.create(ji)
+        .subscribe((response: any) => {
+          console.log(response);
+          this.getData(this.id);
+        },(err:any)=>{
+          console.log(err)
+        }
+        )
+
+
+
+         } else {
+           Swal.fire({
+               title: 'Atencion',
+               text: 'Debe llenar ingrediente, cantidad y unidad',
+               icon: 'warning',
+           })
+         }
+    }else{
+      this.platosService.create(this.defaultForm.value)
+        .subscribe((response:any) => {
+          this.id=response['id'];
+          this.getData(this.id);
+        }, error => {
+          console.log(error);
+          if (error.error.descripcion === 'ER_DUP_ENTRY') {
+            Swal.fire({
+              title: 'Atencion',
+              text: 'Ya existe ',
+              icon: 'warning',
+            })
+          } else {
+            Swal.fire({
+              title: 'Atencion',
+              text: 'Contactar al servicio técnico Baricode ' + error.error.descripcion,
+              icon: 'error',
+            })
+          }
+
+        });
+    }
+
+
+  }
+
+  eliminar_ingrediente(id: string) {
+    this.ingredientesService.delete(id)
+      .subscribe((response: any) => {
+        this.getData(this.id);
+      }, (err: any) => {
+        console.log(err);
+      });
   }
 }

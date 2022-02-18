@@ -22,7 +22,7 @@
                                         <label>Identificador</label>
                                         <div class="input-group">
                                             <input type="text" class="form-control" placeholder="Ingrese Identificador"
-                                                formControlName="plato_id">
+                                                formControlName="articulo_id">
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
@@ -151,15 +151,17 @@
                                             <th scope="col">Ingredientes</th>
                                             <th scope="col">Cantidad</th>
                                             <th scope="col">Unidad</th>
+                                            <th scope="col">Costo</th>
                                             <th scope="col">Acción</th>
                                         </tr>
                                     </thead>
                                     <tbody id="body_tabla">
                                         <tr *ngFor="let item of items">
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td><i class="far fa-trash-alt color-red"></i></td>
+                                            <td>{{item.descripcion}}</td>
+                                            <td>{{item.cantidad}}</td>
+                                            <td>{{item.unidad}}</td>
+                                            <td>{{item.costo}}</td>
+                                            <td><i class="far fa-trash-alt color-red" (click)="eliminar_ingrediente(item.id)"></i></td>
                                         </tr>
                                     </tbody>
                                 </table>
