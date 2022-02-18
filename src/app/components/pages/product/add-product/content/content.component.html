@@ -58,6 +58,76 @@
 
 
                                 </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-12 derecha flotante">
+                                        <button class="btn btn-primary" type="submit">Guardar</button>
+                                    </div>
+                                </div>
+        
+                                <div class="form-row ">
+                                    <div class="col-md-3 mb-3">
+                                        <label>Ingrediente</label>
+                                        <select class="form-control" [(ngModel)]="ingredientes.producto_id"  formControlName="productosNO">
+                                            <option [value]=producto.id *ngFor="let producto  of productos">
+                                                {{producto.descripcion}}</option>
+        
+        
+                                        </select>
+        
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Cantidad</label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" placeholder="Cantidad"
+                                                [(ngModel)]="ingredientes.cantidad"  formControlName="cantidadNO">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Unidad</label>
+                                        <select class="form-control" [(ngModel)]="ingredientes.unidad"  formControlName="unidadesNO">
+                                            <option [value]=unidad.id *ngFor="let unidad  of unidades">
+                                                {{unidad.descripcion}}
+                                            </option>
+        
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3" style="text-align: center;">
+                                        <a class="btn btn-outline-danger " style="min-width: 0;margin-top: 23px;"
+                                            (click)="agregarIngredientes()">
+                                            <i class="fas fa-plus"></i></a>
+                                    </div>
+        
+        
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-12 mb-3">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover thead-primary mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Ingredientes</th>
+                                                        <th scope="col">Cantidad</th>
+                                                        <th scope="col">Unidad</th>
+                                                        <th scope="col">Costo</th>
+                                                        <th scope="col">Acción</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="body_tabla">
+                                                    <tr *ngFor="let item of items">
+                                                        <td>{{item.descripcion}}</td>
+                                                        <td>{{item.cantidad}}</td>
+                                                        <td>{{item.unidad}}</td>
+                                                        <td>{{item.costo}}</td>
+                                                        <td><i class="far fa-trash-alt color-red"
+                                                                (click)="eliminar_ingrediente(item.id)"></i></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-row">
                                     <div class="col-md-3 mb-3">
                                         <label>Costo</label>
@@ -67,7 +137,7 @@
                                             </div>
                                             <input type="number" class="form-control" placeholder="Ingrese Costo"
                                                 formControlName="costo">
-
+        
                                         </div>
                                     </div>
                                     <div class="col-md-3 mb-3 " style="text-align: left;">
@@ -78,7 +148,7 @@
                                                 <span class="ms-switch-slider round"></span>
                                             </label>
                                         </div>
-
+        
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Precio</label>
@@ -94,86 +164,22 @@
                                                 formControlName="margen" readonly>
                                         </div>
                                     </div>
-
+        
                                 </div>
+
+
+
                             </div>
                             <div class="col-md-3 mb-3 derecha">
                                 <img src="./assets/img/costic/cereals.jpg" id="foto_menu" class="img-thumbnail"
                                     style="text-align: right;" alt="Foto">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12 derecha flotante">
-                                <button class="btn btn-primary" type="submit">Guardar</button>
-                            </div>
-                        </div>
+                       
                     </form>
-                    <div class="form-row ">
-                        <div class="col-md-3 mb-3">
-                            <label>Ingrediente</label>
-                            <select class="form-control" [(ngModel)]="ingredientes.producto_id"  >                                
-                                <option  [value]=producto.id *ngFor="let producto  of productos">
-                                    {{producto.descripcion}}</option>
-                                    
-
-                            </select>
-                            
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label>Cantidad</label>
-                            <div class="input-group">
-                                <input type="number" class="form-control" placeholder="Cantidad"
-                                    [(ngModel)]="ingredientes.cantidad">
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label>Unidad</label>
-                            <select class="form-control" [(ngModel)]="ingredientes.unidad">
-                                <option [value]=unidad.id *ngFor="let unidad  of unidades">
-                                    {{unidad.descripcion}}
-                                </option>
-
-                            </select>
-                        </div>
-                        <div class="col-md-3 mb-3" style="text-align: center;">
-                            <a class="btn btn-outline-danger " style="min-width: 0;margin-top: 23px;" (click)="agregarIngredientes()">
-                                <i class="fas fa-plus"></i></a>
-                        </div>
-
-
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-12 mb-3">
-                            <div class="table-responsive">
-                                <table class="table table-hover thead-primary mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Ingredientes</th>
-                                            <th scope="col">Cantidad</th>
-                                            <th scope="col">Unidad</th>
-                                            <th scope="col">Costo</th>
-                                            <th scope="col">Acción</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="body_tabla">
-                                        <tr *ngFor="let item of items">
-                                            <td>{{item.descripcion}}</td>
-                                            <td>{{item.cantidad}}</td>
-                                            <td>{{item.unidad}}</td>
-                                            <td>{{item.costo}}</td>
-                                            <td><i class="far fa-trash-alt color-red" (click)="eliminar_ingrediente(item.id)"></i></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                
+
             </div>
-
-            
-
 
         </div>
     </div>
