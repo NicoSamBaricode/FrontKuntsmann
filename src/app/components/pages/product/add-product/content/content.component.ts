@@ -78,6 +78,15 @@ export class ContentComponent implements OnInit {
       margen: new FormControl(null, [
 
       ]),
+      productosNO: new FormControl(null, [
+
+      ]),
+      unidadesNO: new FormControl(null, [
+
+      ]),
+      cantidadNO: new FormControl(null, [
+
+      ]),
     },
 
     );
