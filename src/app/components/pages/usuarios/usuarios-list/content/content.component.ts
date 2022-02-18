@@ -1,10 +1,11 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import data from '../../../../../data/usuarios.json';
 import { LocalDataSource } from 'ng2-smart-table';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import Swal, { SweetAlertOptions } from 'sweetalert2';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { Router } from '@angular/router';
+import { attr } from 'highcharts';
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 export class ContentComponent implements OnInit {
   // Table
   public data = data;
-  constructor(private usuariosService: UsuariosService, private router:Router) {
+  constructor(private usuariosService: UsuariosService, private router: Router) {
 
   }
   @ViewChild('successSwal') public successSwal: SwalComponent;
@@ -33,7 +34,7 @@ export class ContentComponent implements OnInit {
     text: ''
   };
   deleteQuestion() {
-   
+
   };
   source: LocalDataSource;
   settings = {
@@ -54,11 +55,13 @@ export class ContentComponent implements OnInit {
       },
       rol: {
         title: 'Tipo',
-        filter: true
+        filter: true,
+        
       },
       estado: {
         title: 'Status',
-        filter: true
+        filter: true,
+
       },
 
     },
@@ -69,14 +72,17 @@ export class ContentComponent implements OnInit {
       saveButtonContent: 'Guardar',
       cancelButtonContent: 'Cancelar'
     },
+
     actions: {
       columnTitle: "Acciones",
       position: "right",
+
       custom: [
 
         {
           name: 'editAction',
-          title: '<i class="far fa-edit" title="Edit"></i>'
+          title: '<i class="far fa-edit" title="Edit"></i>',
+
         },
         {
           name: 'deleteAction',
@@ -112,7 +118,7 @@ export class ContentComponent implements OnInit {
     }
   }
   onCustom(event) {
-    if (event.action == 'deleteAction') { 
+    if (event.action == 'deleteAction') {
       Swal.fire({
         title: 'Esta por eliminar un usuario',
         text: "Esta seguro?",
@@ -126,7 +132,7 @@ export class ContentComponent implements OnInit {
       }).then((result) => {
         if (result.isConfirmed) {
           this.deleteAceptado(event.data["user_id"]);
-          
+
           Swal.fire(
             'Usuario eliminado con exito!',
             '',
@@ -134,12 +140,12 @@ export class ContentComponent implements OnInit {
           )
         }
       })
-      
-        
-      
+
+
+
     }
     if (event.action == 'editAction') {
-      this.router.navigate(['/usuarios-form/update/'+event.data["user_id"]]);
+      this.router.navigate(['/usuarios-form/update/' + event.data["user_id"]]);
     }
 
   }
@@ -152,14 +158,14 @@ export class ContentComponent implements OnInit {
       }
     )
   }
-  deleteAceptado(id:string){
+  deleteAceptado(id: string) {
     this.usuariosService.delete(id).subscribe(
       (resp: any) => {
         this.ngOnInit();
-      },error => {
+      }, error => {
         console.log(error);
       }
-      
+
     )
   }
 
