@@ -23,10 +23,9 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     UsuariosFormRoutingModule,
     SharedModule,
     NgbModule,
-    FormsModule,
-    Ng2SmartTableModule,
-    FormsModule,
     
+    Ng2SmartTableModule,
+    FormsModule,    
     ReactiveFormsModule,
     NgBootstrapFormValidationModule.forRoot(),
     NgBootstrapFormValidationModule

@@ -1,1 +1,42 @@
-<p>content etapas form works!</p>
+<div class="ms-content-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            
+            <div class="ms-panel">
+                <div class="ms-panel-header">
+                    <h6>{{titulo}} Etapa</h6>
+                </div>
+                <div class="ms-panel-body">
+                    <form [formGroup]="defaultForm" (validSubmit)="onSubmit()">
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom01">Nombre</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Ingrese Nombre"
+                                        formControlName="descripcion" id="validationCustom01">
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label>Almacen</label>
+                                <select class="form-control" formControlName="lugar">
+                                    <option [value]=lugar.id *ngFor ="let lugar of lugares" >{{lugar.descripcion}}</option>
+
+                                </select>
+                            </div>
+
+                        </div>
+                       
+                        
+                        <div class="row">
+                            <div class="col-md-12 derecha">
+                                <button class="btn btn-primary" type="submit">Guardar</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

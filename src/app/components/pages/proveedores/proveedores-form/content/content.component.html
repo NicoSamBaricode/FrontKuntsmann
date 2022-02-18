@@ -1,1 +1,71 @@
-<p>content proveedores form works!</p>
+<div class="ms-content-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            
+            <div class="ms-panel">
+                <div class="ms-panel-header">
+                    <h6>{{titulo}} Proveedor</h6>
+                </div>
+                <div class="ms-panel-body">
+                    <form [formGroup]="defaultForm" (validSubmit)="onSubmit()">
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom01">Nombre</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Ingrese Nombre"
+                                        formControlName="descripcion" id="validationCustom01">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>Cuil</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="Ingrese Cuil"
+                                        formControlName="cuil">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label>Email</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">@</span>
+                                    </div>
+                                    <input type="email" class="form-control" placeholder="Ingrese Email"
+                                        formControlName="email">
+                                        <div class="invalid-feedback">Ingrese Mail valido</div>
+                                        
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label>Dirección</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Ingrese Dirección"
+                                        formControlName="direccion">
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label>Teléfono</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control"  placeholder="Ingrese Teléfono"
+                                        formControlName="telefono"> 
+                                      
+                                       
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-12 derecha">
+                                <button class="btn btn-primary" type="submit">Guardar</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

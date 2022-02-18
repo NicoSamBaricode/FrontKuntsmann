@@ -23,6 +23,6 @@ export class ConfiguracionService {
   }
 
   public delete(id:string){
-    return this.http.get(`${this.url}configuracion/${id}`)
+    return this.http.delete(`${this.url}configuracion/${id}`)
   }
 }

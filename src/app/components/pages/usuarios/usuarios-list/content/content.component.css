@@ -12,3 +12,7 @@
   :host /deep/ ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom:hover {
     color: #5dcfe3;
   }
+
+  .ancho{
+    max-width: 20px !important;
+  }

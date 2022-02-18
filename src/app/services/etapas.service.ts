@@ -25,6 +25,6 @@ export class EtapasService {
   }
 
   public delete(id:string){
-    return this.http.get(`${this.url}etapas/${id}`)
+    return this.http.delete(`${this.url}etapas/${id}`)
   }
 }

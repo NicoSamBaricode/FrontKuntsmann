@@ -4,7 +4,7 @@
             
             <div class="ms-panel">
                 <div class="ms-panel-header">
-                    <h6>Crear Nuevo Usuario</h6>
+                    <h6>{{titulo}} Usuario</h6>
                 </div>
                 <div class="ms-panel-body">
                     <form [formGroup]="defaultForm" (validSubmit)="onSubmit()">
@@ -34,7 +34,8 @@
                                     </div>
                                     <input type="email" class="form-control" placeholder="Ingrese Email"
                                         formControlName="email">
-                                        <div class="invalid-feedback">Ingrese un mail Valido</div>
+                                        <div class="invalid-feedback">Ingrese Mail valido</div>
+                                        
                                 </div>
                             </div>
                             <div class="col-md-3 mb-3">
@@ -47,9 +48,10 @@
                             <div class="col-md-3 mb-3">
                                 <label>Confirmar Contraseña</label>
                                 <div class="input-group">
-                                    <input type="password" class="form-control" placeholder="Confirme Contraseña"
-                                        formControlName="password2">
-                                        <div class="invalid-feedback">Las contraseñas no coinciden</div>
+                                    <input type="password" class="form-control"  placeholder="Confirme Contraseña"
+                                        formControlName="password2"> 
+                                      
+                                       
                                 </div>
                             </div>
                             

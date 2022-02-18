@@ -47,28 +47,18 @@
         "submenu": [
             {
                 "id": 2.1,
-                "linktext": "Menu Catalogue",
-                "link": "/product/product-catalogue"
-            },
+                "linktext": "Agregar Menú",
+                "link": "/product/add-product"
+            },            
             {
                 "id": 2.2,
-                "linktext": "Menu List",
+                "linktext": "Listado de Menú",
                 "link": "/product/product-list"
             },
             {
                 "id": 2.3,
-                "linktext": "Menu Grid",
+                "linktext": "Grilla de Menú",
                 "link": "/product/product-grid"
-            },
-            {
-                "id": 2.4,
-                "linktext": "Add Menu",
-                "link": "/product/add-product"
-            },
-            {
-                "id": 2.5,
-                "linktext": "Menu Detail",
-                "link": "/product/product-detail/1"
             }
            
         ]

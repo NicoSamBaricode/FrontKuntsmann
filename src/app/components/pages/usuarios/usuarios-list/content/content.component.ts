@@ -36,7 +36,7 @@ export class ContentComponent implements OnInit {
   deleteQuestion() {
 
   };
-  source: LocalDataSource;
+  source: LocalDataSource;  
   settings = {
     hideSubHeader: true,
     pager: {
@@ -74,9 +74,9 @@ export class ContentComponent implements OnInit {
     },
 
     actions: {
-      columnTitle: "Acciones",
+      columnTitle:"Acciones",
       position: "right",
-
+      
       custom: [
 
         {
@@ -92,6 +92,7 @@ export class ContentComponent implements OnInit {
       add: false,
       edit: false,
       delete: false,
+      defaultStyle:false
     },
   };
   onSearch(query: string = '') {
@@ -103,18 +104,15 @@ export class ContentComponent implements OnInit {
         // fields we want to include in the search
 
         {
-          field: 'Nombre',
+          field: 'nombre',
           search: query
         },
         {
-          field: 'Apellido',
+          field: 'apellido',
           search: query
         },
 
       ], false);
-
-      console.log(query, this.source);
-
     }
   }
   onCustom(event) {
@@ -152,9 +150,20 @@ export class ContentComponent implements OnInit {
 
   ngOnInit(): void {
     this.usuariosService.list().subscribe(
-      (resp: any) => {
-        this.source = resp.result;
-        console.log(this.source);
+      (resp: any) => {        
+        
+        let aux = resp.result.map((element)=>{
+          if (element.estado==0) {
+            element.estado='Inactivo'
+           return element
+            
+          }else{
+            element.estado='Activo'
+            return element
+          }
+          
+        })
+        this.source = new LocalDataSource(aux);
       }
     )
   }

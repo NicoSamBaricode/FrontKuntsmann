@@ -27,6 +27,6 @@ export class ProductosService {
   }
 
   public delete(id:string){
-    return this.http.get(`${this.url}productos/${id}`)
+    return this.http.delete(`${this.url}productos/${id}`)
   }
 }

@@ -13,8 +13,13 @@ export class PlatosService {
   public list(){
     return this.http.get(`${this.url}platos`)
   }
+
+  public listUnidades(){
+    return this.http.get(`${this.url}unidades`)
+  }
+
   public getOne(id:string){
-    return this.http.get(`${this.url}platos/${id}`)
+    return this.http.get(`${this.url}platos/one/${id}`)
   }
 
   public create(data:any){
@@ -26,7 +31,7 @@ export class PlatosService {
   }
 
   public delete(id:string){
-    return this.http.get(`${this.url}platos/${id}`)
+    return this.http.delete(`${this.url}platos/${id}`)
   }
 
   public imagen(data:any){
