@@ -175,44 +175,12 @@ export class ContentComponent implements OnInit {
   }
   agregarIngredientes() {
     if(this.id){
-      if (!!this.ingredientes.producto_id && !!this.ingredientes.cantidad && !!this.ingredientes.unidad) {
-
-        let ji = {"plato_id":this.id,"producto_id":this.ingredientes.producto_id,"cantidad":this.ingredientes.cantidad,"unidad":this.ingredientes.unidad}
-        console.log(ji)
-        
-        this.ingredientesService.create(ji)
-        .subscribe((response: any) => {
-          this.platosService.update(this.id, this.defaultForm.value)
-          .subscribe((response: any) => {
-            this.getData(this.id);
-          }, err => {
-            console.log(err);
-            Swal.fire({
-              title: 'Atencion',
-              text: 'No se puede guardar' + err.error.descripcion,
-              icon: 'warning',
-            })
-          })
-          
-        },(err:any)=>{
-          console.log(err)
-        }
-        )
-
-
-
-         } else {
-           Swal.fire({
-               title: 'Atencion',
-               text: 'Debe llenar ingrediente, cantidad y unidad',
-               icon: 'warning',
-           })
-         }
+      this.addItem()
     }else{
       this.platosService.create(this.defaultForm.value)
         .subscribe((response:any) => {
           this.id=response['id'];
-          this.getData(this.id);
+          this.addItem()
         }, error => {
           console.log(error);
           if (error.error.descripcion === 'ER_DUP_ENTRY') {
@@ -243,4 +211,46 @@ export class ContentComponent implements OnInit {
         console.log(err);
       });
   }
+
+
+
+  addItem() {
+    if (!!this.ingredientes.producto_id && !!this.ingredientes.cantidad && !!this.ingredientes.unidad) {
+
+      let ji = {"plato_id":this.id,"producto_id":this.ingredientes.producto_id,"cantidad":this.ingredientes.cantidad,"unidad":this.ingredientes.unidad}
+     
+      this.ingredientesService.create(ji)
+      .subscribe((response: any) => {
+        this.platosService.update(this.id, this.defaultForm.value)
+        .subscribe((response: any) => {
+          this.getData(this.id);
+        }, err => {
+          console.log(err);
+          Swal.fire({
+            title: 'Atencion',
+            text: 'No se puede guardar' + err.error.descripcion,
+            icon: 'warning',
+          })
+        })
+        
+      },(err:any)=>{
+        console.log(err)
+      }
+      )
+
+
+
+       } else {
+         Swal.fire({
+             title: 'Atencion',
+             text: 'Debe llenar ingrediente, cantidad y unidad',
+             icon: 'warning',
+         })
+       }
+
+  }
+
+
+
+
 }
