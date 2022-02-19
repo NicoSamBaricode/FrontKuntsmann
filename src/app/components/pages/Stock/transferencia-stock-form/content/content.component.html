@@ -1,0 +1,131 @@
+<div class="ms-content-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="ms-panel">
+                <div class="ms-panel-header">
+                    <h6>Transpaso de Stock</h6>
+                </div>
+                <div class="ms-panel-body">
+                    <form [formGroup]="defaultForm" (validSubmit)="onSubmit()">
+                        <div class="form-row">
+                            <div class="col-md-12 mb-3">
+                                <div class="form-row">
+                                    
+                                    <div class="col-md-3 mb-3">
+                                        <label>Producto</label>
+                                        <div class="input-group">
+                                            <input disable type="text" class="form-control"  readonly
+                                            formControlName="producto_id">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Marca</label>
+                                        <div class="input-group">
+                                            <input  type="text" class="form-control"  readonly
+                                                formControlName="marca">
+                                        </div>
+                                    </div>
+                                    
+                                   
+                                    <div class="col-md-3 mb-3">
+                                        <label>Lote</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Ingrese lote"
+                                                formControlName="lote">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3 mb-3">
+                                        <label>Unidad</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" readonly
+                                                formControlName="unidad">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-3 mb-3">
+                                        <label>Stock Total Lote</label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" readonly
+                                                formControlName="cantidadTotal">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-3 mb-3">
+                                        <label>Cantidad a Transferir</label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" placeholder="Ingrese Cantidad a Transferir"
+                                                formControlName="cantidad">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Cantidad Efectiva</label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" placeholder="Ingrese Cantidad Efectiva a transferir"
+                                                formControlName="cantidadEfectiva">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Almacén de Destino</label>
+                                        <select class="form-control"   formControlName="almacen">
+                                            <option [value]=almacen.id *ngFor="let almacen  of almacenes">
+                                                {{almacen.descripcion}}
+                                            </option>
+        
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Etapa</label>
+                                        <select class="form-control"   formControlName="etapa">
+                                            <option [value]=etapa.id *ngFor="let etapa  of etapas">
+                                                {{etapa.descripcion}}
+                                            </option>
+        
+                                        </select>
+                                    </div>
+                                  
+
+                                </div>
+                                <div class="form-row ">
+                                    <div class="col-md-12 mb-3">
+                                        <label>Observaciones</label>
+                                        <div class="input-group">
+                                            <textarea class="form-control" formControlName="descripcion"
+                                                id="exampleFormControlTextarea1" rows="3"
+                                                placeholder="Ingrese Descripción"></textarea>
+                                        </div>
+                                    </div>
+                                   
+
+
+
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-12 derecha">
+                                        <button class="btn btn-primary" type="submit">Guardar</button>
+                                    </div>
+                                </div>
+        
+                              
+                                
+                                
+        
+                                </div>
+
+
+
+                            </div>
+                            
+                        
+                       
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
