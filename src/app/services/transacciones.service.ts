@@ -13,6 +13,9 @@ export class TransaccionesService {
   public list(){
     return this.http.get(`${this.url}transacciones`)
   }
+  public getOne(id:string){
+    return this.http.get(`${this.url}transacciones/one/${id}`)
+  }
 
   public create(data:any){
     return this.http.post(`${this.url}transacciones`,data)

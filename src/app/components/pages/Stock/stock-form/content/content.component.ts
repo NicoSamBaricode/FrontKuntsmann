@@ -65,7 +65,6 @@ export class ContentComponent implements OnInit {
       ]),
       remito: new FormControl(null, [
 
-
       ]),
       marca: new FormControl(null, [
 
@@ -97,9 +96,7 @@ export class ContentComponent implements OnInit {
       etapa: new FormControl(null, [
         
       ]),
-      costo: new FormControl(null, [
-      ]),
-      
+     
       precio: new FormControl(null, [
         Validators.required
       ]),
