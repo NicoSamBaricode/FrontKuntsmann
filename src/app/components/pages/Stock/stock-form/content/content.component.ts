@@ -8,6 +8,7 @@ import { TransaccionesService } from 'src/app/services/transacciones.service';
 import { AlmacenesService } from 'src/app/services/almacenes.service';
 import { ProveedoresService } from 'src/app/services/proveedores.service';
 import { EtapasService } from 'src/app/services/etapas.service';
+
 import Swal from 'sweetalert2';
 
 @Component({
@@ -43,16 +44,6 @@ export class ContentComponent implements OnInit {
   ngOnInit(): void {
     // Default Form
 
-    const params = this.activatedRoute.snapshot.params;
-
-    if (params.id) {
-      this.id = params.id;
-      this.titulo = "Modificar"
-      this.getData(params.id)
-      this.update = true
-    } else {
-      this.update = false
-    }
 
     this.defaultForm = new FormGroup({
       descripcion: new FormControl(null, [
@@ -184,108 +175,9 @@ export class ContentComponent implements OnInit {
 
   }
 
-  getData(id: string) {
-    this.platosService.getOne(id)
-      .subscribe((response: any) => {
-        let data = response.result[0]
-        console.log(data);
-        this.items = response.ingredientes;
-        this.defaultForm.controls["descripcion"].setValue(data["descripcion"]);
-        this.defaultForm.controls["articulo_id"].setValue(data["articulo_id"]);
-        this.defaultForm.controls["imagen"].setValue(data["imagen"]);
-        this.defaultForm.controls["info"].setValue(data["info"]);
-        this.defaultForm.controls["preparacion"].setValue(data["preparacion"]);
-        this.defaultForm.controls["costo"].setValue(data["costo"]);
-        this.defaultForm.controls["precio"].setValue(data["precio"]);
-        this.defaultForm.controls["margen"].setValue(data["margen"]);
-        this.defaultForm.controls["auto"].setValue(data["auto"]);
-      }, error => {
-        console.log(error);
-        Swal.fire({
-          title: 'Atencion',
-          text: 'No hay conexion con base de datos' + error.error.descripcion,
-          icon: 'warning',
-        })
-      });
-  }
-  agregarIngredientes() {
-    if (this.id) {
-      this.addItem()
-    } else {
-      this.platosService.create(this.defaultForm.value)
-        .subscribe((response: any) => {
-          this.id = response['id'];
-          this.addItem()
-        }, error => {
-          console.log(error);
-          if (error.error.descripcion === 'ER_DUP_ENTRY') {
-            Swal.fire({
-              title: 'Atencion',
-              text: 'Ya existe ',
-              icon: 'warning',
-            })
-          } else {
-            Swal.fire({
-              title: 'Atencion',
-              text: 'Contactar al servicio técnico Baricode ' + error.error.descripcion,
-              icon: 'error',
-            })
-          }
+ 
+ 
 
-        });
-    }
-
-
-  }
-
-  eliminar_ingrediente(id: string) {
-    this.ingredientesService.delete(id)
-      .subscribe((response: any) => {
-        this.getData(this.id);
-      }, (err: any) => {
-        console.log(err);
-      });
-  }
-
-
-
-  addItem() {
-    if (!!this.ingredientes.producto_id && !!this.ingredientes.cantidad && !!this.ingredientes.unidad) {
-
-      let ji = { "plato_id": this.id, "producto_id": this.ingredientes.producto_id, "cantidad": this.ingredientes.cantidad, "unidad": this.ingredientes.unidad }
-
-      this.ingredientesService.create(ji)
-        .subscribe((response: any) => {
-          this.platosService.update(this.id, this.defaultForm.value)
-            .subscribe((response: any) => {
-              this.getData(this.id);
-            }, err => {
-              console.log(err);
-              Swal.fire({
-                title: 'Atencion',
-                text: 'No se puede guardar' + err.error.descripcion,
-                icon: 'warning',
-              })
-            })
-
-        }, (err: any) => {
-          console.log(err)
-        }
-        )
-
-
-
-    } else {
-      Swal.fire({
-        title: 'Atencion',
-        text: 'Debe llenar ingrediente, cantidad y unidad',
-        icon: 'warning',
-      })
-    }
-
-  }
-
-
-
+ 
 
 }
