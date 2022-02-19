@@ -97,8 +97,6 @@ export class ContentComponent implements OnInit {
 
       ], false);
 
-      console.log(query, this.source);
-
     }
   }
   onCustom(event) {
@@ -138,8 +136,6 @@ export class ContentComponent implements OnInit {
     this.platosService.list().subscribe(
       (resp: any) => {
         this.source = new LocalDataSource(resp.result);
-
-        console.log(this.source);
       }
     )
   }
