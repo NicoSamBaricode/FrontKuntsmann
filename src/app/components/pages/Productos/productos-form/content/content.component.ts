@@ -38,6 +38,10 @@ export class ContentComponent implements OnInit {
         Validators.required,
         Validators.minLength(2),
       ]),
+      claseMedida: new FormControl('1', [ //aca el nombre tiene que coincidir con el nombre la columna de la base
+        Validators.required,
+        
+      ]),
       
 
     }
@@ -95,7 +99,7 @@ export class ContentComponent implements OnInit {
         let data = response.result[0]
 
         this.defaultForm.controls["descripcion"].setValue(data["descripcion"]);
-       
+        this.defaultForm.controls["claseMedida"].setValue(data["claseMedida"]);
 
         console.log(response);
       }, error => {

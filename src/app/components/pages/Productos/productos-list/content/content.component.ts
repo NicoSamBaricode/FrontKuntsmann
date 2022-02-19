@@ -30,6 +30,10 @@ export class ContentComponent implements OnInit {
         title: 'Nombre',
         filter: true
       },
+      claseMedida: {
+        title: 'Unidad de medida',
+        filter: true
+      },
       
 
     },
