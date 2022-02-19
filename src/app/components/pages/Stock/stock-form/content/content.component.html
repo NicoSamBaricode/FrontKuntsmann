@@ -4,12 +4,12 @@
 
             <div class="ms-panel">
                 <div class="ms-panel-header">
-                    <h6>Nuevo Movimiento de Stock</h6>
+                    <h6>Nuevo Ingreso de Stock</h6>
                 </div>
                 <div class="ms-panel-body">
                     <form [formGroup]="defaultForm" (validSubmit)="onSubmit()">
                         <div class="form-row">
-                            <div class="col-md-9 mb-3">
+                            <div class="col-md-12 mb-3">
                                 <div class="form-row">
                                     <div class="col-md-3 mb-3">
                                         <label>Producto</label>
@@ -68,6 +68,15 @@
                                         <select class="form-control"  formControlName="proveedor_id">
                                             <option [value]=proveedor.id *ngFor="let proveedor  of proveedores">
                                                 {{proveedor.descripcion}}
+                                            </option>
+        
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Unidad</label>
+                                        <select class="form-control"  formControlName="unidad">
+                                            <option [value]=unidad.id *ngFor="let unidad  of unidades">
+                                                {{unidad.descripcion}}
                                             </option>
         
                                         </select>
