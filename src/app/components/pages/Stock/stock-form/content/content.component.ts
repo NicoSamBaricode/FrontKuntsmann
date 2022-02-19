@@ -87,6 +87,10 @@ export class ContentComponent implements OnInit {
       etapa: new FormControl(null, [
         
       ]),
+
+      unidad: new FormControl(null, [
+        
+      ]),
      
       precio: new FormControl(null, [
         Validators.required
