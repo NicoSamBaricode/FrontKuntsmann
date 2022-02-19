@@ -104,6 +104,7 @@ const routes: Routes = [
   { path: 'ventas-list', loadChildren: () => import('./components/pages/Ventas/ventas-list/ventas-list.module').then(m => m.VentasListModule) },
   { path: 'comprobantes-list', loadChildren: () => import('./components/pages/Comprobantes/comprobantes-list/comprobantes-list.module').then(m => m.ComprobantesListModule) },
   { path: 'comprobantes-form', loadChildren: () => import('./components/pages/Comprobantes/comprobantes-form/comprobantes-form.module').then(m => m.ComprobantesFormModule) },
+  { path: 'transferenciaStock-form', loadChildren: () => import('./components/pages/Stock/transferencia-stock-form/transferencia-stock-form.module').then(m => m.TransferenciaStockFormModule) },
  
 ];
 
