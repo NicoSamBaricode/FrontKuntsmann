@@ -139,25 +139,10 @@ export class ContentComponent implements OnInit {
 
   onSubmit() {
 
-    if (this.update || this.id) {
-
-      this.platosService.update(this.activatedRoute.snapshot.params.id, this.defaultForm.value)
-        .subscribe((response: any) => {
-          this.router.navigate(['/product/product-list']);
-        }, err => {
-          console.log(err);
-          Swal.fire({
-            title: 'Atencion',
-            text: 'No se puede guardar' + err.error.descripcion,
-            icon: 'warning',
-          })
-        })
-
-    } else {
-
-      this.platosService.create(this.defaultForm.value)
+      this.transaccionesService.create(this.defaultForm.value)
         .subscribe(response => {
-          this.router.navigate(['/product/product-list']);
+          console.log(response);
+          //this.router.navigate(['/product/product-list']);
         }, error => {
           console.log(error);
           if (error.error.descripcion === 'ER_DUP_ENTRY') {
@@ -178,10 +163,3 @@ export class ContentComponent implements OnInit {
     }
 
   }
-
- 
- 
-
- 
-
-}
