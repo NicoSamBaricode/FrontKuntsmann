@@ -19,10 +19,11 @@ export class ContentComponent implements OnInit {
   
   
   source: LocalDataSource;  
+  source2: LocalDataSource; 
   settings = {
     hideSubHeader: true,
     pager: {
-      perPage: 10,
+      perPage: 4,
     },
 
     columns: {
@@ -35,20 +36,8 @@ export class ContentComponent implements OnInit {
         title: 'Producto',
         filter: true
       },
-      marca: {
-        title: 'Marca',
-        filter: true,
-        
-      },
-      lote: {
-        title: 'Lote',
-        filter: true,
-        
-      },numeroComprobante: {
-        title: 'Comprobante',
-        filter: true,
-
-      },      
+      
+            
       cantidad: {
         title: 'Cantidad',
         filter: true,
@@ -58,32 +47,69 @@ export class ContentComponent implements OnInit {
         title: 'Unidad',
         filter: true,
 
-      },fechaIngreso: {
-        title: 'Ingreso',
+      }      
+     
+      
+    },
+    
+
+    actions: {
+      columnTitle:"Acciones",
+      position: "right",
+      
+      custom: [
+
+        {
+          name: 'editAction',
+          title: '<i class="fas fa-share-square " title="Mover Stock"></i>',
+
+        },
+        {
+          name: 'deleteAction',
+          title: '<i class="fas fa-plus-square" title="Detalles" ></i>'
+        }
+      ],
+      add: false,
+      edit: false,
+      delete: false,
+      defaultStyle:false
+    },
+  };
+  settings2 = {
+    hideSubHeader: true,
+    pager: {
+      perPage: 4,
+    },
+
+    columns: {
+
+      id: {
+        title: 'Identificador',
+        filter: true
+      },
+      producto: {
+        title: 'Producto',
+        filter: true
+      },
+      
+            
+      cantidad: {
+        title: 'Cantidad',
         filter: true,
 
       },
-      fechaVencimiento: {
-        title: 'Vencimiento',
+      unidad: {
+        title: 'Unidad',
         filter: true,
 
-      },
+      } ,
       etapa: {
         title: 'Etapa',
         filter: true,
 
-      },
-      tipo: {
-        title: 'Tipo',
-        filter: true,
-
-      },
-      usuario: {
-        title: 'Usuario',
-        filter: true,
-
-      }
-
+      }      
+     
+      
     },
     
 
@@ -149,7 +175,57 @@ export class ContentComponent implements OnInit {
       ], false);
     }
   }
+  onSearch2(query: string = '') {
+    if (query.length == 0) {
+
+      this.source2.reset();
+    } else {
+      this.source2.setFilter([
+        // fields we want to include in the search
+
+        {
+          field: 'id',
+          search: query
+        },
+        {
+          field: 'producto',
+          search: query
+        },
+        {
+          field: 'marca',
+          search: query
+        },
+        {
+          field: 'numeroComprobante',
+          search: query
+        },
+        {
+          field: 'etapa',
+          search: query
+        },
+        {
+          field: 'usuario',
+          search: query
+        },
+        {
+          field: 'tipo',
+          search: query
+        },
+
+      ], false);
+    }
+  }
   onCustom(event) {
+    if (event.action == 'deleteAction') {
+      this.router.navigate(['/stock-form/update/' + event.data["user_id"]]);
+
+    }
+    if (event.action == 'editAction') {
+      this.router.navigate(['/transferencia-stock-form/update/' + event.data["user_id"]]);
+    }
+
+  }
+  onCustom2(event) {
     if (event.action == 'deleteAction') {
       this.router.navigate(['/stock-form/update/' + event.data["user_id"]]);
 
@@ -161,11 +237,20 @@ export class ContentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.transaccionesService.list().subscribe(
+    this.transaccionesService.stock().subscribe(
       (resp: any) => {        
         
         let aux = resp.result
         this.source = new LocalDataSource(aux);
+        console.log(aux)
+      }
+    )
+
+    this.transaccionesService.stockEtapas().subscribe(
+      (resp: any) => {        
+        
+        let aux = resp.result
+        this.source2 = new LocalDataSource(aux);
         console.log(aux)
       }
     )
