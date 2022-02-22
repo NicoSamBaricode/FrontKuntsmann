@@ -153,8 +153,13 @@
             },
             {
                 "id": 9.2,
-                "linktext": "Listar Stock",
+                "linktext": "Listar Movimientos",
                 "link": "/stock-list"
+            },
+            {
+                "id": 9.2,
+                "linktext": "Listar Total",
+                "link": "/stockTotal-list"
             }
         ]
     },
