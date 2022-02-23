@@ -1,1 +1,48 @@
-<p>content ventas form works!</p>
+<div class="ms-content-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            
+            <div class="ms-panel">
+                <div class="ms-panel-header">
+                    <h6>Agregar Venta Manual</h6>
+                </div>
+                <div class="ms-panel-body">
+                    <form [formGroup]="defaultForm" (validSubmit)="onSubmit()">
+                        <div class="form-row">
+                            
+                            
+                            <div class="col-md-6 mb-3">
+                                <label>Menu / Articulo</label>
+                                <select class="form-control"
+                                    formControlName="articulo">
+                                    <option [value]=articulo.plato_id *ngFor="let articulo  of articulos">
+                                        {{articulo.descripcion}}</option>
+
+
+                                </select>
+
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom01">Cantidad</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="Ingrese Cantidad"
+                                        formControlName="cantidad" id="validationCustom01">
+                                </div>
+                            </div>
+                            
+                           
+
+                        </div>
+                                              
+                        <div class="row">
+                            <div class="col-md-12 derecha">
+                                <button class="btn btn-primary" type="submit">Guardar</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
