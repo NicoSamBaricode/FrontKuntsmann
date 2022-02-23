@@ -25,7 +25,7 @@ export class ContentComponent implements OnInit {
     // Default Form
 
     this.defaultForm = new FormGroup({
-      articulo: new FormControl('', [ //aca el nombre tiene que coincidir con el nombre la columna de la base
+      plato_id: new FormControl('', [ //aca el nombre tiene que coincidir con el nombre la columna de la base
         Validators.required,
         Validators.minLength(2),
       ]),
@@ -40,7 +40,8 @@ export class ContentComponent implements OnInit {
     );
 
     this.platosServices.list()
-    .subscribe((response: any) => {
+        .subscribe((response: any) => {
+          console.log(response.result)
       this.articulos = response.result;
     }, (err: any) => {
       console.log(err);
@@ -53,7 +54,7 @@ export class ContentComponent implements OnInit {
   onSubmit() {
     
 
-      this.ventasService.create(this.defaultForm.value)
+      this.ventasService.createManual(this.defaultForm.value)
         .subscribe(response => {
           this.router.navigate(['ventas-list']);
         }, error => {

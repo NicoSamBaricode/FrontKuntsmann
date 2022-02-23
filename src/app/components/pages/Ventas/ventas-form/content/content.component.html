@@ -14,8 +14,8 @@
                             <div class="col-md-6 mb-3">
                                 <label>Menu / Articulo</label>
                                 <select class="form-control"
-                                    formControlName="articulo">
-                                    <option [value]=articulo.plato_id *ngFor="let articulo  of articulos">
+                                    formControlName="plato_id">
+                                    <option [value]=articulo.id *ngFor="let articulo  of articulos">
                                         {{articulo.descripcion}}</option>
 
 

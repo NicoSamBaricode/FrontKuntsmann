@@ -26,8 +26,13 @@ export class ContentComponent implements OnInit {
     },
     noDataMessage:'Ninguna Venta Encontrada',
     columns: {
+      
       id: {
         title: 'Id',
+        filter: true
+      },
+      articulo_id: {
+        title: 'Articulo Num',
         filter: true
       },
       categoria: {
