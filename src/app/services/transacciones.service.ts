@@ -13,6 +13,9 @@ export class TransaccionesService {
   public list(){
     return this.http.get(`${this.url}transacciones`)
   }
+  public productoList(id : string){
+    return this.http.get(`${this.url}transacciones/producto/${id}`)
+  }
   public stock(){
     return this.http.get(`${this.url}transacciones/stock`)
   }
