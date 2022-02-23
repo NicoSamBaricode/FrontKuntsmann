@@ -30,8 +30,6 @@ export class ContentComponent implements OnInit {
   
   constructor(private platosService: PlatosService,
     private transaccionesService: TransaccionesService,
-    private productosService: ProductosService,
-    
     private almacenesService: AlmacenesService,
     
     private etapasService: EtapasService,
@@ -43,7 +41,6 @@ export class ContentComponent implements OnInit {
   
   ngOnInit(): void {
     // Default Form
-    
     const params = this.activatedRoute.snapshot.params; 
       this.getData(params.id) 
     
@@ -113,11 +110,11 @@ export class ContentComponent implements OnInit {
 
   onSubmit() {
 
-    if (this.update || this.id) {
+    if (true) {
 
-      this.platosService.update(this.activatedRoute.snapshot.params.id, this.defaultForm.value)
+      this.transaccionesService.transferencia(this.activatedRoute.snapshot.params.id, this.defaultForm.value)
         .subscribe((response: any) => {
-          this.router.navigate(['/product/product-list']);
+          this.router.navigate(['/stock-list']);
         }, err => {
           console.log(err);
           Swal.fire({
@@ -127,30 +124,7 @@ export class ContentComponent implements OnInit {
           })
         })
 
-    } else {
-
-      this.platosService.create(this.defaultForm.value)
-        .subscribe(response => {
-          this.router.navigate(['/product/product-list']);
-        }, error => {
-          console.log(error);
-          if (error.error.descripcion === 'ER_DUP_ENTRY') {
-            Swal.fire({
-              title: 'Atencion',
-              text: 'Ya existe ',
-              icon: 'warning',
-            })
-          } else {
-            Swal.fire({
-              title: 'Atencion',
-              text: 'Contactar al servicio técnico Baricode ' + error.error.descripcion,
-              icon: 'error',
-            })
-          }
-
-        });
-    }
-
+    } 
   }
 
  

@@ -30,8 +30,8 @@ export class TransaccionesService {
     return this.http.post(`${this.url}transacciones`,data)
   }
 
-  public procesado(id:string,data:any){
-    return this.http.post(`${this.url}transacciones/procesado/${id}`,data)
+  public transferencia(id:string,data:any){
+    return this.http.post(`${this.url}transacciones/transferencia/${id}`,data)
   }
 
   public venta(id:string,data:any){

@@ -157,7 +157,7 @@ export class ContentComponent implements OnInit {
 
     }
     if (event.action == 'editAction') {
-      this.router.navigate(['/transferencia-stock-form/update/' + event.data["id"]]);
+      this.router.navigate(['/transferenciaStock-form/' + event.data["id"]]);
     }
 
   }
@@ -172,7 +172,6 @@ export class ContentComponent implements OnInit {
           
           let aux = resp.result
           this.source = new LocalDataSource(aux);
-          console.log(aux)
         }
       )
     } else {
@@ -181,7 +180,6 @@ export class ContentComponent implements OnInit {
           
           let aux = resp.result
           this.source = new LocalDataSource(aux);
-          console.log(aux)
         }
       )
     }
