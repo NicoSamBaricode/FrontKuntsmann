@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/services/auth.service';
+import Swal, { SweetAlertOptions } from 'sweetalert2';
 
 @Component({
   selector: 'app-content',
@@ -12,15 +13,15 @@ import { AuthService } from 'src/app/services/auth.service';
 export class ContentComponent implements OnInit {
 
   closeResult: string;
-  constructor(private modalService: NgbModal, private router:Router,private auth:AuthService) { }
+  constructor(private modalService: NgbModal, private router: Router, private auth: AuthService) { }
   open(content: any) {
     this.modalService.open(content, { centered: true, windowClass: 'modal-min' });
-  } 
+  }
   loginForm: FormGroup;
 
   ngOnInit(): void {
-    if(this.auth.isAuthenticated()){
-    this.router.navigate(['/home']);
+    if (this.auth.isAuthenticated()) {
+      this.router.navigate(['/home']);
     }
 
 
@@ -39,10 +40,20 @@ export class ContentComponent implements OnInit {
   }
   onSubmit() {
     this.auth.login(this.loginForm.value).subscribe(
-      (resp:any)=>{
+      (resp: any) => {
         this.router.navigate(['/home']);
-      },err=>{
-        console.log(err);
+      }, err => {
+        Swal.fire({
+          title: 'Error al ingresar',
+          text: "Usuario o Contraseña incorrectos ",
+          icon: 'warning',
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          
+          
+        }
+        )
       }
 
     )

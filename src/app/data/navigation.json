@@ -157,10 +157,16 @@
                 "link": "/stock-list"
             },
             {
-                "id": 9.2,
+                "id": 9.3,
                 "linktext": "Listar Total",
                 "link": "/stockTotal-list"
+            },
+            {
+                "id": 9.4,
+                "linktext": "Transferir ELIMINAR",
+                "link": "/transferenciaStock-form"
             }
+            
         ]
     },
     {

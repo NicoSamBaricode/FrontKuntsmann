@@ -29,6 +29,22 @@
                                         </div>
                                     </div>
                                     <div class="col-md-3 mb-3">
+                                        <label>Unidad</label>
+                                        <select class="form-control"  formControlName="unidad">
+                                            <option [value]=unidad.id *ngFor="let unidad  of unidades">
+                                                {{unidad.descripcion}}
+                                            </option>
+        
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Cantidad</label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" placeholder="Ingrese Cantidad"
+                                                formControlName="cantidad">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
                                         <label>Fecha Ingreso</label>
                                         <div class="input-group">
                                             <input type="date" class="form-control" placeholder="Ingrese Fecha Ingreso"
@@ -72,15 +88,7 @@
         
                                         </select>
                                     </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label>Unidad</label>
-                                        <select class="form-control"  formControlName="unidad">
-                                            <option [value]=unidad.id *ngFor="let unidad  of unidades">
-                                                {{unidad.descripcion}}
-                                            </option>
-        
-                                        </select>
-                                    </div>
+                                    
                                     <div class="col-md-3 mb-3">
                                         <label>Precio Total de Compra</label>
                                         <div class="input-group">
@@ -88,13 +96,7 @@
                                                 formControlName="precio">
                                         </div>
                                     </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label>Cantidad</label>
-                                        <div class="input-group">
-                                            <input type="number" class="form-control" placeholder="Ingrese Cantidad"
-                                                formControlName="cantidad">
-                                        </div>
-                                    </div>
+                                    
                                     <div class="col-md-3 mb-3">
                                         <label>Almacén de Destino</label>
                                         <select class="form-control"   formControlName="almacen">
@@ -104,7 +106,7 @@
         
                                         </select>
                                     </div>
-                                    <div class="col-md-3 mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <label>Etapa</label>
                                         <select class="form-control"   formControlName="etapa">
                                             <option [value]=etapa.id *ngFor="let etapa  of etapas">
@@ -126,7 +128,7 @@
 
                                 </div>
                                 <div class="form-row ">
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-12 mb-3">
                                         <label>Descripcion</label>
                                         <div class="input-group">
                                             <textarea class="form-control" formControlName="descripcion"

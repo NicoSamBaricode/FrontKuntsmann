@@ -23,7 +23,7 @@ export class ContentComponent implements OnInit {
   settings = {
     hideSubHeader: true,
     pager: {
-      perPage: 4,
+      perPage: 10,
     },
 
     columns: {
@@ -59,13 +59,8 @@ export class ContentComponent implements OnInit {
       
       custom: [
 
-        {
-          name: 'editAction',
-          title: '<i class="fas fa-share-square " title="Mover Stock"></i>',
-
-        },
-        {
-          name: 'deleteAction',
+                {
+          name: 'detalleAction',
           title: '<i class="fas fa-plus-square" title="Detalles" ></i>'
         }
       ],
@@ -78,7 +73,7 @@ export class ContentComponent implements OnInit {
   settings2 = {
     hideSubHeader: true,
     pager: {
-      perPage: 4,
+      perPage: 10,
     },
 
     columns: {
@@ -191,47 +186,35 @@ export class ContentComponent implements OnInit {
           field: 'producto',
           search: query
         },
-        {
-          field: 'marca',
-          search: query
-        },
-        {
-          field: 'numeroComprobante',
-          search: query
-        },
+       
+        
         {
           field: 'etapa',
           search: query
         },
-        {
-          field: 'usuario',
-          search: query
-        },
-        {
-          field: 'tipo',
-          search: query
-        },
+        
+        
 
       ], false);
     }
   }
   onCustom(event) {
-    if (event.action == 'deleteAction') {
-      this.router.navigate(['/stock-form/update/' + event.data["user_id"]]);
+    if (event.action == 'transferAction') {
+      this.router.navigate(['/stock-form/update/' + event.data["id"]]);
 
     }
-    if (event.action == 'editAction') {
-      this.router.navigate(['/transferencia-stock-form/update/' + event.data["user_id"]]);
+    if (event.action == 'detalleAction') {
+      this.router.navigate(['/transferencia-stock-form/update/' + event.data["id"]]);
     }
 
   }
   onCustom2(event) {
-    if (event.action == 'deleteAction') {
-      this.router.navigate(['/stock-form/update/' + event.data["user_id"]]);
+    if (event.action == 'transferAction') {
+      this.router.navigate(['/stock-form/update/' + event.data["id"]]);
 
     }
-    if (event.action == 'editAction') {
-      this.router.navigate(['/transferencia-stock-form/update/' + event.data["user_id"]]);
+    if (event.action == 'detalleAction') {
+      this.router.navigate(['/transferencia-stock-form/update/' + event.data["id"]]);
     }
 
   }

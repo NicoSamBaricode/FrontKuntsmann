@@ -3,7 +3,7 @@ import data from '../../../../../data/usuarios.json';
 import { LocalDataSource } from 'ng2-smart-table';
 import { TransaccionesService } from 'src/app/services/transacciones.service';
 
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-content',
@@ -13,7 +13,9 @@ import { Router } from '@angular/router';
 export class ContentComponent implements OnInit {
   // Table
   public data = data;
-  constructor(private transaccionesService: TransaccionesService, private router: Router) {
+  update = false // para saber si es crear o actualizar
+  titulo="Movimientos de Stock Historico"
+  constructor(private transaccionesService: TransaccionesService, private router: Router, private activatedRoute: ActivatedRoute) {
 
   }
   
@@ -151,24 +153,39 @@ export class ContentComponent implements OnInit {
   }
   onCustom(event) {
     if (event.action == 'deleteAction') {
-      this.router.navigate(['/stock-form/update/' + event.data["user_id"]]);
+      this.router.navigate(['/stock-form/update/' + event.data["id"]]);
 
     }
     if (event.action == 'editAction') {
-      this.router.navigate(['/transferencia-stock-form/update/' + event.data["user_id"]]);
+      this.router.navigate(['/transferencia-stock-form/update/' + event.data["id"]]);
     }
 
   }
 
   ngOnInit(): void {
-    this.transaccionesService.list().subscribe(
-      (resp: any) => {        
-        
-        let aux = resp.result
-        this.source = new LocalDataSource(aux);
-        console.log(aux)
-      }
-    )
+    const params = this.activatedRoute.snapshot.params; // para obtener la id del usuario
+
+    if (params.id) {
+      this.titulo = "Detalle de movimientos por producto"
+      this.transaccionesService.list().subscribe(
+        (resp: any) => {        
+          
+          let aux = resp.result
+          this.source = new LocalDataSource(aux);
+          console.log(aux)
+        }
+      )
+    } else {
+      this.transaccionesService.list().subscribe(
+        (resp: any) => {        
+          
+          let aux = resp.result
+          this.source = new LocalDataSource(aux);
+          console.log(aux)
+        }
+      )
+    }
+    
   }
  
 }

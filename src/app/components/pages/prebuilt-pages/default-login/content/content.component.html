@@ -1,10 +1,13 @@
+
 <div class="ms-content-wrapper ms-auth">
     <div class="ms-auth-container">
         <div class="ms-auth-col">
-            <div class="ms-auth-form">
-                <form [formGroup]="loginForm" (validSubmit)="onSubmit()" class="clearfix">
-                    <h1>Inicia sesión en cuenta</h1>
-                    <p>Por favor ingrese su correo electrónico y su contraseña para continuar</p>
+            <div class="ms-auth-form ">
+                <img src="assets/img/costic/logo_Kunstmann-Bariloche.jpg" alt="logo" style="text-align: center;">
+                <form [formGroup]="loginForm" (validSubmit)="onSubmit()" class="clearfix fondo-gris">
+                   
+                    
+                    <p>Por favor ingrese su correo electrónico y su contraseña para ingresar al sistema</p>
                     <div class="mb-3">
                         <label>Dirección de correo electrónico</label>
                         <div class="input-group">
@@ -24,9 +27,9 @@
                             <input class="form-check-input" type="checkbox" value="">
                             <i class="ms-checkbox-check"></i>
                         </label>
-                        <span> Recordar Password </span>
-                        <label class="d-block mt-3"><a href="javascript:void(0)" class="btn-link"
-                                (click)="open(modalone)">Olvidó Password?</a></label>
+                        <span> Recordar Usuario </span>
+                        <!-- <label class="d-block mt-3"><a href="javascript:void(0)" class="btn-link"
+                                (click)="open(modalone)">Olvidó Password?</a></label> -->
                     </div>
                     <button class="btn btn-primary mt-4 d-block w-100" type="submit">Iniciar sesión</button>
                     
@@ -35,6 +38,7 @@
         </div>
     </div>
 </div>
+
 <ng-template #modalone let-modal>
     <div class="modal-body text-center">
         <button type="button" class="close" (click)="modal.dismiss('Cross click')"><span
