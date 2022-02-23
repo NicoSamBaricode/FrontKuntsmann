@@ -167,7 +167,7 @@ export class ContentComponent implements OnInit {
 
     if (params.id) {
       this.titulo = "Detalle de movimientos por producto"
-      this.transaccionesService.list().subscribe(
+      this.transaccionesService.productoList(params.id).subscribe(
         (resp: any) => {        
           
           let aux = resp.result

@@ -114,13 +114,9 @@ export class ContentComponent implements OnInit {
       
       custom: [
 
+        
         {
-          name: 'editAction',
-          title: '<i class="fas fa-share-square " title="Mover Stock"></i>',
-
-        },
-        {
-          name: 'deleteAction',
+          name: 'detallesAction',
           title: '<i class="fas fa-plus-square" title="Detalles" ></i>'
         }
       ],
@@ -199,22 +195,17 @@ export class ContentComponent implements OnInit {
     }
   }
   onCustom(event) {
-    if (event.action == 'transferAction') {
-      this.router.navigate(['/stock-form/update/' + event.data["id"]]);
-
-    }
+   
     if (event.action == 'detalleAction') {
-      this.router.navigate(['/transferencia-stock-form/update/' + event.data["id"]]);
+      this.router.navigate(['/stock-list/detalle/' + event.data["producto_id"]]);
     }
 
   }
   onCustom2(event) {
-    if (event.action == 'transferAction') {
-      this.router.navigate(['/stock-form/update/' + event.data["id"]]);
-
-    }
-    if (event.action == 'detalleAction') {
-      this.router.navigate(['/transferencia-stock-form/update/' + event.data["id"]]);
+   
+    if (event.action == 'detallesAction') {
+     
+      this.router.navigate(['/stock-list/detalle/' + event.data["producto_id"]]);
     }
 
   }
