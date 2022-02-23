@@ -20,7 +20,7 @@ export class ContentComponent implements OnInit {
   id = null
   defaultForm: FormGroup;
   
-  
+  transaccion : any= []
   etapas: any = []
   
   almacenes: any = []
@@ -90,15 +90,40 @@ export class ContentComponent implements OnInit {
     );
     
       this.etapasService.list()
-      .subscribe((response: any) => {
-        this.etapas = response.result;
+      .subscribe((response: any) => { 
+        //funcion para borrar de un array
+      let nuevoArray=[]
+       let aux= response.result.map((element:any)=>{        
+            if(element.id!=this.transaccion.etapa_id){
+              nuevoArray.push(element);
+              return element
+            }else{
+              return element
+            }
+            
+        }
+        )
+        this.etapas = nuevoArray
+        
       }, (err: any) => {
         console.log(err);
       }
       )
       this.almacenesService.list()
       .subscribe((response: any) => {
-        this.almacenes = response.result;
+
+       let nuevoArray=[]
+       let aux= response.result.map((element:any)=>{        
+            if(element.id!=this.transaccion.almacen_id){
+              nuevoArray.push(element);
+              return element
+            }else{
+              return element
+            }
+            
+        }
+        )
+        this.etapas = nuevoArray
       }, (err: any) => {
         console.log(err);
       }
@@ -132,10 +157,11 @@ export class ContentComponent implements OnInit {
     this.transaccionesService.getOne(id)
       .subscribe((response: any) => {
         let data = response.result[0]
+        this.transaccion=data;
         console.log(data);
         this.items = response.ingredientes;
         this.defaultForm.controls["marca"].setValue(data["marca"]);
-        this.defaultForm.controls["producto_id"].setValue(data["producto_id"]);
+        this.defaultForm.controls["producto_id"].setValue(data["producto"]);
         this.defaultForm.controls["descripcion"].setValue(data["descripcion"]);
         this.defaultForm.controls["unidad"].setValue(data["unidad"]);
         this.defaultForm.controls["cantidadTotal"].setValue(data["cantidadTotal"]);
@@ -143,8 +169,8 @@ export class ContentComponent implements OnInit {
         this.defaultForm.controls["cantidad"].setValue(data["cantidad"]);
         this.defaultForm.controls["lote"].setValue(data["lote"]);
         this.defaultForm.controls["almacen"].setValue(data["almacen"]);
-        this.defaultForm.controls["etapa"].setValue(data["etapa"]);
-
+        this.defaultForm.controls["etapa"].setValue("");
+       
       }, error => {
         console.log(error);
         Swal.fire({
