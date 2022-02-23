@@ -21,6 +21,10 @@ export class VentasService {
     return this.http.post(`${this.url}ventas`,data)
   }
 
+  public createManual(data:any){
+    return this.http.post(`${this.url}ventas/manual`,data)
+  }
+
   public update(id:string,data:any){
     return this.http.put(`${this.url}ventas/${id}`,data)
   }
