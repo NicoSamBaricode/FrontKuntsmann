@@ -1,0 +1,162 @@
+<div class="ms-content-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="ms-panel">
+                <div class="ms-panel-header">
+                    <h6>Detalle Movimiento Stock</h6>
+                </div>
+                <div class="ms-panel-body">
+                    <form [formGroup]="defaultForm" (validSubmit)="onSubmit()">
+                        <div class="form-row">
+                            <div class="col-md-12 mb-3">
+                                <div class="form-row">
+                                    <div class="col-md-3 mb-3">
+                                        <label>Producto</label>
+                                        <select class="form-control"  formControlName="producto_id" readonly>
+                                            <option [value]=producto.id *ngFor="let producto  of productos">
+                                                {{producto.descripcion}}</option>
+        
+        
+                                        </select>
+                                        
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Marca</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Ingrese Marca" readonly
+                                                formControlName="marca">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Unidad</label>
+                                        <select class="form-control"  formControlName="unidad" readonly>
+                                            <option [value]=unidad.id *ngFor="let unidad  of unidades">
+                                                {{unidad.descripcion}}
+                                            </option>
+        
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Cantidad</label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" placeholder="Ingrese Cantidad"
+                                                formControlName="cantidad" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Fecha Ingreso</label>
+                                        <div class="input-group">
+                                            <input type="date" class="form-control" placeholder="Ingrese Fecha Ingreso"
+                                                formControlName="fechaIngreso" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Fecha Vencimiento</label>
+                                        <div class="input-group">
+                                            <input type="date" class="form-control" placeholder="Ingrese Fecha Vencimiento"
+                                                formControlName="fechaVencimiento" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Fecha Comprobante</label>
+                                        <div class="input-group">
+                                            <input type="date" class="form-control" placeholder="Ingrese Fecha Comprobante"
+                                                formControlName="fechaComprobante" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Numero de Comprobante</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Ingrese Numero de comprobante"
+                                                formControlName="numeroComprobante" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Lote</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Ingrese lote"
+                                                formControlName="lote" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Proveedor</label>
+                                        <select class="form-control"  formControlName="proveedor_id" readonly>
+                                            <option [value]=proveedor.id *ngFor="let proveedor  of proveedores">
+                                                {{proveedor.descripcion}}
+                                            </option>
+        
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="col-md-3 mb-3">
+                                        <label>Precio Total de Compra</label>
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" placeholder="Ingrese Costo"
+                                                formControlName="precio" readonly>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-3 mb-3">
+                                        <label>Almacén de Destino</label>
+                                        <select class="form-control"   formControlName="almacen" readonly>
+                                            <option [value]=almacen.id *ngFor="let almacen  of almacenes">
+                                                {{almacen.descripcion}}
+                                            </option>
+        
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Etapa</label>
+                                        <select class="form-control"   formControlName="etapa" readonly>
+                                            <option [value]=etapa.id *ngFor="let etapa  of etapas">
+                                                {{etapa.descripcion}}
+                                            </option>
+        
+                                        </select>
+                                    </div>
+                                    
+
+                                </div>
+                                <div class="form-row ">
+                                    <div class="col-md-12 mb-3">
+                                        <label>Descripcion</label>
+                                        <div class="input-group">
+                                            <textarea class="form-control" formControlName="descripcion" readonly
+                                                id="exampleFormControlTextarea1" rows="3"
+                                                placeholder="Ingrese Descripción"></textarea>
+                                        </div>
+                                    </div>
+                                   
+
+
+
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-12 derecha flotante">
+                                        <button class="btn btn-primary" type="submit">Volver</button>
+                                    </div>
+                                </div>
+        
+                              
+                                
+                                
+        
+                                </div>
+
+
+
+                            </div>
+                            
+                        
+                       
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

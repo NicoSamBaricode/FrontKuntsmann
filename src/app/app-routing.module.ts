@@ -107,6 +107,7 @@ const routes: Routes = [
   { path: 'transferenciaStock-form', loadChildren: () => import('./components/pages/Stock/transferencia-stock-form/transferencia-stock-form.module').then(m => m.TransferenciaStockFormModule) },
   { path: 'stockTotal-list', loadChildren: () => import('./components/pages/Stock/stock-total-list/stock-total-list.module').then(m => m.StockTotalListModule) },
   { path: 'ventas-excel-form', loadChildren: () => import('./components/pages/Ventas/ventas-excel-form/ventas-excel-form.module').then(m => m.VentasExcelFormModule) },
+  { path: 'stock-detalle-form', loadChildren: () => import('./components/pages/Stock/stock-detalle-form/stock-detalle-form.module').then(m => m.StockDetalleFormModule) },
  
 ];
 
