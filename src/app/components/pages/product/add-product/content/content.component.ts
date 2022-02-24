@@ -179,7 +179,7 @@ export class ContentComponent implements OnInit {
         this.defaultForm.controls["precio"].setValue(data["precio"]);
         this.defaultForm.controls["margen"].setValue(data["margen"]);
         this.defaultForm.controls["auto"].setValue(data["auto"]);
-        this.defaultForm.controls["categoria"].setValue(data["categoria"]);
+        this.defaultForm.controls["categoria"].setValue(data["categoria_id"]);
       }, error => {
         console.log(error);
         Swal.fire({
