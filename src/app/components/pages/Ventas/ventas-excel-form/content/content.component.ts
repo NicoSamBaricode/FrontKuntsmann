@@ -28,7 +28,7 @@ export class ContentComponent implements OnInit {
     
 
     this.defaultForm = new FormGroup({
-      excel: new FormControl('', [ //aca el nombre tiene que coincidir con el nombre la columna de la base
+     ventas: new FormControl('', [ //aca el nombre tiene que coincidir con el nombre la columna de la base
         Validators.required,
         
       ])    
@@ -39,9 +39,27 @@ export class ContentComponent implements OnInit {
   }
 
 
-
+  uploadFile(file) {  
+    const formData = new FormData();  
+    formData.append('ventas', file.data);  
+    file.inProgress = true;  
+    this.ventasServices.create(formData).subscribe(  
+      (event => { console.log(event)
+      }),  
+    
+    )
+  }
   onSubmit() {
    
+
+    
+
+
+
+
+
+
+
       this.ventasServices.create(this.defaultForm.value)
         .subscribe(response => {
           Swal.fire({
@@ -49,7 +67,7 @@ export class ContentComponent implements OnInit {
             text: 'Guardado exitoso',
             icon: 'success',
           })
-          this.router.navigate(['almacenes-list']);
+          this.router.navigate(['ventas-list']);
         }, error => {
           console.log(error);
           if (error.error.descripcion === 'ER_DUP_ENTRY') {

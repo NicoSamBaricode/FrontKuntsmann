@@ -7,13 +7,13 @@
                     <h6>Cargar Venta por Excel</h6>
                 </div>
                 <div class="ms-panel-body">
-                    <form [formGroup]="defaultForm" (validSubmit)="onSubmit()">
+                    <form [formGroup]="defaultForm" (validSubmit)="onSubmit()" enctype="multipart/form-data">
                         <div class="form-row">
                             <div class="col-md-12 mb-3">
                                 <label for="validationCustom01">Cargar archivo.</label>
                                 <div class="input-group">
-                                    <input type="file" class="form-control paddingPersonalizado" placeholder="Ingrese Nombre"
-                                        formControlName="descripcion" id="validationCustom01">
+                                    <input type="file" class="form-control paddingPersonalizado"  placeholder="Ingrese Nombre" (click)="uploadFile()"
+                                        formControlName="ventas" id="validationCustom01">
                                 </div>
                             </div>
 
