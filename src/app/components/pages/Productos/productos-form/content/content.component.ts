@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductosService } from 'src/app/services/productos.service';
+import { PlatosService } from 'src/app/services/platos.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -11,17 +12,28 @@ import Swal from 'sweetalert2';
 })
 export class ContentComponent implements OnInit {
   defaultForm: FormGroup;
+  unidades:any=[];
   update = false // para saber si es crear o actualizar
   titulo = 'Agregar Nuevo'
 
   constructor(private productosServices: ProductosService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute) {
+              private platosServices: PlatosService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
 
   }
 
   ngOnInit(): void {
     // Default Form
+    this,this.platosServices.listUnidades().subscribe(
+      (resp:any)=>{
+        this.unidades=resp.result
+      },err=>{
+        console.log(err)
+      }
+    )
+
+
 
     const params = this.activatedRoute.snapshot.params; // para obtener la id del usuario
 
@@ -34,13 +46,21 @@ export class ContentComponent implements OnInit {
     }
 
     this.defaultForm = new FormGroup({
-      descripcion: new FormControl('', [ //aca el nombre tiene que coincidir con el nombre la columna de la base
+      descripcion: new FormControl(null, [ //aca el nombre tiene que coincidir con el nombre la columna de la base
         Validators.required,
         Validators.minLength(2),
       ]),
-      claseMedida: new FormControl('1', [ //aca el nombre tiene que coincidir con el nombre la columna de la base
-        Validators.required,
-        
+      unidad: new FormControl(1, [ //aca el nombre tiene que coincidir con el nombre la columna de la base
+        Validators.required        
+      ]),
+      bajoStock: new FormControl(null, [ //aca el nombre tiene que coincidir con el nombre la columna de la base
+        Validators.required        
+      ]),
+      margenStock: new FormControl(0, [ //aca el nombre tiene que coincidir con el nombre la columna de la base
+        Validators.required        
+      ]),
+      margenVencimiento: new FormControl(0, [ //aca el nombre tiene que coincidir con el nombre la columna de la base
+        Validators.required        
       ]),
       
 
@@ -97,9 +117,12 @@ export class ContentComponent implements OnInit {
     this.productosServices.getOne(id)
       .subscribe((response: any) => {
         let data = response.result[0]
-
         this.defaultForm.controls["descripcion"].setValue(data["descripcion"]);
-        this.defaultForm.controls["claseMedida"].setValue(data["claseMedida"]);
+        this.defaultForm.controls["unidad"].setValue(data["unidad"]);
+        this.defaultForm.controls["bajoStock"].setValue(data["bajoStock"]);
+        this.defaultForm.controls["margenStock"].setValue(data["margenStock"]);
+        this.defaultForm.controls["margenVencimiento"].setValue(data["margenVencimiento"]);
+
 
         console.log(response);
       }, error => {

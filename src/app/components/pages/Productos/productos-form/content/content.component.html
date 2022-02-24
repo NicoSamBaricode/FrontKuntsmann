@@ -20,10 +20,8 @@
                                 <label for="validationCustom02">Unidad de medida</label>
                                 <div class="input-group">
                                     <select class="form-control" aria-label="UnidadMedida" id="validationCustom02"
-                                        formControlName="claseMedida">                                        
-                                        <option value="1">Unidad</option>
-                                        <option value="2">Peso</option>
-                                        <option value="3">Volumen</option>
+                                        formControlName="unidad">                                        
+                                        <option [value]=unidad.id *ngFor="let unidad of unidades">{{unidad.descripcion}}</option>
                                     </select>
                                 </div>
                             </div>
