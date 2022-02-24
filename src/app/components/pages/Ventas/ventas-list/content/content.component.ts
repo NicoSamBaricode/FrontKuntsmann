@@ -59,6 +59,10 @@ export class ContentComponent implements OnInit {
         title: 'Rentabilidad',
         filter: true
       },
+      creado: {
+        title: 'Fecha',
+        filter: true
+      },
 
 
 
