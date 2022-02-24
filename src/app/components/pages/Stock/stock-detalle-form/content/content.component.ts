@@ -26,7 +26,7 @@ export class ContentComponent implements OnInit {
   almacenes: any = []
   productos: any = []
   items: any = []
-  update = false // para saber si es crear o actualizar
+  detalle = false // para saber si es crear o actualizar
   titulo = "Agregar"
   constructor(private platosService: PlatosService,
     private transaccionesService: TransaccionesService,
@@ -43,7 +43,14 @@ export class ContentComponent implements OnInit {
   
   ngOnInit(): void {
     // Default Form
-
+    const params = this.activatedRoute.snapshot.params; // para obtener la id 
+    if (params.id) {
+     
+      this.get(params.id) // para obtener los datos
+      this.detalle = true
+    } else {
+      this.detalle = false
+    }
 
     this.defaultForm = new FormGroup({
       descripcion: new FormControl(null, [
@@ -138,5 +145,41 @@ export class ContentComponent implements OnInit {
     this.router.navigate(['stock-list']);
       
     }
+    get(id: string) {
+      this.transaccionesService.getOne(id)
+        .subscribe((response: any) => {
+          let data = response.result[0]
+  
+          this.defaultForm.controls["descripcion"].setValue(data["descripcion"]);
+          this.defaultForm.controls["producto_id"].setValue(data["producto_id"]);
+          this.defaultForm.controls["marca"].setValue(data["marca"]);
+          this.defaultForm.controls["fechaIngreso"].setValue(data["fechaIngreso"]);
+          this.defaultForm.controls["fechaVencimiento"].setValue(data["fechaVencimiento"]);
+          this.defaultForm.controls["fechaComprobante"].setValue(data["fechaComprobante"]);
+          this.defaultForm.controls["numeroComprobante"].setValue(data["numeroComprobante"]);
+          this.defaultForm.controls["lote"].setValue(data["lote"]);
+          this.defaultForm.controls["proveedor_id"].setValue(data["proveedor_id"]);
+          this.defaultForm.controls["cantidad"].setValue(data["cantidad"]);
+          this.defaultForm.controls["almacen"].setValue(data["almacen"]);
+          this.defaultForm.controls["etapa"].setValue(data["etapa"]);
+          this.defaultForm.controls["unidad"].setValue(data["unidad"]);
+          this.defaultForm.controls["precio"].setValue(data["precio"]);
 
+
+
+
+
+
+
+  
+          console.log(response);
+        }, error => {
+          console.log(error);
+          Swal.fire({
+            title: 'Atencion',
+            text: 'No hay conexion con base de datos' + error.error.descripcion,
+            icon: 'warning',
+          })
+        });
+    }
   }
