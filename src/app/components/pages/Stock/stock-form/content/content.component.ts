@@ -47,8 +47,7 @@ export class ContentComponent implements OnInit {
 
     this.defaultForm = new FormGroup({
       descripcion: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(4),
+        
       ]),
       producto_id: new FormControl(null, [
         Validators.required,
@@ -92,7 +91,7 @@ export class ContentComponent implements OnInit {
         
       ]),
      
-      precio: new FormControl(null, [
+      costo: new FormControl(null, [
         Validators.required
       ]),
      
@@ -135,10 +134,17 @@ export class ContentComponent implements OnInit {
       }
       )
   }
-
+   valor:any =''
+ cambioUnidades(valor){
+ 
+  this.defaultForm.controls["unidad"].setValue(this.productos[valor.split(",")[1]].unidad);
+  
+  this.valor=valor
+ }
 
   onSubmit() {
-
+    
+    this.defaultForm.controls["producto_id"].setValue(this.valor.split(",")[0]);
       this.transaccionesService.create(this.defaultForm.value)
         .subscribe(response => {
           console.log(response);

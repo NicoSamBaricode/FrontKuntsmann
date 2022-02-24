@@ -13,13 +13,13 @@
                                 <div class="form-row">
                                     <div class="col-md-3 mb-3">
                                         <label>Producto</label>
-                                        <select class="form-control"  formControlName="producto_id">
-                                            <option [value]=producto.id *ngFor="let producto  of productos">
+                                        <select class="form-control" formControlName="producto_id" #producto (change)="cambioUnidades(producto.value)">
+                                            <option [value]=[producto.id,i] *ngFor="let producto  of productos;let i=index">
                                                 {{producto.descripcion}}</option>
-        
-        
+
+
                                         </select>
-        
+
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Marca</label>
@@ -30,11 +30,11 @@
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Unidad</label>
-                                        <select class="form-control"  formControlName="unidad">
+                                        <select class="form-control" formControlName="unidad" disabled>
                                             <option [value]=unidad.id *ngFor="let unidad  of unidades">
                                                 {{unidad.descripcion}}
                                             </option>
-        
+
                                         </select>
                                     </div>
                                     <div class="col-md-3 mb-3">
@@ -54,21 +54,24 @@
                                     <div class="col-md-3 mb-3">
                                         <label>Fecha Vencimiento</label>
                                         <div class="input-group">
-                                            <input type="date" class="form-control" placeholder="Ingrese Fecha Vencimiento"
+                                            <input type="date" class="form-control"
+                                                placeholder="Ingrese Fecha Vencimiento"
                                                 formControlName="fechaVencimiento">
                                         </div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Fecha Comprobante</label>
                                         <div class="input-group">
-                                            <input type="date" class="form-control" placeholder="Ingrese Fecha Comprobante"
+                                            <input type="date" class="form-control"
+                                                placeholder="Ingrese Fecha Comprobante"
                                                 formControlName="fechaComprobante">
                                         </div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Numero de Comprobante</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Ingrese Numero de comprobante"
+                                            <input type="text" class="form-control"
+                                                placeholder="Ingrese Numero de comprobante"
                                                 formControlName="numeroComprobante">
                                         </div>
                                     </div>
@@ -81,38 +84,38 @@
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Proveedor</label>
-                                        <select class="form-control"  formControlName="proveedor_id">
+                                        <select class="form-control" formControlName="proveedor_id">
                                             <option [value]=proveedor.id *ngFor="let proveedor  of proveedores">
                                                 {{proveedor.descripcion}}
                                             </option>
-        
+
                                         </select>
                                     </div>
-                                    
+
                                     <div class="col-md-3 mb-3">
                                         <label>Precio Total de Compra</label>
                                         <div class="input-group">
                                             <input type="number" class="form-control" placeholder="Ingrese Costo"
-                                                formControlName="precio">
+                                                formControlName="costo">
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-md-3 mb-3">
                                         <label>Almacén de Destino</label>
-                                        <select class="form-control"   formControlName="almacen">
+                                        <select class="form-control" formControlName="almacen">
                                             <option [value]=almacen.id *ngFor="let almacen  of almacenes">
                                                 {{almacen.descripcion}}
                                             </option>
-        
+
                                         </select>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label>Etapa</label>
-                                        <select class="form-control"   formControlName="etapa">
+                                        <select class="form-control" formControlName="etapa">
                                             <option [value]=etapa.id *ngFor="let etapa  of etapas">
                                                 {{etapa.descripcion}}
                                             </option>
-        
+
                                         </select>
                                     </div>
                                     <div class="col-md-6 mb-3">
@@ -136,7 +139,7 @@
                                                 placeholder="Ingrese Descripción"></textarea>
                                         </div>
                                     </div>
-                                   
+
 
 
 
@@ -148,19 +151,19 @@
                                         <button class="btn btn-primary" type="submit">Guardar</button>
                                     </div>
                                 </div>
-        
-                              
-                                
-                                
-        
-                                </div>
+
+
 
 
 
                             </div>
-                            
-                        
-                       
+
+
+
+                        </div>
+
+
+
                     </form>
                 </div>
 

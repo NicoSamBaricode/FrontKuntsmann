@@ -160,10 +160,10 @@ export class ContentComponent implements OnInit {
           this.defaultForm.controls["lote"].setValue(data["lote"]);
           this.defaultForm.controls["proveedor_id"].setValue(data["proveedor_id"]);
           this.defaultForm.controls["cantidad"].setValue(data["cantidad"]);
-          this.defaultForm.controls["almacen"].setValue(data["almacen"]);
-          this.defaultForm.controls["etapa"].setValue(data["etapa"]);
-          this.defaultForm.controls["unidad"].setValue(data["unidad"]);
-          this.defaultForm.controls["precio"].setValue(data["precio"]);
+          this.defaultForm.controls["almacen"].setValue(data["almacen_id"]);
+          this.defaultForm.controls["etapa"].setValue(data["etapa_id"]);
+          this.defaultForm.controls["unidad"].setValue(data["unidad_id"]);
+          this.defaultForm.controls["precio"].setValue(data["costo"]);
 
 
 

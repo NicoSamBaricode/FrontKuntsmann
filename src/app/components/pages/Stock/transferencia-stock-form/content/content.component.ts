@@ -48,8 +48,7 @@ export class ContentComponent implements OnInit {
 
     this.defaultForm = new FormGroup({
       descripcion: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(4),
+        
       ]),
       producto_id: new FormControl(null, [
         Validators.required,
@@ -63,24 +62,24 @@ export class ContentComponent implements OnInit {
 
       ]),
       cantidadTotal: new FormControl(null, [
-
+        Validators.required,
       ]),
       cantidadEfectiva: new FormControl(null, [
-
+        Validators.required,
       ]),
      
       lote: new FormControl(null, [
-        
+        Validators.required,
       ]),
       
       cantidad: new FormControl(null, [
         
       ]),
       almacen: new FormControl(null, [
-        
+        Validators.required,
       ]),
       etapa: new FormControl(null, [
-        
+        Validators.required,
       ]),
       
       
@@ -123,7 +122,7 @@ export class ContentComponent implements OnInit {
             
         }
         )
-        this.etapas = nuevoArray
+        this.almacenes = nuevoArray
       }, (err: any) => {
         console.log(err);
       }
@@ -168,7 +167,7 @@ export class ContentComponent implements OnInit {
         this.defaultForm.controls["cantidadEfectiva"].setValue(data["cantidadEfectiva"]);
         this.defaultForm.controls["cantidad"].setValue(data["cantidad"]);
         this.defaultForm.controls["lote"].setValue(data["lote"]);
-        this.defaultForm.controls["almacen"].setValue(data["almacen"]);
+        this.defaultForm.controls["almacen"].setValue(data["almacen_id"]);
         this.defaultForm.controls["etapa"].setValue("");
        
       }, error => {
