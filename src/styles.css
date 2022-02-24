@@ -2,6 +2,20 @@
 .derecha{
 	text-align: right;
 }
+
+
+
+
+.rojito{
+    color:red;
+}
+
+
+
+
+
+
+
 @import '~perfect-scrollbar/css/perfect-scrollbar.css';
 @import '~ngx-toastr/toastr.css';
 :focus {

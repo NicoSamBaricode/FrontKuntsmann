@@ -12,7 +12,7 @@
                             <div class="col-md-12 mb-3">
                                 <label for="validationCustom01">Cargar archivo.</label>
                                 <div class="input-group">
-                                    <input type="file" class="form-control paddingPersonalizado"  placeholder="Ingrese Nombre" (click)="uploadFile()"
+                                    <input type="file" class="form-control paddingPersonalizado"  placeholder="Ingrese Nombre" (change)="uploadFile($event)"
                                         formControlName="ventas" id="validationCustom01">
                                 </div>
                             </div>

@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 export class ContentComponent implements OnInit {
   defaultForm: FormGroup;
   update = false // para saber si es crear o actualizar
-  
+  fileData: File = null;
 
   constructor(private ventasServices: VentasService,
     private router: Router,
@@ -39,28 +39,16 @@ export class ContentComponent implements OnInit {
   }
 
 
-  uploadFile(file) {  
-    const formData = new FormData();  
-    formData.append('ventas', file.data);  
-    file.inProgress = true;  
-    this.ventasServices.create(formData).subscribe(  
-      (event => { console.log(event)
-      }),  
-    
-    )
+  uploadFile(file:any) {  
+    this.fileData = <File>file.target.files[0];
   }
   onSubmit() {
-   
+
+      const formData = new FormData();
+        formData.append('ventas', this.fileData);
 
     
-
-
-
-
-
-
-
-      this.ventasServices.create(this.defaultForm.value)
+      this.ventasServices.create( formData)
         .subscribe(response => {
           Swal.fire({
             title: 'Atencion',

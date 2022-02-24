@@ -41,7 +41,7 @@ export class ContentComponent implements OnInit {
       cantidad: {
         title: 'Cantidad',
         filter: true,
-
+        type: 'html',
       },
       unidad: {
         title: 'Unidad',
@@ -214,18 +214,27 @@ export class ContentComponent implements OnInit {
     this.transaccionesService.stock().subscribe(
       (resp: any) => {        
         
-        let aux = resp.result
+        let aux = resp.result.map((item) => {
+          if (item.cantidad<=0){
+            
+            item.cantidad=`<div class="rojito" id="gato">Sin Stock por aprox: ${Math.abs(item.cantidad)}</div>`
+          }
+          return item;
+        })
         this.source = new LocalDataSource(aux);
-        console.log(aux)
       }
     )
 
     this.transaccionesService.stockEtapas().subscribe(
       (resp: any) => {        
         
-        let aux = resp.result
+        let aux = resp.result.map((item) => {
+          if (item.cantidad<=0){
+            item.cantidad=`<div class="rojito">Sin Stock por aprox: ${Math.abs(item.cantidad)}</div>`
+          }
+          return item;
+        })
         this.source2 = new LocalDataSource(aux);
-        console.log(aux)
       }
     )
   }
