@@ -153,7 +153,7 @@ export class ContentComponent implements OnInit {
   }
   onCustom(event) {
     if (event.action == 'deleteAction') {
-      this.router.navigate(['/stock-form/update/' + event.data["id"]]);
+      this.router.navigate(['/stock-detalle-form/detalle/' + event.data["id"]]);
 
     }
     if (event.action == 'editAction') {
