@@ -28,7 +28,6 @@ export class ContentComponent implements OnInit {
     this,this.platosServices.listUnidades().subscribe(
       (resp:any)=>{
         this.unidades=resp.result
-        console.log(this.unidades)
       },err=>{
         console.log(err)
       }
