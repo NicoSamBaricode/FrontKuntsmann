@@ -62,14 +62,14 @@ export class ContentComponent implements OnInit {
 
       ]),
       cantidadTotal: new FormControl(null, [
-        Validators.required,
+ 
       ]),
       cantidadEfectiva: new FormControl(null, [
         Validators.required,
       ]),
      
       lote: new FormControl(null, [
-        Validators.required,
+        
       ]),
       
       cantidad: new FormControl(null, [
@@ -138,9 +138,9 @@ export class ContentComponent implements OnInit {
 
       this.transaccionesService.transferencia(this.activatedRoute.snapshot.params.id, this.defaultForm.value)
         .subscribe((response: any) => {
-          this.router.navigate(['/stock-list']);
+          alert(response);
+          //this.router.navigate(['/stock-list']);
         }, err => {
-          console.log(err);
           Swal.fire({
             title: 'Atencion',
             text: 'No se puede guardar' + err.error.descripcion,
