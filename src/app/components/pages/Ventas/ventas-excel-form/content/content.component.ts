@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from '@angular/router';
-import { PlatosService } from 'src/app/services/platos.service';
 import { VentasService } from 'src/app/services/ventas.service';
 import Swal from 'sweetalert2';
 
@@ -12,51 +11,45 @@ import Swal from 'sweetalert2';
 })
 export class ContentComponent implements OnInit {
   defaultForm: FormGroup;
-  articulos: any=[]
+  update = false // para saber si es crear o actualizar
+  
 
-  constructor(private platosServices: PlatosService,
+  constructor(private ventasServices: VentasService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private ventasService: VentasService) {
+    private activatedRoute: ActivatedRoute) {
 
   }
 
   ngOnInit(): void {
     // Default Form
 
+    const params = this.activatedRoute.snapshot.params; // para obtener la id del usuario
+
+    
+
     this.defaultForm = new FormGroup({
-      plato_id: new FormControl('', [ //aca el nombre tiene que coincidir con el nombre la columna de la base
+      excel: new FormControl('', [ //aca el nombre tiene que coincidir con el nombre la columna de la base
         Validators.required,
-        Validators.minLength(2),
-      ]),
-      cantidad: new FormControl('', [ //aca el nombre tiene que coincidir con el nombre la columna de la base
-        Validators.required,
-        Validators.minLength(1),
-      ]),
-      
+        
+      ])    
 
     }
 
     );
-
-    this.platosServices.list()
-        .subscribe((response: any) => {
-          console.log(response.result)
-      this.articulos = response.result;
-    }, (err: any) => {
-      console.log(err);
-    }
-    )
   }
 
 
 
   onSubmit() {
-    
-
-      this.ventasService.createManual(this.defaultForm.value)
+   
+      this.ventasServices.create(this.defaultForm.value)
         .subscribe(response => {
-          this.router.navigate(['ventas-list']);
+          Swal.fire({
+            title: 'Atencion',
+            text: 'Guardado exitoso',
+            icon: 'success',
+          })
+          this.router.navigate(['almacenes-list']);
         }, error => {
           console.log(error);
           if (error.error.descripcion === 'ER_DUP_ENTRY') {
@@ -77,5 +70,7 @@ export class ContentComponent implements OnInit {
     
 
   }
+
+  
 
 }

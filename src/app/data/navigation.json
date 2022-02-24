@@ -183,6 +183,11 @@
             },
             {
                 "id": 10.2,
+                "linktext": "Cargar Excel",
+                "link": "/ventas-excel-form"
+            },
+            {
+                "id": 10.3,
                 "linktext": "Listar Ventas",
                 "link": "/ventas-list"
             }

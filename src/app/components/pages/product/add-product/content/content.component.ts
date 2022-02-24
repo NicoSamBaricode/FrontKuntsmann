@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IngredientesService } from 'src/app/services/ingredientes.service';
 import { PlatosService } from 'src/app/services/platos.service';
 import { ProductosService } from 'src/app/services/productos.service';
+import { CategoriasService } from 'src/app/services/categorias.service';
 
 import Swal from 'sweetalert2';
 
@@ -19,11 +20,13 @@ export class ContentComponent implements OnInit {
   ingredientes: any = []
   productos: any = []
   items: any = []
+  categorias: any =[]
   update = false // para saber si es crear o actualizar
   titulo = "Agregar"
   constructor(  private platosService: PlatosService,
                 private productosService: ProductosService,
                 private ingredientesService: IngredientesService,
+                private categoriasService: CategoriasService,
                 private router: Router,
                 private activatedRoute: ActivatedRoute) {
 
@@ -67,6 +70,11 @@ export class ContentComponent implements OnInit {
 
 
       ]),
+      categoria: new FormControl(null, [
+
+        Validators.required,
+
+      ]),
       costo: new FormControl(null, [
       ]),
       auto: new FormControl(null, [
@@ -100,6 +108,13 @@ export class ContentComponent implements OnInit {
       this.platosService.listUnidades()
       .subscribe((response: any) => {
         this.unidades = response.result;
+      }, (err: any) => {
+        console.log(err);
+      }
+      )
+      this.categoriasService.list()
+      .subscribe((response: any) => {
+        this.categorias = response.result;
       }, (err: any) => {
         console.log(err);
       }
@@ -164,6 +179,7 @@ export class ContentComponent implements OnInit {
         this.defaultForm.controls["precio"].setValue(data["precio"]);
         this.defaultForm.controls["margen"].setValue(data["margen"]);
         this.defaultForm.controls["auto"].setValue(data["auto"]);
+        this.defaultForm.controls["categoria"].setValue(data["categoria"]);
       }, error => {
         console.log(error);
         Swal.fire({

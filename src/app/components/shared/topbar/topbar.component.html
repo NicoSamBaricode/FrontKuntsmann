@@ -15,7 +15,7 @@
         <li ngbDropdown class="ms-nav-item dropdown"> <a href="javascript:void(0)" class="text-disabled ms-has-notification" ngbDropdownToggle><i class="flaticon-bell"></i></a>
             <ul ngbDropdownMenu class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdown">
                 <li class="dropdown-menu-header">
-                    <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Notifications</span></h6><span class="badge badge-pill badge-info">4 New</span>
+                    <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Notificaciones</span></h6><span class="badge badge-pill badge-info">4 </span>
                 </li>
                 <li class="dropdown-divider"></li>
                 <perfect-scrollbar class="ms-scrollable ms-dropdown-list">
@@ -24,24 +24,10 @@
                             <p class="fs-10 my-1 text-disabled"><i class="material-icons">access_time</i> 30 seconds ago</p>
                         </div>
                     </a>
-                    <a class="media p-2" routerLink="/">
-                        <div class="media-body"> <span>You have newly registered users</span>
-                            <p class="fs-10 my-1 text-disabled"><i class="material-icons">access_time</i> 45 minutes ago</p>
-                        </div>
-                    </a>
-                    <a class="media p-2" routerLink="/">
-                        <div class="media-body"> <span>Your account was logged in from an unauthorized IP</span>
-                            <p class="fs-10 my-1 text-disabled"><i class="material-icons">access_time</i> 2 hours ago</p>
-                        </div>
-                    </a>
-                    <a class="media p-2" routerLink="/">
-                        <div class="media-body"> <span>An application form has been submitted</span>
-                            <p class="fs-10 my-1 text-disabled"><i class="material-icons">access_time</i> 1 day ago</p>
-                        </div>
-                    </a>
+                    
                 </perfect-scrollbar>
                 <li class="dropdown-divider"></li>
-                <li class="dropdown-menu-footer text-center"> <a routerLink="/notificaciones-list">View all Notifications</a>
+                <li class="dropdown-menu-footer text-center"> <a routerLink="/notificaciones-list">Ver todas</a>
                 </li>
             </ul>
         </li>
@@ -52,17 +38,17 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-right user-dropdown" ngbDropdownMenu>
                 <li class="dropdown-menu-header">
-                    <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Bienvenido, Nico</span></h6>
+                    <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Bienvenido, {{nombre.nombre}}</span></h6>
                 </li>
                 <li class="dropdown-divider"></li>
-                <li class="ms-dropdown-list">
+                <!-- <li class="ms-dropdown-list">
                     <a class="media fs-14 p-2" routerLink="/prebuilt-pages/user-profile"> <span><i class="flaticon-user mr-2"></i> Perfil</span> </a>
                     <a class="media fs-14 p-2" routerLink="/prebuilt-pages/user-profile"> <span><i class="flaticon-gear mr-2"></i> Configuraciones de Usuario</span> </a>
                 </li>
-                <li class="dropdown-divider"></li>
+                <li class="dropdown-divider"></li> -->
                 
                 <li class="dropdown-menu-footer">
-                    <a class="media fs-14 p-2" (click)="logout()"> <span><i class="flaticon-shut-down mr-2"></i> Logout</span> </a>
+                    <a class="media fs-14 p-2" (click)="logout()"> <span><i class="flaticon-shut-down mr-2"></i> Salir</span> </a>
                 </li>
             </ul>
         </li>

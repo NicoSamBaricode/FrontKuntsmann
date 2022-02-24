@@ -5035,6 +5035,17 @@ div#driver-popover-item .driver-popover-footer .driver-close-btn:hover {
 .thead-light thead{
   background-color: rgb(244,244,244);
 }
+.thead-personalizado thead a {
+  background-color: cornflowerblue;
+  color: white !important;
+  
+}
+.thead-personalizado thead  {
+  background-color: cornflowerblue;
+  color: white !important;
+  
+}
+
 table img{
   max-width: 30px;
   border-radius: 50%;
