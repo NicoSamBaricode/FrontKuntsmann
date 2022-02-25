@@ -22,6 +22,6 @@ export class NotificacionesService {
     return this.http.delete(`${this.url}platos/${id}`)
   }
   public list(){
-    return this.http.get(`${this.url}notificaciones/stock`)
+    return this.http.get(`${this.url}notificaciones`)
   }
 }

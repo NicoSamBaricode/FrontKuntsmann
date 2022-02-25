@@ -27,12 +27,12 @@ export class ContentComponent implements OnInit {
 
     columns: {
 
-      nombre: {
-        title: 'Nombre',
+      tipo: {
+        title: 'Tipo Aviso',
         filter: true
       },
-      mensaje: {
-        title: 'Mensaje',
+      producto_id: {
+        title: 'Articulo',
         filter: true
       },
      
@@ -136,7 +136,8 @@ export class ContentComponent implements OnInit {
           
         })
         this.source = new LocalDataSource(aux);
-      }
+        console.log(resp.result)
+      } 
     )
   }
   deleteAceptado(id: string) {
