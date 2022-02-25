@@ -61,15 +61,19 @@ export class ContentComponent implements OnInit {
       position: "right",
 
       custom: [
-
+        {
+          name: 'detalleAction',
+          title: '<i class="fa fa-plus-circle" title="Detalles" ></i>'
+        },
         {
           name: 'editAction',
-          title: '<i class="far fa-edit" title="Edit"></i>'
+          title: '<i class="far fa-edit" title="Editar"></i>'
         },
         {
           name: 'deleteAction',
-          title: '<i class="far fa-trash-alt color-red" title="delete" ></i>'
-        }
+          title: '<i class="far fa-trash-alt color-red" title="Borrar" ></i>'
+        },
+        
       ],
       add: false,
       edit: false,
@@ -128,6 +132,9 @@ export class ContentComponent implements OnInit {
     }
     if (event.action == 'editAction') {
       this.router.navigate(['product/add-product/update/' + event.data["id"]]);
+    }
+    if (event.action == 'detalleAction') {
+      this.router.navigate(['product-detalle/detalle/' + event.data["id"]]);
     }
 
   }
