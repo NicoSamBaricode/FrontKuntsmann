@@ -43,7 +43,28 @@ export class ContentComponent implements OnInit {
     if (params.id) {
       this.id= params.id;
       this.titulo = "Modificar"
-      this.getData(params.id) 
+      this.platosService.getOne(this.id)
+      .subscribe((response: any) => {
+        let data = response.result[0]
+        this.items = response.ingredientes;
+        this.defaultForm.controls["descripcion"].setValue(data["descripcion"]);
+        this.defaultForm.controls["articulo_id"].setValue(data["articulo_id"]);
+        this.defaultForm.controls["imagen"].setValue(data["imagen"]);
+        this.defaultForm.controls["info"].setValue(data["info"]);
+        this.defaultForm.controls["preparacion"].setValue(data["preparacion"]);
+        this.defaultForm.controls["costo"].setValue(data["costo"]);
+        this.defaultForm.controls["precio"].setValue(data["precio"]);
+        this.defaultForm.controls["margen"].setValue(data["margen"]);
+        this.defaultForm.controls["auto"].setValue(data["auto"]);
+        this.defaultForm.controls["categoria"].setValue(data["categoria_id"]);
+      }, error => {
+        console.log(error);
+        Swal.fire({
+          title: 'Atencion',
+          text: 'No hay conexion con base de datos' + error.error.descripcion,
+          icon: 'warning',
+        })
+      }); 
       this.update = true
     } else {
       this.update = false
@@ -168,17 +189,23 @@ export class ContentComponent implements OnInit {
     this.platosService.getOne(id)
       .subscribe((response: any) => {
         let data = response.result[0]
-        console.log(data);
         this.items = response.ingredientes;
         this.defaultForm.controls["descripcion"].setValue(data["descripcion"]);
         this.defaultForm.controls["articulo_id"].setValue(data["articulo_id"]);
         this.defaultForm.controls["imagen"].setValue(data["imagen"]);
         this.defaultForm.controls["info"].setValue(data["info"]);
         this.defaultForm.controls["preparacion"].setValue(data["preparacion"]);
-        this.defaultForm.controls["costo"].setValue(data["costo"]);
-        this.defaultForm.controls["precio"].setValue(data["precio"]);
-        this.defaultForm.controls["margen"].setValue(data["margen"]);
-        this.defaultForm.controls["auto"].setValue(data["auto"]);
+        if(this.defaultForm.get('auto').value){
+          this.defaultForm.controls["costo"].setValue(data["costo"]);
+          this.defaultForm.controls["precio"].setValue(data["precio"]);
+          this.defaultForm.controls["margen"].setValue(data["margen"]);
+        }else{
+          this.defaultForm.controls["costo"].setValue(data["costo"]);
+          this.defaultForm.controls["precio"].setValue(data["precio"]);
+          this.defaultForm.controls["margen"].setValue(data["margen"]);
+        }
+
+        //this.defaultForm.controls["auto"].setValue(data["auto"]);
         this.defaultForm.controls["categoria"].setValue(data["categoria_id"]);
       }, error => {
         console.log(error);
@@ -265,6 +292,17 @@ export class ContentComponent implements OnInit {
        }
 
   }
+
+  changeAuto(event) {
+    if(this.defaultForm.get('auto').value){
+      this.defaultForm.controls['costo'].disable();
+      this.getData(this.id);
+    }else{
+      this.defaultForm.controls['costo'].enable();
+    }
+  }
+
+  
 
 
 

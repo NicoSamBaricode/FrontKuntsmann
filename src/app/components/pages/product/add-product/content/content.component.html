@@ -156,7 +156,7 @@
                                         <label>Costo Automatico</label>
                                         <div class="sitwchCentrar">
                                             <label class="ms-switch">
-                                                <input type="checkbox" formControlName="auto">
+                                                <input type="checkbox" formControlName="auto" (change)="changeAuto($event)">
                                                 <span class="ms-switch-slider round"></span>
                                             </label>
                                         </div>
