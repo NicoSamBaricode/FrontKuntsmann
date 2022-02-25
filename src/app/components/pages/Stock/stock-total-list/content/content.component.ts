@@ -91,6 +91,7 @@ export class ContentComponent implements OnInit {
       cantidad: {
         title: 'Cantidad',
         filter: true,
+        type: 'html',
 
       },
       unidad: {

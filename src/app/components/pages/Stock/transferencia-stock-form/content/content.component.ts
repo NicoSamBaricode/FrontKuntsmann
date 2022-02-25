@@ -138,8 +138,7 @@ export class ContentComponent implements OnInit {
 
       this.transaccionesService.transferencia(this.activatedRoute.snapshot.params.id, this.defaultForm.value)
         .subscribe((response: any) => {
-          alert(response);
-          //this.router.navigate(['/stock-list']);
+          this.router.navigate(['/stock-list']);
         }, err => {
           Swal.fire({
             title: 'Atencion',

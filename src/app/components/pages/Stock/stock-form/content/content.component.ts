@@ -147,8 +147,8 @@ export class ContentComponent implements OnInit {
     this.defaultForm.controls["producto_id"].setValue(this.valor.split(",")[0]);
       this.transaccionesService.create(this.defaultForm.value)
         .subscribe(response => {
-          console.log(response);
-          //this.router.navigate(['/product/product-list']);
+         
+        this.router.navigate(['/stock-list']);
         }, error => {
           console.log(error);
           if (error.error.descripcion === 'ER_DUP_ENTRY') {
