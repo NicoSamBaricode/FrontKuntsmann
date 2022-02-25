@@ -1,1 +1,65 @@
-<p>content works!</p>
+<div class="ms-content-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="ms-panel">
+                <div class="ms-panel-header">
+                    <h6>Detalle Producto</h6>
+                </div>
+                <div class="ms-panel-body">
+                    <form [formGroup]="defaultForm" (validSubmit)="onSubmit()">
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom01">Nombre</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Sin Nombre" disabled
+                                        formControlName="descripcion" id="validationCustom01">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom02">Unidad de medida</label>
+                                <div class="input-group">
+                                    <select class="form-control" aria-label="UnidadMedida" id="validationCustom02"disabled
+                                        formControlName="unidad">                                        
+                                        <option [value]=unidad.id *ngFor="let unidad of unidades">{{unidad.descripcion}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                               <label for="validationCustom03">Avisar Bajo Stock</label>
+                                <div class="form-group">
+                                     
+                                    <input type="checkbox" class="form-check-input centrar" placeholder="Sin Nombre"disabled
+                                        formControlName="bajoStock" id="validationCustom03">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom04">Cantidad Minima Stock</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="Sin Cantidad"disabled
+                                        formControlName="margenStock" id="validationCustom04">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom05">Dias de Aviso Previo Vencimiento Mercaderia </label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="Sin dias declarados"disabled
+                                        formControlName="margenVencimiento" id="validationCustom05">
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12 derecha">
+                                <button class="btn btn-primary" type="submit">Volver</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
