@@ -30,7 +30,7 @@ export class ContentComponent implements OnInit {
         title: 'Nombre',
         filter: true
       },
-      claseMedida: {
+      unidad: {
         title: 'Unidad de medida',
         filter: true
       },
@@ -49,7 +49,10 @@ export class ContentComponent implements OnInit {
       position: "right",
       
       custom: [
-
+        {
+          name: 'detalleAction',
+          title: '<i class="fa fa-plus-circle" title="Detalles" ></i>'
+        },
         {
           name: 'editAction',
           title: '<i class="far fa-edit" title="Edit"></i>'
@@ -114,6 +117,9 @@ export class ContentComponent implements OnInit {
     }
     if (event.action == 'editAction') {
       this.router.navigate(['/productos-form/update/'+event.data["id"]]);
+    }
+    if (event.action == 'detalleAction') {
+      this.router.navigate(['productos-detalle/detalle/' + event.data["id"]]);
     }
 
   }
