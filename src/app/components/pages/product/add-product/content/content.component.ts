@@ -24,12 +24,20 @@ export class ContentComponent implements OnInit {
   imagen :any = 0
   update = false // para saber si es crear o actualizar
   titulo = "Agregar"
-  constructor(private platosService: PlatosService,
-    private productosService: ProductosService,
-    private ingredientesService: IngredientesService,
-    private categoriasService: CategoriasService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute) {
+
+  fileData: File = null;
+  previewImagen = null;
+
+
+
+
+
+  constructor(  private platosService: PlatosService,
+                private productosService: ProductosService,
+                private ingredientesService: IngredientesService,
+                private categoriasService: CategoriasService,
+                private router: Router,
+                private activatedRoute: ActivatedRoute) {
 
   }
   defaultslide = [
@@ -144,7 +152,31 @@ export class ContentComponent implements OnInit {
   }
 
 
+
+  uploadFile(file:any) {  
+    this.fileData = <File>file.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = (file:any) => {
+      this.previewImagen = file.target.result;
+    }
+    reader.readAsDataURL(<File>file.target.files[0])
+  }
+
+
+
+
   onSubmit() {
+
+
+
+    ////////////////////////
+
+    const formData = new FormData();
+    formData.append('imagen', this.fileData);
+
+//////////////////////////
+
 
     if (this.update || this.id) {
       this.getData(this.id);
