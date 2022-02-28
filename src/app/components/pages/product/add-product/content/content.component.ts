@@ -147,7 +147,7 @@ export class ContentComponent implements OnInit {
 
     if (this.update || this.id) {
       this.getData(this.id);
-      this.platosService.update(this.activatedRoute.snapshot.params.id, this.defaultForm.value)
+      this.platosService.update(this.id, this.defaultForm.value)
         .subscribe((response: any) => {
           this.router.navigate(['/product/product-list']);
         }, err => {
@@ -200,7 +200,7 @@ export class ContentComponent implements OnInit {
           this.defaultForm.controls["precio"].setValue(data["precio"]);
           this.defaultForm.controls["margen"].setValue(data["margen"]);
         }else{
-          //this.defaultForm.controls["costo"].setValue(data["costo"]);
+          this.defaultForm.controls["costo"].setValue(data["costo"]);
           this.defaultForm.controls["precio"].setValue(data["precio"]);
           this.defaultForm.controls["margen"].setValue(data["margen"]);
         }
@@ -308,7 +308,7 @@ export class ContentComponent implements OnInit {
       }
       this.defaultForm.controls['costo'].setValue(costo);
       this.defaultForm.controls['costo'].disable();
-      //this.getData(this.id);
+      
     }else{
       this.defaultForm.controls['costo'].enable();
     }
