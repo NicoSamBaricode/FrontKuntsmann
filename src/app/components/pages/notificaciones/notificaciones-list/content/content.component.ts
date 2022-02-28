@@ -47,7 +47,11 @@ export class ContentComponent implements OnInit {
         hide: true,
       },
 
-
+      id: {
+        title: 'Tipo Aviso',
+        filter: true,
+        hide: true,
+      },
 
     },
     noDataMessage: 'No hay nuevas notificaciones'
