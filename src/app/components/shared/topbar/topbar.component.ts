@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { NotificacionesService } from 'src/app/services/notificaciones.service';
 
 @Component({
   selector: 'app-topbar',
@@ -9,7 +10,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class TopbarComponent implements OnInit {
   nombre :any = []
-  constructor(private auth:AuthService,private usuarioService:UsuariosService) { }
+  constructor(private auth:AuthService,private usuarioService:UsuariosService, private notificacionesService: NotificacionesService) { }
   navToggle = () => {
     document.getElementById('body').classList.toggle('ms-aside-left-open');
     document.getElementById('ms-side-nav').classList.toggle('ms-aside-open');
