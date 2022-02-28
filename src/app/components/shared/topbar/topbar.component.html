@@ -12,18 +12,16 @@
     <ul class="ms-nav-list ms-inline mb-0" id="ms-nav-options">
         
       <!--notificaciones-->
-        <li ngbDropdown class="ms-nav-item dropdown"> <a href="javascript:void(0)" class="text-disabled ms-has-notification" ngbDropdownToggle><i class="flaticon-bell"></i></a>
+        <li *ngIf="estoyEnNotificacion" ngbDropdown class="ms-nav-item dropdown"> <a href="javascript:void(0)" class="text-disabled " [ngClass]="tieneNotificacion" ngbDropdownToggle><i class="flaticon-bell"></i></a>
             <ul ngbDropdownMenu class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdown">
                 <li class="dropdown-menu-header">
-                    <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Notificaciones</span></h6><span class="badge badge-pill badge-info">4 </span>
+                    <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Notificaciones</span></h6><span class="badge badge-pill badge-info">{{numero}} </span>
                 </li>
                 <li class="dropdown-divider"></li>
                 <perfect-scrollbar class="ms-scrollable ms-dropdown-list">
-                    <a class="media p-2" routerLink="/">
-                        <div class="media-body"> <span>Bajo Stock </span>
-                            <p class="fs-10 my-1 text-disabled"><i class="material-icons">access_time</i> 30 seconds ago</p>
-                        </div>
-                    </a>
+                    <div class="table-responsive">
+                        <ng2-smart-table [settings]="settings"(userRowSelect)="onUserRowSelect($event)"[source]="source" (custom)="onCustom($event)" class="table w-100 thead-personalizado"></ng2-smart-table>
+                    </div>
                     
                 </perfect-scrollbar>
                 <li class="dropdown-divider"></li>

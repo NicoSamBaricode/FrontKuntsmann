@@ -46,6 +46,11 @@ export class ContentComponent implements OnInit {
         filter: true,
         hide: true,
       },
+      id: {
+        title: 'Id',
+        filter: true,
+        hide: true,
+      },
 
       id: {
         title: 'Tipo Aviso',
