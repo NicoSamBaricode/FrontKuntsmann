@@ -17,10 +17,10 @@ export class TransaccionesService {
     return this.http.get(`${this.url}transacciones/producto/${id}`)
   }
   public stock(){
-    return this.http.get(`${this.url}transacciones/stock`)
+    return this.http.get(`${this.url}stock`)
   }
   public stockEtapas(){
-    return this.http.get(`${this.url}transacciones/stockEtapas`)
+    return this.http.get(`${this.url}stock/etapas`)
   }
   public getOne(id:string){
     return this.http.get(`${this.url}transacciones/one/${id}`)
