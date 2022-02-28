@@ -58,7 +58,9 @@ export class ContentComponent implements OnInit {
       margenVencimiento: new FormControl(0, [ //aca el nombre tiene que coincidir con el nombre la columna de la base
                
       ]),
-      
+      cantidad: new FormControl(0, [ //aca el nombre tiene que coincidir con el nombre la columna de la base
+               
+      ]),
 
     }
 
@@ -76,12 +78,12 @@ export class ContentComponent implements OnInit {
       .subscribe((response: any) => {
         let data = response.result[0]
         this.defaultForm.controls["descripcion"].setValue(data["descripcion"]);
-        this.defaultForm.controls["unidad"].setValue(data["unidad"]);
+        this.defaultForm.controls["unidad"].setValue(data["unidad_id"]);
         this.defaultForm.controls["bajoStock"].setValue(data["bajoStock"]);
         this.defaultForm.controls["margenStock"].setValue(data["margenStock"]);
         this.defaultForm.controls["margenVencimiento"].setValue(data["margenVencimiento"]);
 
-
+        this.defaultForm.controls["cantidad"].setValue(data["cantidad"]);
         console.log(response);
       }, error => {
         console.log(error);

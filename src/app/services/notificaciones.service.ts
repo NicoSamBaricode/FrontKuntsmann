@@ -18,10 +18,11 @@ export class NotificacionesService {
   public bajoStock(){
     return this.http.get(`${this.url}notificaciones/stock`)
   }
-  public delete(id:string){
-    return this.http.delete(`${this.url}platos/${id}`)
-  }
+  
   public list(){
     return this.http.get(`${this.url}notificaciones`)
+  }
+  public visto(id:string,data:any){
+    return this.http.put(`${this.url}notificaciones/${id}`,data)
   }
 }
