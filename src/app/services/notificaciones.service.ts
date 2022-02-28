@@ -22,6 +22,11 @@ export class NotificacionesService {
   public list(){
     return this.http.get(`${this.url}notificaciones`)
   }
+
+  public cantidad(){
+    return this.http.get(`${this.url}notificaciones/numero`)
+  }
+
   public visto(id:string,data:any){
     return this.http.put(`${this.url}notificaciones/${id}`,data)
   }

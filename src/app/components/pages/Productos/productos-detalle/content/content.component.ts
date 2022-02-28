@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductosService } from 'src/app/services/productos.service';
+import { StockService } from 'src/app/services/stock.service';
 import { PlatosService } from 'src/app/services/platos.service';
 import Swal from 'sweetalert2';
 
@@ -18,6 +19,7 @@ export class ContentComponent implements OnInit {
 
   constructor(private productosServices: ProductosService,
               private platosServices: PlatosService,
+              private stockServices: StockService,
               private router: Router,
               private activatedRoute: ActivatedRoute) {
 
@@ -25,7 +27,7 @@ export class ContentComponent implements OnInit {
 
   ngOnInit(): void {
     // Default Form
-    this,this.platosServices.listUnidades().subscribe(
+    this.platosServices.listUnidades().subscribe(
       (resp:any)=>{
         this.unidades=resp.result
       },err=>{
@@ -33,13 +35,12 @@ export class ContentComponent implements OnInit {
       }
     )
 
-
-
     const params = this.activatedRoute.snapshot.params; // para obtener la id del usuario
 
     if (params.id) {
       
       this.getDatos(params.id) // para obtener los datos
+
      
     } 
     this.defaultForm = new FormGroup({
@@ -65,6 +66,16 @@ export class ContentComponent implements OnInit {
     }
 
     );
+
+
+    this.stockServices.getOne(params.id).subscribe(
+      (resp:any)=>{
+
+        this.defaultForm.controls["cantidad"].setValue(resp.result[0]['cantidad'])
+      },err=>{
+        console.log(err)
+      }
+    )
   }
 
 
@@ -83,7 +94,7 @@ export class ContentComponent implements OnInit {
         this.defaultForm.controls["margenStock"].setValue(data["margenStock"]);
         this.defaultForm.controls["margenVencimiento"].setValue(data["margenVencimiento"]);
 
-        this.defaultForm.controls["cantidad"].setValue(data["cantidad"]);
+        
         console.log(response);
       }, error => {
         console.log(error);
