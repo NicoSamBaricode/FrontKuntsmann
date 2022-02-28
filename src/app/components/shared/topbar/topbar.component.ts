@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
-
+import Swal, { SweetAlertOptions } from 'sweetalert2';
+import { ActivatedRoute, Router, RouterStateSnapshot } from '@angular/router';
+import { LocalDataSource } from 'ng2-smart-table';
 @Component({
   selector: 'app-topbar',
   templateUrl: './topbar.component.html',
@@ -10,7 +13,91 @@ import { NotificacionesService } from 'src/app/services/notificaciones.service';
 })
 export class TopbarComponent implements OnInit {
   nombre :any = []
-  constructor(private auth:AuthService,private usuarioService:UsuariosService, private notificacionesService: NotificacionesService) { }
+  public data = [];
+  numero = 0;
+  tieneNotificacion='';
+  estoyEnNotificacion=true;
+  constructor(private auth:AuthService,private usuarioService:UsuariosService, private notificacionesService: NotificacionesService,private router: Router) { }
+  source: LocalDataSource;
+
+  settings = {
+    hideHeader:true,
+    hideSubHeader: true,
+    pager: {
+      perPage: 10,
+    },
+
+    columns: {
+
+      tipo: {
+        title: 'Tipo Aviso',
+        filter: true
+      },
+      producto: {
+        title: 'Producto',
+        filter: true
+      },
+      producto_id: {
+        title: 'Producto_id',
+        filter: true,
+        hide: true,
+      },
+      transaccion_id: {
+        title: 'Transaccion_id',
+        filter: true,
+        hide: true,
+      },
+      id: {
+        title: 'Id',
+        filter: true,
+        hide: true,
+      },
+
+
+    },
+    noDataMessage: 'No hay nuevas notificaciones'
+
+    ,
+    delete: {
+      confirmDelete: true,
+
+      deleteButtonContent: 'Borrar Fila',
+      saveButtonContent: 'Guardar',
+      cancelButtonContent: 'Cancelar'
+    },
+
+    actions: {
+      columnTitle: "Acciones",
+      position: "right",
+
+      custom: [
+       
+
+        {
+          name: 'deleteAction',
+          title: '<i class="far fa-trash-alt color-red" title="Borrar Notificacion" ></i>'
+        }
+      ],
+      add: false,
+      edit: false,
+      delete: false,
+      defaultStyle: false
+    },
+
+  };
+  onUserRowSelect(event): void {
+    console.log(event.data)
+    if (event.data['tipo'] == 'Stock') {
+    
+      this.router.navigate(['productos-detalle/detalle/' + event.data["producto_id"]]);
+    }
+    if (event.data['tipo'] == 'Vencimiento') {
+      
+      this.router.navigate(['/stock-detalle-form/detalle/' + event.data["transaccion_id"]]);
+    }
+
+
+  }
   navToggle = () => {
     document.getElementById('body').classList.toggle('ms-aside-left-open');
     document.getElementById('ms-side-nav').classList.toggle('ms-aside-open');
@@ -21,6 +108,10 @@ export class TopbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
+    if (this.router.url=='/notificaciones-list') {
+      this.estoyEnNotificacion=false;  
+    }
     this.auth.isAuthenticated()
     this.usuarioService.getName()
       .subscribe((response:any) => {
@@ -28,10 +119,89 @@ export class TopbarComponent implements OnInit {
       },(err:any)=>{
         console.log(err);
       })
+
+      this.notificacionesService.cantidad()
+      .subscribe((response:any) => {
+        this.numero = response.result[0].numero_notificaciones;
+        if (this.numero==0) {
+          this.tieneNotificacion=''
+        }
+        if (this.numero>0) {
+          this.tieneNotificacion='ms-has-notification'
+        }
+      },(err:any)=>{
+        console.log(err);
+      })
+
+      this.notificacionesService.list().subscribe(
+        (resp: any) => {
+  
+          let aux = resp.result.map((element) => {
+            return element
+  
+          })
+          this.source = new LocalDataSource(aux);
+          console.log(resp.result)
+        }
+      )
   }
 
   logout(){
     this.auth.logout()
   }
+  onCustom(event) {
 
+    if (event.action == 'deleteAction') {
+      Swal.fire({
+        title: 'Esta por eliminar un aviso',
+        text: "Esta seguro?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, Borrar!',
+        cancelButtonText: 'Cancelar'
+
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.deleteAceptado(event.data["id"]);
+
+          Swal.fire(
+            'Mensaje eliminado!',
+            '',
+            'success'
+          )
+        }
+      })
+
+
+
+    }
+    if (event.action == 'editAction') {
+      this.router.navigate(['/usuarios-form/update/' + event.data["id"]]);
+    }
+    if (event.action == 'detalleAction') {
+      if (event.data['tipo'] == 'Stock') {
+        alert("entro a stock")
+        this.router.navigate(['productos-detalle/detalle/' + event.data["producto_id"]]);
+      }
+      if (event.data['tipo'] == 'Vencimiento') {
+        alert("entro a Vencimiento")
+        this.router.navigate(['/stock-detalle-form/detalle/' + event.data["transaccion_id"]]);
+      }
+    }
+
+  }
+
+  deleteAceptado(id: string) {
+    var visto = "visto"
+    this.notificacionesService.visto(id, visto).subscribe(
+      (resp: any) => {
+        this.ngOnInit();
+      }, error => {
+        console.log(error);
+      }
+
+    )
+  }
 }

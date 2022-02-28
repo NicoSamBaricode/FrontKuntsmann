@@ -25,6 +25,7 @@ import { InviteComponent } from './quick/invite/invite.component';
 import { SettingsComponent } from './quick/settings/settings.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     SortablejsModule,
     BreadcrumbModule,
     HttpClientModule,
-    SweetAlert2Module.forRoot()
+    SweetAlert2Module.forRoot(),
+    Ng2SmartTableModule
   ],
   exports: [TopbarComponent,SweetAlert2Module, SidenavComponent, QuickbarComponent, BreadcrumbComponent, HttpClientModule],
   providers: [
