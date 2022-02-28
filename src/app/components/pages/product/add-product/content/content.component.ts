@@ -23,6 +23,14 @@ export class ContentComponent implements OnInit {
   categorias: any =[]
   update = false // para saber si es crear o actualizar
   titulo = "Agregar"
+
+  fileData: File = null;
+  previewImagen = null;
+
+
+
+
+
   constructor(  private platosService: PlatosService,
                 private productosService: ProductosService,
                 private ingredientesService: IngredientesService,
@@ -143,7 +151,31 @@ export class ContentComponent implements OnInit {
   }
 
 
+
+  uploadFile(file:any) {  
+    this.fileData = <File>file.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = (file:any) => {
+      this.previewImagen = file.target.result;
+    }
+    reader.readAsDataURL(<File>file.target.files[0])
+  }
+
+
+
+
   onSubmit() {
+
+
+
+    ////////////////////////
+
+    const formData = new FormData();
+    formData.append('imagen', this.fileData);
+
+//////////////////////////
+
 
     if (this.update || this.id) {
       this.getData(this.id);
