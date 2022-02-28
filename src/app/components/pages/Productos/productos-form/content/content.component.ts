@@ -118,7 +118,7 @@ export class ContentComponent implements OnInit {
       .subscribe((response: any) => {
         let data = response.result[0]
         this.defaultForm.controls["descripcion"].setValue(data["descripcion"]);
-        this.defaultForm.controls["unidad"].setValue(data["unidad"]);
+        this.defaultForm.controls["unidad"].setValue(data["unidad_id"]);
         this.defaultForm.controls["bajoStock"].setValue(data["bajoStock"]);
         this.defaultForm.controls["margenStock"].setValue(data["margenStock"]);
         this.defaultForm.controls["margenVencimiento"].setValue(data["margenVencimiento"]);

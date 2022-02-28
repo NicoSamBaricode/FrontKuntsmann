@@ -17,9 +17,10 @@ export class ContentComponent implements OnInit {
   constructor(private notificacionesService: NotificacionesService, private router: Router) {
 
   }
- 
-  source: LocalDataSource;  
+
+  source: LocalDataSource;
   settings = {
+
     hideSubHeader: true,
     pager: {
       perPage: 10,
@@ -31,14 +32,25 @@ export class ContentComponent implements OnInit {
         title: 'Tipo Aviso',
         filter: true
       },
-      producto_id: {
-        title: 'Articulo',
+      producto: {
+        title: 'Producto',
         filter: true
       },
-     
+      producto_id: {
+        title: 'Producto_id',
+        filter: true,
+        hide: true,
+      },
+      transaccion_id: {
+        title: 'Transaccion_id',
+        filter: true,
+        hide: true,
+      },
+
+
 
     },
-    noDataMessage:'No se encontraron Mensajes'
+    noDataMessage: 'No hay nuevas notificaciones'
 
     ,
     delete: {
@@ -48,25 +60,43 @@ export class ContentComponent implements OnInit {
       saveButtonContent: 'Guardar',
       cancelButtonContent: 'Cancelar'
     },
-   
-    actions: {
-      columnTitle:"Acciones",
-      position: "right",
-      
-      custom: [
 
-       
+    actions: {
+      columnTitle: "Acciones",
+      position: "right",
+
+      custom: [
+        {
+          name: 'detalleAction',
+          title: '<i class="fa fa-plus-circle" title="Detalles" ></i>'
+        },
+
         {
           name: 'deleteAction',
-          title: '<i class="far fa-trash-alt color-red" title="delete" ></i>'
+          title: '<i class="far fa-trash-alt color-red" title="Borrar Notificacion" ></i>'
         }
       ],
       add: false,
       edit: false,
       delete: false,
-      defaultStyle:false
+      defaultStyle: false
     },
+
   };
+  onUserRowSelect(event): void {
+    console.log(event.data)
+    if (event.data['tipo'] == 'Stock') {
+      alert("entro a stock")
+      this.router.navigate(['productos-detalle/detalle/' + event.data["producto_id"]]);
+    }
+    if (event.data['tipo'] == 'Vencimiento') {
+      alert("entro a Vencimiento")
+      this.router.navigate(['/stock-detalle-form/detalle/' + event.data["transaccion_id"]]);
+    }
+
+
+  }
+
   onSearch(query: string = '') {
     if (query.length == 0) {
 
@@ -88,6 +118,7 @@ export class ContentComponent implements OnInit {
     }
   }
   onCustom(event) {
+
     if (event.action == 'deleteAction') {
       Swal.fire({
         title: 'Esta por eliminar un aviso',
@@ -104,7 +135,7 @@ export class ContentComponent implements OnInit {
           this.deleteAceptado(event.data["id"]);
 
           Swal.fire(
-            'Mensaje eliminado con exito!',
+            'Mensaje eliminado!',
             '',
             'success'
           )
@@ -117,31 +148,35 @@ export class ContentComponent implements OnInit {
     if (event.action == 'editAction') {
       this.router.navigate(['/usuarios-form/update/' + event.data["id"]]);
     }
+    if (event.action == 'detalleAction') {
+      if (event.data['tipo'] == 'Stock') {
+        alert("entro a stock")
+        this.router.navigate(['productos-detalle/detalle/' + event.data["producto_id"]]);
+      }
+      if (event.data['tipo'] == 'Vencimiento') {
+        alert("entro a Vencimiento")
+        this.router.navigate(['/stock-detalle-form/detalle/' + event.data["transaccion_id"]]);
+      }
+    }
 
   }
 
   ngOnInit(): void {
     this.notificacionesService.list().subscribe(
-      (resp: any) => {        
-        
-        let aux = resp.result.map((element)=>{
-          if (element.estado==0) {
-            element.estado='Inactivo'
-           return element
-            
-          }else{
-            element.estado='Activo'
-            return element
-          }
-          
+      (resp: any) => {
+
+        let aux = resp.result.map((element) => {
+          return element
+
         })
         this.source = new LocalDataSource(aux);
         console.log(resp.result)
-      } 
+      }
     )
   }
   deleteAceptado(id: string) {
-    this.notificacionesService.delete(id).subscribe(
+    var visto = "visto"
+    this.notificacionesService.visto(id, visto).subscribe(
       (resp: any) => {
         this.ngOnInit();
       }, error => {
