@@ -146,7 +146,7 @@ export class ContentComponent implements OnInit {
   onSubmit() {
 
     if (this.update || this.id) {
-
+      this.getData(this.id);
       this.platosService.update(this.activatedRoute.snapshot.params.id, this.defaultForm.value)
         .subscribe((response: any) => {
           this.router.navigate(['/product/product-list']);
@@ -200,7 +200,7 @@ export class ContentComponent implements OnInit {
           this.defaultForm.controls["precio"].setValue(data["precio"]);
           this.defaultForm.controls["margen"].setValue(data["margen"]);
         }else{
-          this.defaultForm.controls["costo"].setValue(data["costo"]);
+          //this.defaultForm.controls["costo"].setValue(data["costo"]);
           this.defaultForm.controls["precio"].setValue(data["precio"]);
           this.defaultForm.controls["margen"].setValue(data["margen"]);
         }
@@ -249,6 +249,7 @@ export class ContentComponent implements OnInit {
   eliminar_ingrediente(id: string) {
     this.ingredientesService.delete(id)
       .subscribe((response: any) => {
+
         this.getData(this.id);
       }, (err: any) => {
         console.log(err);
@@ -294,9 +295,20 @@ export class ContentComponent implements OnInit {
   }
 
   changeAuto(event) {
+    let costo =0;
     if(this.defaultForm.get('auto').value){
+      
+      for(let i=0;i<this.items.length;i++){
+
+        if(this.items[i].costo){
+          costo = costo+ parseFloat (this.items[i].costo);
+        }else{
+          costo = costo+ 0;
+        }  
+      }
+      this.defaultForm.controls['costo'].setValue(costo);
       this.defaultForm.controls['costo'].disable();
-      this.getData(this.id);
+      //this.getData(this.id);
     }else{
       this.defaultForm.controls['costo'].enable();
     }
