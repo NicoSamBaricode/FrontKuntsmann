@@ -20,15 +20,16 @@ export class ContentComponent implements OnInit {
   ingredientes: any = []
   productos: any = []
   items: any = []
-  categorias: any =[]
+  categorias: any = []
+  imagen :any = 0
   update = false // para saber si es crear o actualizar
   titulo = "Agregar"
-  constructor(  private platosService: PlatosService,
-                private productosService: ProductosService,
-                private ingredientesService: IngredientesService,
-                private categoriasService: CategoriasService,
-                private router: Router,
-                private activatedRoute: ActivatedRoute) {
+  constructor(private platosService: PlatosService,
+    private productosService: ProductosService,
+    private ingredientesService: IngredientesService,
+    private categoriasService: CategoriasService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {
 
   }
   defaultslide = [
@@ -38,33 +39,33 @@ export class ContentComponent implements OnInit {
   ngOnInit(): void {
     // Default Form
 
-    const params = this.activatedRoute.snapshot.params; 
+    const params = this.activatedRoute.snapshot.params;
 
     if (params.id) {
-      this.id= params.id;
+      this.id = params.id;
       this.titulo = "Modificar"
       this.platosService.getOne(this.id)
-      .subscribe((response: any) => {
-        let data = response.result[0]
-        this.items = response.ingredientes;
-        this.defaultForm.controls["descripcion"].setValue(data["descripcion"]);
-        this.defaultForm.controls["articulo_id"].setValue(data["articulo_id"]);
-        this.defaultForm.controls["imagen"].setValue(data["imagen"]);
-        this.defaultForm.controls["info"].setValue(data["info"]);
-        this.defaultForm.controls["preparacion"].setValue(data["preparacion"]);
-        this.defaultForm.controls["costo"].setValue(data["costo"]);
-        this.defaultForm.controls["precio"].setValue(data["precio"]);
-        this.defaultForm.controls["margen"].setValue(data["margen"]);
-        this.defaultForm.controls["auto"].setValue(data["auto"]);
-        this.defaultForm.controls["categoria"].setValue(data["categoria_id"]);
-      }, error => {
-        console.log(error);
-        Swal.fire({
-          title: 'Atencion',
-          text: 'No hay conexion con base de datos' + error.error.descripcion,
-          icon: 'warning',
-        })
-      }); 
+        .subscribe((response: any) => {
+          let data = response.result[0]
+          this.items = response.ingredientes;
+          this.defaultForm.controls["descripcion"].setValue(data["descripcion"]);
+          this.defaultForm.controls["articulo_id"].setValue(data["articulo_id"]);
+          this.defaultForm.controls["imagen"].setValue(data["imagen"]);
+          this.defaultForm.controls["info"].setValue(data["info"]);
+          this.defaultForm.controls["preparacion"].setValue(data["preparacion"]);
+          this.defaultForm.controls["costo"].setValue(data["costo"]);
+          this.defaultForm.controls["precio"].setValue(data["precio"]);
+          this.defaultForm.controls["margen"].setValue(data["margen"]);
+          this.defaultForm.controls["auto"].setValue(data["auto"]);
+          this.defaultForm.controls["categoria"].setValue(data["categoria_id"]);
+        }, error => {
+          console.log(error);
+          Swal.fire({
+            title: 'Atencion',
+            text: 'No hay conexion con base de datos' + error.error.descripcion,
+            icon: 'warning',
+          })
+        });
       this.update = true
     } else {
       this.update = false
@@ -126,14 +127,14 @@ export class ContentComponent implements OnInit {
         console.log(err);
       }
       )
-      this.platosService.listUnidades()
+    this.platosService.listUnidades()
       .subscribe((response: any) => {
         this.unidades = response.result;
       }, (err: any) => {
         console.log(err);
       }
       )
-      this.categoriasService.list()
+    this.categoriasService.list()
       .subscribe((response: any) => {
         this.categorias = response.result;
       }, (err: any) => {
@@ -195,11 +196,11 @@ export class ContentComponent implements OnInit {
         this.defaultForm.controls["imagen"].setValue(data["imagen"]);
         this.defaultForm.controls["info"].setValue(data["info"]);
         this.defaultForm.controls["preparacion"].setValue(data["preparacion"]);
-        if(this.defaultForm.get('auto').value){
+        if (this.defaultForm.get('auto').value) {
           this.defaultForm.controls["costo"].setValue(data["costo"]);
           this.defaultForm.controls["precio"].setValue(data["precio"]);
           this.defaultForm.controls["margen"].setValue(data["margen"]);
-        }else{
+        } else {
           this.defaultForm.controls["costo"].setValue(data["costo"]);
           this.defaultForm.controls["precio"].setValue(data["precio"]);
           this.defaultForm.controls["margen"].setValue(data["margen"]);
@@ -217,12 +218,12 @@ export class ContentComponent implements OnInit {
       });
   }
   agregarIngredientes() {
-    if(this.id){
+    if (this.id) {
       this.addItem()
-    }else{
+    } else {
       this.platosService.create(this.defaultForm.value)
-        .subscribe((response:any) => {
-          this.id=response['id'];
+        .subscribe((response: any) => {
+          this.id = response['id'];
           this.addItem()
         }, error => {
           console.log(error);
@@ -261,60 +262,65 @@ export class ContentComponent implements OnInit {
   addItem() {
     if (!!this.ingredientes.producto_id && !!this.ingredientes.cantidad && !!this.ingredientes.unidad) {
 
-      let ji = {"plato_id":this.id,"producto_id":this.ingredientes.producto_id,"cantidad":this.ingredientes.cantidad,"unidad":this.ingredientes.unidad}
-     
+      let ji = { "plato_id": this.id, "producto_id": this.ingredientes.producto_id, "cantidad": this.ingredientes.cantidad, "unidad": this.ingredientes.unidad }
+
       this.ingredientesService.create(ji)
-      .subscribe((response: any) => {
-        this.platosService.update(this.id, this.defaultForm.value)
         .subscribe((response: any) => {
-          this.getData(this.id);
-        }, err => {
-          console.log(err);
-          Swal.fire({
-            title: 'Atencion',
-            text: 'No se puede guardar' + err.error.descripcion,
-            icon: 'warning',
-          })
-        })
-        
-      },(err:any)=>{
-        console.log(err)
-      }
-      )
+          this.platosService.update(this.id, this.defaultForm.value)
+            .subscribe((response: any) => {
+              this.getData(this.id);
+            }, err => {
+              console.log(err);
+              Swal.fire({
+                title: 'Atencion',
+                text: 'No se puede guardar' + err.error.descripcion,
+                icon: 'warning',
+              })
+            })
+
+        }, (err: any) => {
+          console.log(err)
+        }
+        )
 
 
 
-       } else {
-         Swal.fire({
-             title: 'Atencion',
-             text: 'Debe llenar ingrediente, cantidad y unidad',
-             icon: 'warning',
-         })
-       }
+    } else {
+      Swal.fire({
+        title: 'Atencion',
+        text: 'Debe llenar ingrediente, cantidad y unidad',
+        icon: 'warning',
+      })
+    }
 
   }
 
   changeAuto(event) {
-    let costo =0;
-    if(this.defaultForm.get('auto').value){
-      
-      for(let i=0;i<this.items.length;i++){
+    let costo = 0;
+    if (this.defaultForm.get('auto').value) {
 
-        if(this.items[i].costo){
-          costo = costo+ parseFloat (this.items[i].costo);
-        }else{
-          costo = costo+ 0;
-        }  
+      for (let i = 0; i < this.items.length; i++) {
+
+        if (this.items[i].costo) {
+          costo = costo + parseFloat(this.items[i].costo);
+        } else {
+          costo = costo + 0;
+        }
       }
       this.defaultForm.controls['costo'].setValue(costo);
       this.defaultForm.controls['costo'].disable();
-      
-    }else{
+
+    } else {
       this.defaultForm.controls['costo'].enable();
     }
   }
 
-  
+  imagenSeleccionada(event) {
+    if (event.target.files.length >0) {
+     const file = event.target.files[0];
+     this.imagen =file;
+    }
+  }
 
 
 
