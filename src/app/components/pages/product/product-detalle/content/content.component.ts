@@ -7,6 +7,7 @@ import { ProductosService } from 'src/app/services/productos.service';
 import { CategoriasService } from 'src/app/services/categorias.service';
 
 import Swal from 'sweetalert2';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-content',
@@ -23,12 +24,16 @@ export class ContentComponent implements OnInit {
   categorias: any =[]
   detalle = false // para saber si es crear o actualizar
   titulo = "Agregar"
+
+
+  previewImagen = null;
   constructor(  private platosService: PlatosService,
                 private productosService: ProductosService,
                 private ingredientesService: IngredientesService,
                 private categoriasService: CategoriasService,
                 private router: Router,
-                private activatedRoute: ActivatedRoute) {
+                private activatedRoute: ActivatedRoute,
+                private sanitizer: DomSanitizer) {
 
   }
   defaultslide = [
@@ -115,6 +120,8 @@ export class ContentComponent implements OnInit {
         console.log(err);
       }
       )
+
+
   }
 
 
@@ -131,13 +138,19 @@ export class ContentComponent implements OnInit {
         this.items = response.ingredientes;
         this.defaultForm.controls["descripcion"].setValue(data["descripcion"]);
         this.defaultForm.controls["articulo_id"].setValue(data["articulo_id"]);
-        this.defaultForm.controls["imagen"].setValue(data["imagen"]);
         this.defaultForm.controls["info"].setValue(data["info"]);
         this.defaultForm.controls["preparacion"].setValue(data["preparacion"]);
         this.defaultForm.controls["costo"].setValue(data["costo"]);
         this.defaultForm.controls["precio"].setValue(data["precio"]);
         this.defaultForm.controls["margen"].setValue(data["margen"]);        
         this.defaultForm.controls["categoria"].setValue(data["categoria"]);
+
+        this.platosService.imagen(data["imagen"])
+        .subscribe((response: any) => {
+          this.previewImagen = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(response));
+        }, err => {
+          console.log(err);
+        })
       }, error => {
         console.log(error);
         Swal.fire({

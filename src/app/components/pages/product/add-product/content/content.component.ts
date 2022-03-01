@@ -7,6 +7,8 @@ import { ProductosService } from 'src/app/services/productos.service';
 import { CategoriasService } from 'src/app/services/categorias.service';
 
 import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-content',
@@ -29,14 +31,13 @@ export class ContentComponent implements OnInit {
 
 
 
-
-
   constructor(  private platosService: PlatosService,
                 private productosService: ProductosService,
                 private ingredientesService: IngredientesService,
                 private categoriasService: CategoriasService,
                 private router: Router,
-                private activatedRoute: ActivatedRoute) {
+                private activatedRoute: ActivatedRoute,
+                private sanitizer: DomSanitizer) {
 
   }
   defaultslide = [
@@ -44,8 +45,7 @@ export class ContentComponent implements OnInit {
 
   ];
   ngOnInit(): void {
-    // Default Form
-
+   
     const params = this.activatedRoute.snapshot.params; 
 
     if (params.id) {
@@ -57,7 +57,6 @@ export class ContentComponent implements OnInit {
         this.items = response.ingredientes;
         this.defaultForm.controls["descripcion"].setValue(data["descripcion"]);
         this.defaultForm.controls["articulo_id"].setValue(data["articulo_id"]);
-        this.defaultForm.controls["imagen"].setValue(data["imagen"]);
         this.defaultForm.controls["info"].setValue(data["info"]);
         this.defaultForm.controls["preparacion"].setValue(data["preparacion"]);
         this.defaultForm.controls["costo"].setValue(data["costo"]);
@@ -65,6 +64,15 @@ export class ContentComponent implements OnInit {
         this.defaultForm.controls["margen"].setValue(data["margen"]);
         this.defaultForm.controls["auto"].setValue(data["auto"]);
         this.defaultForm.controls["categoria"].setValue(data["categoria_id"]);
+
+         this.platosService.imagen(data["imagen"])
+         .subscribe((response: any) => {
+           this.previewImagen = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(response));
+         }, err => {
+           console.log(err);
+         })
+
+
       }, error => {
         console.log(error);
         Swal.fire({
@@ -154,12 +162,17 @@ export class ContentComponent implements OnInit {
 
   uploadFile(file:any) {  
     this.fileData = <File>file.target.files[0];
+    if(this.fileData){
     const reader = new FileReader();
 
     reader.onload = (file:any) => {
       this.previewImagen = file.target.result;
+
+     
     }
     reader.readAsDataURL(<File>file.target.files[0])
+  }
+    
   }
 
 
@@ -167,19 +180,23 @@ export class ContentComponent implements OnInit {
 
   onSubmit() {
 
+        ////////////////////////
 
+        const formData = new FormData();
 
-    ////////////////////////
-
-    const formData = new FormData();
-    formData.append('imagen', this.fileData);
-
-//////////////////////////
-
+        let datosJson= this.defaultForm.getRawValue();
+    
+        formData.append('data', JSON.stringify( datosJson));
+        if(this.fileData){
+          formData.append('imagen', this.fileData);
+        }
+        
+    
+    //////////////////////////
 
     if (this.update || this.id) {
       this.getData(this.id);
-      this.platosService.update(this.id, this.defaultForm.value)
+      this.platosService.update(this.id, formData)
         .subscribe((response: any) => {
           this.router.navigate(['/product/product-list']);
         }, err => {
@@ -193,7 +210,7 @@ export class ContentComponent implements OnInit {
 
     } else {
 
-      this.platosService.create(this.defaultForm.value)
+      this.platosService.create(formData)
         .subscribe(response => {
           this.router.navigate(['/product/product-list']);
         }, error => {
@@ -224,7 +241,7 @@ export class ContentComponent implements OnInit {
         this.items = response.ingredientes;
         this.defaultForm.controls["descripcion"].setValue(data["descripcion"]);
         this.defaultForm.controls["articulo_id"].setValue(data["articulo_id"]);
-        this.defaultForm.controls["imagen"].setValue(data["imagen"]);
+        //this.defaultForm.controls["imagen"].setValue(data["imagen"]);
         this.defaultForm.controls["info"].setValue(data["info"]);
         this.defaultForm.controls["preparacion"].setValue(data["preparacion"]);
         if(this.defaultForm.get('auto').value){
@@ -249,10 +266,21 @@ export class ContentComponent implements OnInit {
       });
   }
   agregarIngredientes() {
+
+
+        const formData = new FormData();
+
+        let datosJson= this.defaultForm.getRawValue();
+    
+        formData.append('data', JSON.stringify( datosJson));
+        if(this.fileData){
+          formData.append('imagen', this.fileData);
+        }
+
     if(this.id){
       this.addItem()
     }else{
-      this.platosService.create(this.defaultForm.value)
+      this.platosService.create(formData)
         .subscribe((response:any) => {
           this.id=response['id'];
           this.addItem()
@@ -291,13 +319,26 @@ export class ContentComponent implements OnInit {
 
 
   addItem() {
+
+
+    const formData = new FormData();
+
+    let datosJson= this.defaultForm.getRawValue();
+
+    formData.append('data', JSON.stringify( datosJson));
+    if(this.fileData){
+      formData.append('imagen', this.fileData);
+    }
+
+
+
     if (!!this.ingredientes.producto_id && !!this.ingredientes.cantidad && !!this.ingredientes.unidad) {
 
       let ji = {"plato_id":this.id,"producto_id":this.ingredientes.producto_id,"cantidad":this.ingredientes.cantidad,"unidad":this.ingredientes.unidad}
      
       this.ingredientesService.create(ji)
       .subscribe((response: any) => {
-        this.platosService.update(this.id, this.defaultForm.value)
+        this.platosService.update(this.id, formData)
         .subscribe((response: any) => {
           this.getData(this.id);
         }, err => {

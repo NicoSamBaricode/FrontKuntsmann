@@ -141,7 +141,6 @@ export class TopbarComponent implements OnInit {
   
           })
           this.source = new LocalDataSource(aux);
-          console.log(resp.result)
         }
       )
   }
