@@ -23,6 +23,7 @@ export class ContentComponent implements OnInit {
   ingredientes: any = []
   etapas: any = []
   proveedores: any = []
+  tipo_proveedores: any = []
   almacenes: any = []
   productos: any = []
   items: any = []
@@ -98,6 +99,9 @@ export class ContentComponent implements OnInit {
       ]),
      
       costo: new FormControl(null, [
+        Validators.required
+      ]),
+      proveedor_tipo_pago: new FormControl(null, [
         Validators.required
       ]),
      

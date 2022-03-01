@@ -91,7 +91,13 @@
 
                                         </select>
                                     </div>
-
+                                    <div class="col-md-3 mb-3">
+                                        <label>Tipo Pago Proveedor</label>
+                                        <select class="form-control" formControlName="proveedor_tipo_pago">
+                                            <!-- <option [value]=proveedor_tipo_pago.id *ngFor="let tipo_proveedor  of tipo_proveedores">{{proveedor.descripcion}}</option> -->
+                                                       <option>Opcion1</option>                              
+                                        </select>
+                                    </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Precio Total de Compra</label>
                                         <div class="input-group">
@@ -109,7 +115,7 @@
 
                                         </select>
                                     </div>
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-3 mb-3">
                                         <label>Etapa</label>
                                         <select class="form-control" formControlName="etapa">
                                             <option [value]=etapa.id *ngFor="let etapa  of etapas">
@@ -121,7 +127,7 @@
                                     <div class="col-md-6 mb-3">
                                         <label for="validationCustom12">Remito</label>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="validatedCustomFile"
+                                            <input type="file" class="custom-file-input" id="validatedCustomFile" accept=".png, .jpg, .jpeg, .JPEG, .JPG"
                                                 formControlName="remito"  (change)="uploadFile($event)">
                                             <label class="custom-file-label" for="validatedCustomFile">Subir
                                                 Remito...</label>
