@@ -36,8 +36,17 @@ export class ContentComponent implements OnInit {
         title: 'Producto',
         filter: true
       },
+      plato: {
+        title: 'Producto',
+        filter: true
+      },
       producto_id: {
         title: 'Producto_id',
+        filter: true,
+        hide: true,
+      },
+      plato_id: {
+        title: 'Plato_id',
         filter: true,
         hide: true,
       },
@@ -90,12 +99,16 @@ export class ContentComponent implements OnInit {
   onUserRowSelect(event): void {
     console.log(event.data)
     if (event.data['tipo'] == 'Stock') {
-      alert("entro a stock")
+      
       this.router.navigate(['productos-detalle/detalle/' + event.data["producto_id"]]);
     }
     if (event.data['tipo'] == 'Vencimiento') {
-      alert("entro a Vencimiento")
+      
       this.router.navigate(['/stock-detalle-form/detalle/' + event.data["transaccion_id"]]);
+    }
+    if (event.data['tipo'] == 'PrecioDesactualizado') {
+     
+      this.router.navigate(['/product-detalle/detalle/' + event.data["plato_id"]]);
     }
 
 

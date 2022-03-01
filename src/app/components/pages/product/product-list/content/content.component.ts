@@ -27,7 +27,13 @@ export class ContentComponent implements OnInit {
     columns: {
       id: {
         title: 'Id',
-        filter: true
+        filter: true,
+        hide: true
+      },
+      articulo_id: {
+        title: 'Id',
+        filter: true,
+       
       },
       descripcion: {
         title: 'Articulo',
