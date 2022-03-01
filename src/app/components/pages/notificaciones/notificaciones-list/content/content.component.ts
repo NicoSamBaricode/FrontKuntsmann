@@ -37,7 +37,7 @@ export class ContentComponent implements OnInit {
         filter: true
       },
       plato: {
-        title: 'Producto',
+        title: 'Plato',
         filter: true
       },
       producto_id: {
