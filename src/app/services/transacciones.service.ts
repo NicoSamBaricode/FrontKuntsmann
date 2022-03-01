@@ -13,6 +13,10 @@ export class TransaccionesService {
   public list(){
     return this.http.get(`${this.url}transacciones`)
   }
+
+  public metodosPagos(){
+    return this.http.get(`${this.url}transacciones/metodospagos`)
+  }
   public productoList(id : string){
     return this.http.get(`${this.url}transacciones/producto/${id}`)
   }
