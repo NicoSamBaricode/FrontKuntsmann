@@ -1,24 +1,6 @@
 [
    
-    {
-        "id": 3,
-        "linktext": "Usuarios",
-        "iconclass": "fa fa-users fs-16",
-        "icon": "",
-        "child": true,
-        "submenu": [
-            {
-                "id": 3.1,
-                "linktext": "Ingresar Usuario",
-                "link": "/usuarios-form"
-            },
-            {
-                "id": 3.2,
-                "linktext": "Listar Usuarios",
-                "link": "/usuarios-list"
-            }
-        ]
-    },
+    
     {
         "id": 4,
         "linktext": "Proveedores",
