@@ -34,7 +34,7 @@ export class PlatosService {
     return this.http.delete(`${this.url}platos/${id}`)
   }
 
-  public imagen(data:any){
-    return this.http.post(`${this.url}imagen`,data)
+  public imagen(id:string){
+    return this.http.get(`${this.url}get/imagen/${id}`,{responseType: 'blob'})
   }
 }

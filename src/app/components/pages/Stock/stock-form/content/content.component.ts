@@ -28,15 +28,21 @@ export class ContentComponent implements OnInit {
   items: any = []
   update = false // para saber si es crear o actualizar
   titulo = "Agregar"
+
+  fileData: File = null;
+  previewImagen = null;
+
+  valor:any =''
+
+
   constructor(private platosService: PlatosService,
-    private transaccionesService: TransaccionesService,
-    private productosService: ProductosService,
-    private ingredientesService: IngredientesService,
-    private almacenesService: AlmacenesService,
-    private proveedoresService: ProveedoresService,
-    private etapasService: EtapasService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute
+              private transaccionesService: TransaccionesService,
+              private productosService: ProductosService,
+              private ingredientesService: IngredientesService,
+              private almacenesService: AlmacenesService,
+              private proveedoresService: ProveedoresService,
+              private etapasService: EtapasService,
+              private router: Router,
   ) {
 
   }
@@ -134,18 +140,62 @@ export class ContentComponent implements OnInit {
       }
       )
   }
-   valor:any =''
- cambioUnidades(valor){
  
-  this.defaultForm.controls["unidad"].setValue(this.productos[valor.split(",")[1]].unidad);
+ 
+ 
+ 
+   cambioUnidades(valor){
+ 
+  this.defaultForm.controls["unidad"].setValue(this.productos[valor.split(",")[1]].unidad_id);
   
   this.valor=valor
+
  }
+
+
+ uploadFile(file:any) {  
+  this.fileData = <File>file.target.files[0];
+  if(this.fileData){
+  const reader = new FileReader();
+
+  reader.onload = (file:any) => {
+    this.previewImagen = file.target.result;
+
+   
+  }
+  reader.readAsDataURL(<File>file.target.files[0])
+}
+  
+}
+
+
+
+
 
   onSubmit() {
     
     this.defaultForm.controls["producto_id"].setValue(this.valor.split(",")[0]);
-      this.transaccionesService.create(this.defaultForm.value)
+
+
+
+            ////////////////////////
+
+            const formData = new FormData();
+
+            let datosJson= this.defaultForm.getRawValue();
+        
+            formData.append('data', JSON.stringify( datosJson));
+            if(this.fileData){
+              formData.append('remito', this.fileData);
+            }
+            
+        
+        //////////////////////////
+
+
+
+
+      this.transaccionesService.create(formData)
         .subscribe(response => {
          
         this.router.navigate(['/stock-list']);

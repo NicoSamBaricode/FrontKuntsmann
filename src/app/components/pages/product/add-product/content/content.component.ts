@@ -7,6 +7,8 @@ import { ProductosService } from 'src/app/services/productos.service';
 import { CategoriasService } from 'src/app/services/categorias.service';
 
 import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-content',
@@ -30,14 +32,13 @@ export class ContentComponent implements OnInit {
 
 
 
-
-
   constructor(  private platosService: PlatosService,
                 private productosService: ProductosService,
                 private ingredientesService: IngredientesService,
                 private categoriasService: CategoriasService,
                 private router: Router,
-                private activatedRoute: ActivatedRoute) {
+                private activatedRoute: ActivatedRoute,
+                private sanitizer: DomSanitizer) {
 
   }
   defaultslide = [
@@ -45,14 +46,50 @@ export class ContentComponent implements OnInit {
 
   ];
   ngOnInit(): void {
+<<<<<<< HEAD
+   
+    const params = this.activatedRoute.snapshot.params; 
+=======
     // Default Form
 
     const params = this.activatedRoute.snapshot.params;
+>>>>>>> 957e600b60ddc3d51d8e3db86cb8f979c32d0dd1
 
     if (params.id) {
       this.id = params.id;
       this.titulo = "Modificar"
       this.platosService.getOne(this.id)
+<<<<<<< HEAD
+      .subscribe((response: any) => {
+        let data = response.result[0]
+        this.items = response.ingredientes;
+        this.defaultForm.controls["descripcion"].setValue(data["descripcion"]);
+        this.defaultForm.controls["articulo_id"].setValue(data["articulo_id"]);
+        this.defaultForm.controls["info"].setValue(data["info"]);
+        this.defaultForm.controls["preparacion"].setValue(data["preparacion"]);
+        this.defaultForm.controls["costo"].setValue(data["costo"]);
+        this.defaultForm.controls["precio"].setValue(data["precio"]);
+        this.defaultForm.controls["margen"].setValue(data["margen"]);
+        this.defaultForm.controls["auto"].setValue(data["auto"]);
+        this.defaultForm.controls["categoria"].setValue(data["categoria_id"]);
+
+         this.platosService.imagen(data["imagen"])
+         .subscribe((response: any) => {
+           this.previewImagen = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(response));
+         }, err => {
+           console.log(err);
+         })
+
+
+      }, error => {
+        console.log(error);
+        Swal.fire({
+          title: 'Atencion',
+          text: 'No hay conexion con base de datos' + error.error.descripcion,
+          icon: 'warning',
+        })
+      }); 
+=======
         .subscribe((response: any) => {
           let data = response.result[0]
           this.items = response.ingredientes;
@@ -74,6 +111,7 @@ export class ContentComponent implements OnInit {
             icon: 'warning',
           })
         });
+>>>>>>> 957e600b60ddc3d51d8e3db86cb8f979c32d0dd1
       this.update = true
     } else {
       this.update = false
@@ -155,12 +193,17 @@ export class ContentComponent implements OnInit {
 
   uploadFile(file:any) {  
     this.fileData = <File>file.target.files[0];
+    if(this.fileData){
     const reader = new FileReader();
 
     reader.onload = (file:any) => {
       this.previewImagen = file.target.result;
+
+     
     }
     reader.readAsDataURL(<File>file.target.files[0])
+  }
+    
   }
 
 
@@ -168,19 +211,23 @@ export class ContentComponent implements OnInit {
 
   onSubmit() {
 
+        ////////////////////////
 
+        const formData = new FormData();
 
-    ////////////////////////
-
-    const formData = new FormData();
-    formData.append('imagen', this.fileData);
-
-//////////////////////////
-
+        let datosJson= this.defaultForm.getRawValue();
+    
+        formData.append('data', JSON.stringify( datosJson));
+        if(this.fileData){
+          formData.append('imagen', this.fileData);
+        }
+        
+    
+    //////////////////////////
 
     if (this.update || this.id) {
       this.getData(this.id);
-      this.platosService.update(this.id, this.defaultForm.value)
+      this.platosService.update(this.id, formData)
         .subscribe((response: any) => {
           this.router.navigate(['/product/product-list']);
         }, err => {
@@ -194,7 +241,7 @@ export class ContentComponent implements OnInit {
 
     } else {
 
-      this.platosService.create(this.defaultForm.value)
+      this.platosService.create(formData)
         .subscribe(response => {
           this.router.navigate(['/product/product-list']);
         }, error => {
@@ -225,7 +272,7 @@ export class ContentComponent implements OnInit {
         this.items = response.ingredientes;
         this.defaultForm.controls["descripcion"].setValue(data["descripcion"]);
         this.defaultForm.controls["articulo_id"].setValue(data["articulo_id"]);
-        this.defaultForm.controls["imagen"].setValue(data["imagen"]);
+        //this.defaultForm.controls["imagen"].setValue(data["imagen"]);
         this.defaultForm.controls["info"].setValue(data["info"]);
         this.defaultForm.controls["preparacion"].setValue(data["preparacion"]);
         if (this.defaultForm.get('auto').value) {
@@ -250,12 +297,32 @@ export class ContentComponent implements OnInit {
       });
   }
   agregarIngredientes() {
+<<<<<<< HEAD
+
+
+        const formData = new FormData();
+
+        let datosJson= this.defaultForm.getRawValue();
+    
+        formData.append('data', JSON.stringify( datosJson));
+        if(this.fileData){
+          formData.append('imagen', this.fileData);
+        }
+
+    if(this.id){
+      this.addItem()
+    }else{
+      this.platosService.create(formData)
+        .subscribe((response:any) => {
+          this.id=response['id'];
+=======
     if (this.id) {
       this.addItem()
     } else {
       this.platosService.create(this.defaultForm.value)
         .subscribe((response: any) => {
           this.id = response['id'];
+>>>>>>> 957e600b60ddc3d51d8e3db86cb8f979c32d0dd1
           this.addItem()
         }, error => {
           console.log(error);
@@ -292,11 +359,29 @@ export class ContentComponent implements OnInit {
 
 
   addItem() {
+
+
+    const formData = new FormData();
+
+    let datosJson= this.defaultForm.getRawValue();
+
+    formData.append('data', JSON.stringify( datosJson));
+    if(this.fileData){
+      formData.append('imagen', this.fileData);
+    }
+
+
+
     if (!!this.ingredientes.producto_id && !!this.ingredientes.cantidad && !!this.ingredientes.unidad) {
 
       let ji = { "plato_id": this.id, "producto_id": this.ingredientes.producto_id, "cantidad": this.ingredientes.cantidad, "unidad": this.ingredientes.unidad }
 
       this.ingredientesService.create(ji)
+<<<<<<< HEAD
+      .subscribe((response: any) => {
+        this.platosService.update(this.id, formData)
+=======
+>>>>>>> 957e600b60ddc3d51d8e3db86cb8f979c32d0dd1
         .subscribe((response: any) => {
           this.platosService.update(this.id, this.defaultForm.value)
             .subscribe((response: any) => {
