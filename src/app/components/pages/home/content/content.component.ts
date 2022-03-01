@@ -10,14 +10,135 @@ import { Label } from 'ng2-charts';
 export class ContentComponent implements OnInit {
 
   constructor() { }
-  // Line Chart
-  public LineChartType: ChartType = 'line';
-  public data_1 = [4100, 3800, 3200, 3400, 2700, 3600, 3300, 3700, 4900];
-  public data_2 = [2800, 2600, 2300, 2800, 3600, 2900, 3000, 3100, 3600, 3000, 3100, 3200];
-  public infographicsLabels: Label[] = ["Jan-11", "Jan-12", "Jan-13", "Jan-14", "Jan-15", "Jan-16", "Jan-17", "Jan-18", "Jan-19"];
-  public infographicsLabels2: Label[] = ["Jan-11", "Jan-12", "Jan-13", "Jan-14", "Jan-15", "Jan-16", "Jan-17", "Jan-18", "Jan-19", "Jan-20", "Jan-21", "Jan-22"];
-  public infographicsLabels3: Label[] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"];
-  public infographicsOptions: ChartOptions = {
+  // Statics
+  statbox = [
+    {
+      icon: 'folder',
+      title: 'My Products',
+      text: 'Manage Products',
+      notification: 6
+    },
+    {
+      icon: 'people',
+      title: 'My Clients',
+      text: 'Manage Users',
+      notification: 5
+    },
+    {
+      icon: 'help',
+      title: 'Support Tickets',
+      text: 'View Tickets',
+      notification: 3
+    },
+    {
+      icon: 'graphic_eq',
+      title: 'Management',
+      text: 'Manage Product',
+      notification: 2
+    },
+  ];
+  // User Country
+  countrytable = [
+    {
+      countryflag: 'assets/img/costic/country-1.jpg',
+      entrance: 725,
+      bouncerate: 17.24,
+      exits: 7.65,
+    },
+    {
+      countryflag: 'assets/img/costic/country-2.jpg',
+      entrance: 890,
+      bouncerate: 12.90,
+      exits: 9.12,
+    },
+    {
+      countryflag: 'assets/img/costic/country-3.jpg',
+      entrance: 729,
+      bouncerate: 20.75,
+      exits: 14.29,
+    },
+    {
+      countryflag: 'assets/img/costic/country-4.jpg',
+      entrance: 316,
+      bouncerate: 32.09,
+      exits: 10.99,
+    },
+  ];
+  // Pie chart
+  public PieChartLabels: Label[] = ["USA", "Germany", "UK", "Russia", "France"];
+  public PieChartType: ChartType = 'pie';
+  public PieChartData: ChartDataSets[] = [
+    {
+      label: "Users (thousands)",
+      backgroundColor: ["#ff0018", "#f7b11b", "#ff6c60", "#8663e1", "#08bf6f"],
+      data: [725, 890, 729, 316, 275]
+    }
+  ];
+  public PieChartOptions: ChartOptions = {
+    responsive: true,
+    title: {
+      display: false,
+      text: 'Users By Country'
+    },
+    legend: {
+      display: false
+    },
+  }
+  public lineChartType: ChartType = 'line';
+  // User Traffic
+  public UsertrafficChartLabels: Label[] = ["Jan-11", "Jan-12", "Jan-13", "Jan-14", "Jan-15", "Jan-16", "Jan-17", "Jan-18", "Jan-19"];
+  public UsertrafficChartData: ChartDataSets[] = [
+    {
+      label: "Users",
+      borderColor: '#ff0018',
+      pointBorderColor: '#ff0018',
+      pointBackgroundColor: '#ff0018',
+      pointHoverBackgroundColor: '#ff0018',
+      pointHoverBorderColor: '#ff0018',
+      pointBorderWidth: 1,
+      pointHoverRadius: 4,
+      pointHoverBorderWidth: 1,
+      pointRadius: 2,
+      fill: true,
+      backgroundColor: "rgba(53,127,250,0.4)",
+      borderWidth: 1,
+      data: [1800, 1600, 2300, 2800, 3600, 2900, 3000, 3800, 3600]
+    }
+  ];
+  public UsertrafficChartOptions: ChartOptions = {
+    responsive: true,
+    legend: {
+      display: false,
+      position: "bottom"
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          fontColor: "#A8A9AD",
+          beginAtZero: true,
+          maxTicksLimit: 200,
+          padding: 20
+        },
+        gridLines: {
+          drawTicks: false,
+          display: false
+        }
+
+      }],
+      xAxes: [{
+        gridLines: {
+          zeroLineColor: "transparent"
+        },
+        ticks: {
+          padding: 20,
+          fontColor: "#A8A9AD"
+        }
+      }]
+    }
+  }
+  // User Purchase
+  public UserpchChartLabels: Label[] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"];
+  public UserpchChartOptions: ChartOptions = {
     responsive: true,
     elements: {
       line: {
@@ -37,314 +158,46 @@ export class ContentComponent implements OnInit {
       }]
     }
   };
-  // Sell Graph
-  public sellGraph: ChartDataSets[] = [
+  // engaged-users
+  public engagedChartData: ChartDataSets[] = [
     {
       label: "Data",
-      borderColor: '#000000',
-      pointBorderColor: '#000000',
-      pointBackgroundColor: '#000000',
-      pointHoverBackgroundColor: '#000000',
-      pointHoverBorderColor: '#000000',
+      borderColor: '#07be6e',
+      pointBorderColor: '#07be6e',
+      pointBackgroundColor: '#07be6e',
+      pointHoverBackgroundColor: '#07be6e',
+      pointHoverBorderColor: '#07be6e',
       pointBorderWidth: 0,
       pointHoverRadius: 0,
       pointHoverBorderWidth: 0,
       pointRadius: 0,
       fill: true,
-      backgroundColor: "rgba(25, 25, 25, 0.12)",
+      backgroundColor: "rgba(7, 190, 110,0.3)",
       borderWidth: 2,
-      data: this.data_1
+      data: [5, 1, 8, 1, 3, 7, 8, 4, 3, 6, 8, 9, 4, 5, 8, 2, 6, 4, 8, 3]
     }
   ];
-  // Total Visitors
-  public totalVisitors: ChartDataSets[] = [
+  // page-impressions
+  public pageimmpChartData: ChartDataSets[] = [
     {
       label: "Data",
-      borderColor: '#ff0018',
-      pointBorderColor: '#ff0018',
-      pointBackgroundColor: '#ff0018',
-      pointHoverBackgroundColor: '#ff0018',
-      pointHoverBorderColor: '#ff0018',
+      borderColor: '#07be6e',
+      pointBorderColor: '#07be6e',
+      pointBackgroundColor: '#07be6e',
+      pointHoverBackgroundColor: '#07be6e',
+      pointHoverBorderColor: '#07be6e',
       pointBorderWidth: 0,
       pointHoverRadius: 0,
       pointHoverBorderWidth: 0,
       pointRadius: 0,
       fill: true,
-      backgroundColor: "rgba(255, 0, 24, 0.11)",
+      backgroundColor: "rgba(7, 190, 110,0.3)",
       borderWidth: 2,
-      data: this.data_2
+      data: [8, 5, 1, 8, 5, 9, 4, 3, 4, 5, 8, 4, 4, 8, 9, 5, 5, 1, 3, 6]
     }
   ];
-  // New Users
-  public newUsers: ChartDataSets[] = [
-    {
-      label: "Data",
-      borderColor: '#000000',
-      pointBorderColor: '#000000',
-      pointBackgroundColor: '#000000',
-      pointHoverBackgroundColor: '#000000',
-      pointHoverBorderColor: '#000000',
-      pointBorderWidth: 0,
-      pointHoverRadius: 0,
-      pointHoverBorderWidth: 0,
-      pointRadius: 0,
-      fill: true,
-      backgroundColor: "rgba(25, 25, 25, 0.12)",
-      borderWidth: 2,
-      data: [5, 6, 8, 1, 5, 3, 9, 7, 5, 8, 7, 3, 6, 9, 1]
-    }
-  ];
-  // Total Orders
-  public totalOrders: ChartDataSets[] = [
-    {
-      label: "Data",
-      borderColor: '#ff0018',
-      pointBorderColor: '#ff0018',
-      pointBackgroundColor: '#ff0018',
-      pointHoverBackgroundColor: '#ff0018',
-      pointHoverBorderColor: '#ff0018',
-      pointBorderWidth: 0,
-      pointHoverRadius: 0,
-      pointHoverBorderWidth: 0,
-      pointRadius: 0,
-      fill: true,
-      backgroundColor: "rgba(255, 0, 24, 0.11)",
-      borderWidth: 2,
-      data: [1, 4, 7, 3, 5, 7, 6, 5, 8, 3, 5, 5, 4, 3, 7]
-    }
-  ];
-  // Recent Orders
-  recentOrders = [
-    {
-      img: "assets/img/costic/pizza.jpg",
-      title: "Pizza",
-      price: 19.99,
-      id: 67384917
-    },
-    {
-      img: "assets/img/costic/french-fries.jpg",
-      title: "French Fries",
-      price: 14.59,
-      id: 789393819
-    },
-    {
-      img: "assets/img/costic/cereals.jpg",
-      title: "Multigrain Hot Cereal",
-      price: 25.22,
-      id: 137893137
-    },
-    {
-      img: "assets/img/costic/egg-sandwich.jpg",
-      title: "Fried Egg Sandwich",
-      price: 11.23,
-      id: 235193138
-    }
-  ];
-  // Monthly Revenue
-  monthlyRevenue = [
-    {
-      title: "Month 1",
-      value: 25
-    },
-    {
-      title: "Month 2",
-      value: 50
-    },
-    {
-      title: "Month 3",
-      value: 75
-    },
-    {
-      title: "Month 4",
-      value: 40
-    }
-  ];
-  // Trending Orders
-  trendingOrders = [
-    {
-      title: "Meat Stew",
-      img: "assets/img/costic/food-2.jpg",
-      price: 25,
-      orders: 15
-    },
-    {
-      title: "Pancake",
-      img: "assets/img/costic/food-3.jpg",
-      price: 50,
-      orders: 75
-    },
-    {
-      title: "Burger",
-      img: "assets/img/costic/food-4.jpg",
-      price: 45,
-      orders: 85
-    },
-    {
-      title: "Saled",
-      img: "assets/img/costic/food-5.jpg",
-      price: 85,
-      orders: 175
-    }
-  ];
-  // Order Timing Chart
-  public BarChart: ChartType = 'bar';
-  public orderLabels: Label[] = ["12 AM", "2 PM", "4 PM", "6 PM", "8 PM", "10 PM", "12 PM", "2 PM", "6 PM", "8 AM", "10 PM"];
-  public orderOptions: ChartOptions = {
-    responsive: true,
-    legend: { display: false },
-    title: {
-      display: false,
-    },
-    scales: {
-      xAxes: [{
-        stacked: true,
-      }],
-      yAxes: [{
-        stacked: true
-      }]
-    }
-  };
-  public orderGraph: ChartDataSets[] = [
-    {
-      label: "Repeat order",
-      backgroundColor: '#ff0018',
-      data: [7, 6, 3, 5, 4, 2, 3, 6, 8, 5, 7]
-    }, {
-      label: "New order",
-      backgroundColor: '#000000',
-      data: [0, -4, -2, 0, -5, -3, 0, 0, -2, -5, -3]
-    }
-  ];
-  // Favourite Table
-  favouriteTable = [
-    {
-      name: "Hunger House",
-      qty: 8528,
-      orders: 17.24,
-      profits: 7.65,
-      profit: true
-    },
-    {
-      name: "Food Lounge",
-      qty: 4867,
-      orders: 12.24,
-      profits: 9.12,
-      profit: false
-    },
-    {
-      name: "Delizious",
-      qty: 7538,
-      orders: 32.04,
-      profits: 14.29,
-      profit: true
-    },
-    {
-      name: "Netherfood",
-      qty: 1614,
-      orders: 20.75,
-      profits: 12.25,
-      profit: false
-    },
-    {
-      name: "Rusmiz",
-      qty: 7538,
-      orders: 32.04,
-      profits: 14.29,
-      profit: true
-    }
-  ];
-  // Recently Placed Orders
-  recentlyOrders = [
-    {
-      id: 1,
-      name: "French Fries",
-      customername: "Jhon Leo",
-      location: "New Town",
-      status: "Pending",
-      deliverytime: "10:05",
-      price: 10
-    },
-    {
-      id: 2,
-      name: "Mango Pie",
-      customername: "Kristien",
-      location: "Old Town",
-      status: "Cancelled",
-      deliverytime: "14:05",
-      price: 9
-    },
-    {
-      id: 3,
-      name: "Fried Egg Sandwich",
-      customername: "Jack Suit",
-      location: "Oxford Street",
-      status: "Delivered",
-      deliverytime: "12:05",
-      price: 19
-    },
-    {
-      id: 4,
-      name: "Lemon Yogurt Parfait",
-      customername: "Alesdro Guitto",
-      location: "Church hill",
-      status: "Delivered",
-      deliverytime: "12:05",
-      price: 18
-    },
-    {
-      id: 5,
-      name: "Spicy Grill Sandwich",
-      customername: "Jacob Sahwny",
-      location: "Palace Road",
-      status: "Delivered",
-      deliverytime: "12:05",
-      price: 21
-    },
-    {
-      id: 6,
-      name: "Chicken Sandwich",
-      customername: "Peter Gill",
-      location: "Street 21",
-      status: "Pending",
-      deliverytime: "12:05",
-      price: 15
-    }
-  ];
-  // New Restaurant Listings
-  newListings = [
-    {
-      title: "Hunger House",
-      img: "assets/img/costic/customer-1.jpg",
-      productBanner: "assets/img/costic/food-1.jpg",
-      addbeforetime: "30 seconds ago",
-      rating: 5,
-      shortdesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nunc velit, dictum eget nulla a, sollicitudin rhoncus orci. Vivamus nec commodo turpis.",
-      likes: 982,
-      comment: 785
-    },
-    {
-      title: "Food Lounge",
-      img: "assets/img/costic/customer-2.jpg",
-      productBanner: "assets/img/costic/food-2.jpg",
-      addbeforetime: "30 seconds ago",
-      rating: 4,
-      shortdesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nunc velit, dictum eget nulla a, sollicitudin rhoncus orci. Vivamus nec commodo turpis.",
-      likes: 982,
-      comment: 785
-    },
-    {
-      title: "Delizious",
-      img: "assets/img/costic/customer-3.jpg",
-      productBanner: "assets/img/costic/food-3.jpg",
-      addbeforetime: "30 seconds ago",
-      rating: 4,
-      shortdesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nunc velit, dictum eget nulla a, sollicitudin rhoncus orci. Vivamus nec commodo turpis.",
-      likes: 982,
-      comment: 785
-    }
-  ];
-  // Recent Support Tickets
-  supportTickets = [
+  // support tickets
+  tickets = [
     {
       userimg: 'assets/img/costic/customer-4.jpg',
       username: 'Lorem ipsum dolor',
@@ -376,7 +229,6 @@ export class ContentComponent implements OnInit {
       close: true,
     },
   ];
-  // CHat
   public currentUserId = 1;
   chats = [
     {
