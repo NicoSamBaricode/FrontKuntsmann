@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from '@angular/router';
-import { IngredientesService } from 'src/app/services/ingredientes.service';
 import { PlatosService } from 'src/app/services/platos.service';
 import { ProductosService } from 'src/app/services/productos.service';
 import { TransaccionesService } from 'src/app/services/transacciones.service';
@@ -39,7 +38,6 @@ export class ContentComponent implements OnInit {
   constructor(private platosService: PlatosService,
               private transaccionesService: TransaccionesService,
               private productosService: ProductosService,
-              private ingredientesService: IngredientesService,
               private almacenesService: AlmacenesService,
               private proveedoresService: ProveedoresService,
               private etapasService: EtapasService,
@@ -143,6 +141,13 @@ export class ContentComponent implements OnInit {
         console.log(err);
       }
       )
+      this.transaccionesService.metodosPagos()
+      .subscribe((response: any) => {
+        this.tipo_proveedores= response.result;
+      },err=>{
+        console.log(err)
+      })
+
   }
  
  
