@@ -22,8 +22,8 @@
                     <div class="ms-card-body media">
                         <a class="media-body">
                             <h6>Platos Vendidos</h6>
-                            <p class="ms-card-change"> <i class="material-icons">arrow_upward</i> 4567</p>
-                            <p class="fs-12">48% From Last 24 Hours</p>
+                            <p class="ms-card-change"> {{platosVendidosWidget}}</p>
+                            <p class="fs-12">Ventas último Mes</p>
                         </a>
                     </div>
                     <i class="flaticon-stats"></i>
@@ -35,8 +35,8 @@
                 <div class="ms-card-body media">
                     <div class="media-body">
                         <h6>ventas totales</h6>
-                        <p class="ms-card-change"> $80,950</p>
-                        <p class="fs-12">2% Decreased from last budget</p>
+                        <p class="ms-card-change"> {{ventasTotalesWidget}}</p>
+                        <p class="fs-12">Ventas Totales</p>
                     </div>
                 </div>
                 <i class="flaticon-statistics"></i>
@@ -47,8 +47,8 @@
                 <div class="ms-card-body media">
                     <div class="media-body">
                         <h6>Items de Stock</h6>
-                        <p class="ms-card-change"> <i class="material-icons">arrow_upward</i> 4567</p>
-                        <p class="fs-12">48% From Last 24 Hours</p>
+                        <p class="ms-card-change">  {{itemsDeStockWidget}}</p>
+                        <p class="fs-12">Cantidad de Productos</p>
                     </div>
                 </div>
                 <i class="flaticon-user"></i>
@@ -59,8 +59,8 @@
                 <div class="ms-card-body media">
                     <div class="media-body">
                         <h6>notificaciones</h6>
-                        <p class="ms-card-change"> $80,950</p>
-                        <p class="fs-12">2% Decreased from last budget</p>
+                        <p class="ms-card-change"> {{notificacionesWidget}}</p>
+                        <p class="fs-12">Notificaciones Sin Leer</p>
                     </div>
                 </div>
                 <i class="flaticon-reuse"></i>
@@ -85,11 +85,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let item of countrytable">
-                                    <th scope="row"> <img [src]="item.countryflag" alt="flags"></th>
-                                    <td>{{item.entrance | number:'1.2-2'}}</td>
-                                    <td>{{item.bouncerate | number:'1.2-2'}}%</td>
-                                    
+                                <tr *ngFor="let item of top5Platos">                                    
+                                    <td>{{item.descripcion}}</td>
+                                    <td>{{item.cantidadVentas | number:'1.2-2'}}</td>
+                                    <td>{{item.cantidadVentas | number:'1.2-2'}}%</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -106,7 +105,7 @@
                 </div>
                 <div class="ms-panel-body">
                     <div class="row">
-                        <div class="col-xl-4 col-md-4">
+                        <!-- <div class="col-xl-4 col-md-4">
                             <div class="ms-graph-labels column-direction">
                                 <div class="ms-chart-no-label">
                                     <span class="bg-success"></span>
@@ -129,7 +128,7 @@
                                     <p>$3,416,139</p>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-xl-8 col-md-8">
                             <canvas baseChart [datasets]="PieChartData" [labels]="PieChartLabels"
                                 [options]="PieChartOptions" [chartType]="PieChartType">
