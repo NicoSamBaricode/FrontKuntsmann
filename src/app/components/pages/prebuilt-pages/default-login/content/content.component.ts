@@ -35,13 +35,23 @@ export class ContentComponent implements OnInit {
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(20)
-      ])
+      ]),
+      recordar: new FormControl(false)
     });
+
+    if (localStorage.getItem('email')) {
+      this.loginForm.get('Email').setValue(localStorage.getItem('email'));
+      this.loginForm.get('recordar').setValue(true);
+    }
+
   }
   onSubmit() {
     this.auth.login(this.loginForm.value).subscribe(
       (resp: any) => {
         this.router.navigate(['/home']);
+        if(this.loginForm.get('recordar').value){
+          localStorage.setItem('email',this.loginForm.get('Email').value);
+        }
       }, err => {
         Swal.fire({
           title: 'Error al ingresar',
@@ -58,5 +68,15 @@ export class ContentComponent implements OnInit {
 
     )
   }
+
+  recordarValor(event) {
+    if (event.checked) {
+      
+    } else {
+      localStorage.removeItem('email');
+    }
+  }
+
+  
 
 }
