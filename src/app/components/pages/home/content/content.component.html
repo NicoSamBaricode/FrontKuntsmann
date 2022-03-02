@@ -88,7 +88,7 @@
                                 <tr *ngFor="let item of top5Platos">                                    
                                     <td>{{item.descripcion}}</td>
                                     <td>{{item.cantidadVentas | number:'1.2-2'}}</td>
-                                    <td>{{item.cantidadVentas | number:'1.2-2'}}%</td>
+                                    <td>{{item.porcentaje | number:'1.2-2'}}%</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -105,30 +105,7 @@
                 </div>
                 <div class="ms-panel-body">
                     <div class="row">
-                        <!-- <div class="col-xl-4 col-md-4">
-                            <div class="ms-graph-labels column-direction">
-                                <div class="ms-chart-no-label">
-                                    <span class="bg-success"></span>
-                                    <p>$9,348,319</p>
-                                </div>
-                                <div class="ms-chart-no-label">
-                                    <span class="bg-primary"></span>
-                                    <p>$4,344,316</p>
-                                </div>
-                                <div class="ms-chart-no-label">
-                                    <span class="bg-warning"></span>
-                                    <p>$518,513</p>
-                                </div>
-                                <div class="ms-chart-no-label">
-                                    <span class="bg-danger"></span>
-                                    <p>$348,319</p>
-                                </div>
-                                <div class="ms-chart-no-label">
-                                    <span class="bg-secondary"></span>
-                                    <p>$3,416,139</p>
-                                </div>
-                            </div>
-                        </div> -->
+                        
                         <div class="col-xl-8 col-md-8">
                             <canvas baseChart [datasets]="PieChartData" [labels]="PieChartLabels"
                                 [options]="PieChartOptions" [chartType]="PieChartType">
@@ -160,39 +137,21 @@
                 </div>
                 <div class="ms-panel-body p-0">
                     <div class="ms-facebook-page-selection">
-                        <p class="ms-text-dark">March 25, 2022 to April 02, 2022</p>
-                        <span>Product: </span>
-                        <div class="dropdown" ngbDropdown>
-                            <a href="javascript:void(0)" class="has-chevron" ngbDropdownToggle>Plato</a>
-                            <ul ngbDropdownMenu class="dropdown-menu">
-                                <li class="ms-dropdown-list">
-                                    <a class="media p-2" routerLink="/">
-                                        <div class="media-body">
-                                            <span>Product 1</span>
-                                        </div>
-                                    </a>
-                                    <a class="media p-2" routerLink="/">
-                                        <div class="media-body">
-                                            <span>Product 2</span>
-                                        </div>
-                                    </a>
-                                    <a class="media p-2" routerLink="/">
-                                        <div class="media-body">
-                                            <span>Product 3</span>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                        
+                        <span>Productos: </span>
+                        <select class="form-control" (change)="selectPlato($event)" >
+                            <option [value]=plato.id *ngFor="let plato of platos">
+                                {{plato.descripcion}}
+                            </option>
+
+                        </select>
                     </div>
                     <ul class="ms-list clearfix">
                         <li class="ms-list-item">
                             <div class="d-flex justify-content-between align-items-end">
                                 <div class="ms-graph-meta">
                                     <h2>Enero, 2022</h2>
-                                    <p class="ms-text-dark">45.07%</p>
-                                    <p class="ms-text-success">+28.44%</p>
-                                    <p>VS 66.68% (Prev)</p>
+                                    
                                 </div>
                                 <div class="ms-graph-canvas">
                                     <canvas baseChart [datasets]="engagedChartData" [labels]="UserpchChartLabels"
@@ -205,9 +164,7 @@
                             <div class="d-flex justify-content-between align-items-end">
                                 <div class="ms-graph-meta">
                                     <h2>Febrero, 2022</h2>
-                                    <p class="ms-text-dark">9.07%</p>
-                                    <p class="ms-text-danger">-2.31%</p>
-                                    <p>VS 45.07% (Prev)</p>
+                                    
                                 </div>
                                 <div class="ms-graph-canvas">
                                     <canvas baseChart [datasets]="pageimmpChartData" [labels]="UserpchChartLabels"

@@ -3,7 +3,7 @@ import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
-
+import { PlatosService } from 'src/app/services/platos.service';
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
@@ -11,12 +11,13 @@ import { NotificacionesService } from 'src/app/services/notificaciones.service';
 })
 export class ContentComponent implements OnInit {
   platosVendidosWidget: any = [0]
+  platos: any = [0]
   ventasTotalesWidget: any = [0]
   itemsDeStockWidget: any = [0]
   notificacionesWidget: any = [0]
   top5Platos: any = [0]
   topCategorias: any = [0]
-  constructor(private dashboardService: DashboardService, private notificacionesService: NotificacionesService) { }
+  constructor(private platosService:PlatosService, private dashboardService: DashboardService, private notificacionesService: NotificacionesService) { }
   // Statics
   statbox = [
     {
@@ -57,6 +58,7 @@ export class ContentComponent implements OnInit {
   ];
   public PieChartOptions: ChartOptions = {
     responsive: true,
+    
     title: {
       display: false,
       text: 'Categorias Mas Vendidas'
@@ -64,14 +66,15 @@ export class ContentComponent implements OnInit {
     legend: {
       display: true
     },
+    
   }
 
   public lineChartType: ChartType = 'line';
   // User Traffic
-  public UsertrafficChartLabels: Label[] = ["Jan-11", "Jan-12", "Jan-13", "Jan-14", "Jan-15", "Jan-16", "Jan-17", "Jan-18", "Jan-19"];
+  public UsertrafficChartLabels: Label[] = ['Sin Especificar'];
   public UsertrafficChartData: ChartDataSets[] = [
     {
-      label: "Users",
+      label: "Cantidad de Ventas",
       borderColor: '#ff0018',
       pointBorderColor: '#ff0018',
       pointBackgroundColor: '#ff0018',
@@ -80,15 +83,22 @@ export class ContentComponent implements OnInit {
       pointBorderWidth: 1,
       pointHoverRadius: 4,
       pointHoverBorderWidth: 1,
-      pointRadius: 2,
+      pointRadius: 3,
       fill: true,
       backgroundColor: "rgba(53,127,250,0.4)",
       borderWidth: 1,
-      data: [1800, 1600, 2300, 2800, 3600, 2900, 3000, 3800, 3600]
+      data: [0]
+      
     }
   ];
   public UsertrafficChartOptions: ChartOptions = {
+    
     responsive: true,
+    elements: {
+      line: {
+        tension: 0.1
+      }
+    },
     legend: {
       display: false,
       position: "bottom"
@@ -119,7 +129,7 @@ export class ContentComponent implements OnInit {
     }
   }
   // User Purchase
-  public UserpchChartLabels: Label[] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"];
+  public UserpchChartLabels: Label[] = ['Sin Especificar'];
   public UserpchChartOptions: ChartOptions = {
     responsive: true,
     elements: {
@@ -156,18 +166,18 @@ export class ContentComponent implements OnInit {
       fill: true,
       backgroundColor: "rgba(7, 190, 110,0.3)",
       borderWidth: 2,
-      data: [5, 1, 8, 1, 3, 7, 8, 4, 3, 6, 8, 9, 4, 5, 8, 2, 6, 4, 8, 3]
+      data: [0]
     }
   ];
   // page-impressions
   public pageimmpChartData: ChartDataSets[] = [
     {
       label: "Data",
-      borderColor: '#07be6e',
-      pointBorderColor: '#07be6e',
-      pointBackgroundColor: '#07be6e',
-      pointHoverBackgroundColor: '#07be6e',
-      pointHoverBorderColor: '#07be6e',
+      borderColor: '#fd7e14',
+      pointBorderColor: '#fd7e14',
+      pointBackgroundColor: '#fd7e14',
+      pointHoverBackgroundColor: '#fd7e14',
+      pointHoverBorderColor: '#fd7e14',
       pointBorderWidth: 0,
       pointHoverRadius: 0,
       pointHoverBorderWidth: 0,
@@ -175,7 +185,7 @@ export class ContentComponent implements OnInit {
       fill: true,
       backgroundColor: "rgba(7, 190, 110,0.3)",
       borderWidth: 2,
-      data: [8, 5, 1, 8, 5, 9, 4, 3, 4, 5, 8, 4, 4, 8, 9, 5, 5, 1, 3, 6]
+      data: [0]
     }
   ];
 
@@ -237,12 +247,14 @@ export class ContentComponent implements OnInit {
       (resp: any) => {
 
         let aux = resp.result.map((element) => {
-//falta agregar porcentaje resp.total
+        
+         element.porcentaje=(parseFloat(element.cantidadVentas)/parseFloat(resp.total[0].cantidadVentasTotal) )*100 
+         
           return element
 
         })
         this.top5Platos = aux
-
+        
       }
     )//falta agregar porcentaje
     this.dashboardService.platosmasvendidoscategorias().subscribe(
@@ -261,6 +273,74 @@ export class ContentComponent implements OnInit {
         this.PieChartLabels = labels
       }
     )
-  }
+    this.dashboardService.platosvendidoshistorial().subscribe(
+      (resp: any) => {        
+        let cantidad = []
+        let labels = []
+        let aux = resp.result.map((element) => {
+          
+          cantidad.push(element.cantidadVentasHistorial)
+          labels.push(element.fecha)
+          return element
 
+        })
+
+        this.topCategorias = aux
+        this.UsertrafficChartData = [{data:cantidad}]        
+        this.UsertrafficChartLabels = labels
+      }
+    )
+    this.dashboardService.platosvendidoshistorial().subscribe(
+      (resp: any) => {        
+        let cantidad = []
+        let labels = []
+        let aux = resp.result.map((element) => {
+          
+          cantidad.push(element.cantidadVentasHistorial)
+          labels.push(element.fecha)
+          return element
+
+        })
+
+        this.topCategorias = aux
+        this.engagedChartData = [{data:cantidad}] 
+        this.pageimmpChartData = [{data:cantidad}] 
+        this.UserpchChartLabels = labels
+      }
+    )
+    this.platosService.list().subscribe(
+      (resp: any) => {        
+        
+        let aux = resp.result.map((element) => {
+         
+         
+          return element
+
+        })
+
+        this.platos = aux
+        
+      }
+    )
+
+   
+  }
+ selectPlato(event){
+  this.platosService.list().subscribe(
+    (resp: any) => {        
+      
+      let aux = resp.result.map((element) => {
+       
+       
+        return element
+
+      })
+
+      this.platos = aux
+      
+    }
+  )
+
+   console.log(event.target.value)
+ }
 }
