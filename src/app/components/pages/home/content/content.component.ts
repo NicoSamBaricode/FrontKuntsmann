@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { DashboardService } from 'src/app/services/dashboard.service';
+import { NotificacionesService } from 'src/app/services/notificaciones.service';
 
 @Component({
   selector: 'app-content',
@@ -8,8 +10,13 @@ import { Label } from 'ng2-charts';
   styleUrls: ['./content.component.css']
 })
 export class ContentComponent implements OnInit {
-
-  constructor() { }
+  platosVendidosWidget: any = [0]
+  ventasTotalesWidget: any = [0]
+  itemsDeStockWidget: any = [0]
+  notificacionesWidget: any = [0]
+  top5Platos: any = [0]
+  topCategorias: any = [0]
+  constructor(private dashboardService: DashboardService, private notificacionesService: NotificacionesService) { }
   // Statics
   statbox = [
     {
@@ -38,52 +45,27 @@ export class ContentComponent implements OnInit {
     },
   ];
   // User Country
-  countrytable = [
-    {
-      countryflag: 'assets/img/costic/country-1.jpg',
-      entrance: 725,
-      bouncerate: 17.24,
-      exits: 7.65,
-    },
-    {
-      countryflag: 'assets/img/costic/country-2.jpg',
-      entrance: 890,
-      bouncerate: 12.90,
-      exits: 9.12,
-    },
-    {
-      countryflag: 'assets/img/costic/country-3.jpg',
-      entrance: 729,
-      bouncerate: 20.75,
-      exits: 14.29,
-    },
-    {
-      countryflag: 'assets/img/costic/country-4.jpg',
-      entrance: 316,
-      bouncerate: 32.09,
-      exits: 10.99,
-    },
-  ];
   // Pie chart
-  public PieChartLabels: Label[] = ["USA", "Germany", "UK", "Russia", "France"];
+  public PieChartLabels: Label[] = ['Sin Especificar']
   public PieChartType: ChartType = 'pie';
   public PieChartData: ChartDataSets[] = [
     {
-      label: "Users (thousands)",
-      backgroundColor: ["#ff0018", "#f7b11b", "#ff6c60", "#8663e1", "#08bf6f"],
-      data: [725, 890, 729, 316, 275]
+      label: "Categorias",
+
+      data: [0]
     }
   ];
   public PieChartOptions: ChartOptions = {
     responsive: true,
     title: {
       display: false,
-      text: 'Users By Country'
+      text: 'Categorias Mas Vendidas'
     },
     legend: {
-      display: false
+      display: true
     },
   }
+
   public lineChartType: ChartType = 'line';
   // User Traffic
   public UsertrafficChartLabels: Label[] = ["Jan-11", "Jan-12", "Jan-13", "Jan-14", "Jan-15", "Jan-16", "Jan-17", "Jan-18", "Jan-19"];
@@ -196,90 +178,89 @@ export class ContentComponent implements OnInit {
       data: [8, 5, 1, 8, 5, 9, 4, 3, 4, 5, 8, 4, 4, 8, 9, 5, 5, 1, 3, 6]
     }
   ];
-  // support tickets
-  tickets = [
-    {
-      userimg: 'assets/img/costic/customer-4.jpg',
-      username: 'Lorem ipsum dolor',
-      date: 'February 24, 2022',
-      query: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla luctus lectus a facilisis bibendum. Duis quis convallis sapien ... ',
-      comment: 16,
-      attachment: 3,
-      open: true,
-      close: false,
-    },
-    {
-      userimg: 'assets/img/costic/customer-1.jpg',
-      username: 'Lorem ipsum dolor',
-      date: 'February 24, 2022',
-      query: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla luctus lectus a facilisis bibendum. Duis quis convallis sapien ... ',
-      comment: 11,
-      attachment: 1,
-      open: true,
-      close: false,
-    },
-    {
-      userimg: 'assets/img/costic/customer-7.jpg',
-      username: 'Lorem ipsum dolor',
-      date: 'February 24, 2022',
-      query: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla luctus lectus a facilisis bibendum. Duis quis convallis sapien ... ',
-      comment: 21,
-      attachment: 5,
-      open: false,
-      close: true,
-    },
-  ];
+
   public currentUserId = 1;
-  chats = [
-    {
-      userImg: 'assets/img/costic/customer-1.jpg',
-      userId: 1,
-      time: '10:33 pm',
-      message: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-    },
-    {
-      userImg: 'assets/img/costic/customer-2.jpg',
-      userId: 2,
-      time: '11:01 pm',
-      message: "I'm doing great, thanks for asking"
-    },
-    {
-      userImg: 'assets/img/costic/customer-2.jpg',
-      userId: 2,
-      time: '11:01 pm',
-      message: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-    },
-    {
-      userImg: 'assets/img/costic/customer-1.jpg',
-      userId: 1,
-      time: '11:03 pm',
-      message: 'It is a long established fact that a reader will be distracted by the readable content of a page'
-    },
-    {
-      userImg: 'assets/img/costic/customer-1.jpg',
-      userId: 1,
-      time: '11:03 pm',
-      message: 'There are many variations of passages of Lorem Ipsum available'
-    },
-  ]
 
-  getChatInitialMsg(item: { userId: number; userImg: string; }, i: number) {
-    var content = '';
-    i === 0 || (i !== 0 && this.chats[i - 1].userId !== item.userId) ?
-      content += '<div class="ms-chat-status ms-status-online ms-chat-img">' +
-      '<img src="' + item.userImg + '" class="ms-img-round" alt="people">' +
-      '</div>' : content = '';
-    return content;
-  }
 
-  getChatInitialTime(item: { userId: number; time: string; }, i: number) {
-    var content = '';
-    i === this.chats.length - 1 || (i + 1 <= this.chats.length - 1 && this.chats[i + 1].userId !== item.userId) ?
-      content += '<p class="ms-chat-time">' + item.time + '</p>' : content = '';
-    return content;
-  }
+
 
   ngOnInit(): void {
+    this.notificacionesService.cantidad().subscribe(
+      (resp: any) => {
+
+        let aux = resp.result.map((element) => {
+
+          return element
+
+        })
+        this.notificacionesWidget = aux[0].numero_notificaciones
+
+      }
+    )
+    this.dashboardService.platosvendidosmes().subscribe(
+      (resp: any) => {
+
+        let aux = resp.result.map((element) => {
+
+          return element
+
+        })
+        this.platosVendidosWidget = aux[0].cantidadVentasMes
+
+      }
+    )
+    this.dashboardService.platosvendidos().subscribe(
+      (resp: any) => {
+
+        let aux = resp.result.map((element) => {
+
+          return element
+
+        })
+        this.ventasTotalesWidget = aux[0].cantidadVentasMes
+
+      }
+    )
+    this.dashboardService.itemsstock().subscribe(
+      (resp: any) => {
+
+        let aux = resp.result.map((element) => {
+
+          return element
+
+        })
+        this.itemsDeStockWidget = aux[0].itemsStoks
+
+      }
+    )
+    this.dashboardService.platosmasvendidos().subscribe(
+      (resp: any) => {
+
+        let aux = resp.result.map((element) => {
+//falta agregar porcentaje resp.total
+          return element
+
+        })
+        this.top5Platos = aux
+
+      }
+    )//falta agregar porcentaje
+    this.dashboardService.platosmasvendidoscategorias().subscribe(
+      (resp: any) => {        
+        let cantidad = []
+        let labels = []
+        let aux = resp.result.map((element) => {
+          cantidad.push(element.cantidadVentas)
+          labels.push(element.descripcion)
+          return element
+
+        })
+
+        this.topCategorias = aux
+        this.PieChartData = [{data:cantidad}]        
+        this.PieChartLabels = labels
+      }
+    )
   }
 
 }
