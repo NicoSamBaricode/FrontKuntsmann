@@ -40,25 +40,20 @@
     },
     {
         "id": 2,
-        "linktext": "Menus",
+        "linktext": "Artículos",
         "iconclass": "fa fa-tasks fs-16",
         "icon": "",
         "child": true,
         "submenu": [
             {
                 "id": 2.1,
-                "linktext": "Agregar Menú",
+                "linktext": "Agregar Artículo",
                 "link": "/product/add-product"
             },            
             {
                 "id": 2.2,
-                "linktext": "Listado de Menú",
+                "linktext": "Listado de Artículo",
                 "link": "/product/product-list"
-            },
-            {
-                "id": 2.3,
-                "linktext": "Grilla de Menú",
-                "link": "/product/product-grid"
             }
            
         ]
@@ -160,12 +155,8 @@
                 "id": 9.3,
                 "linktext": "Listar Total",
                 "link": "/stockTotal-list"
-            },
-            {
-                "id": 9.4,
-                "linktext": "Transferir ELIMINAR",
-                "link": "/transferenciaStock-form"
             }
+           
             
         ]
     },
@@ -192,26 +183,8 @@
                 "link": "/ventas-list"
             }
         ]
-    },
-    
-    {
-        "id": 40,
-        "linktext": "Invoice",
-        "iconclass": "fas fa-align-justify fs-16",
-        "icon": "",
-        "child": true,
-        "submenu": [
-            {
-                "id": 40.1,
-                "linktext": "Invoice Detail",
-                "link": "/invoice/invoice-detail"
-            },
-            {
-                "id": 40.2,
-                "linktext": "Invoice List",
-                "link": "/invoice/invoice-list"
-            }
-        ]
     }
+    
+   
     
 ]

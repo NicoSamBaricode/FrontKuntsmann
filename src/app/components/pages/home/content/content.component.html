@@ -20,8 +20,8 @@
             <a href="">
                 <div class="ms-card card-gradient-success ms-widget ms-infographics-widget">
                     <div class="ms-card-body media">
-                        <a class="media-body">
-                            <h6>Platos Vendidos</h6>
+                        <a class="media-body"  [routerLink]="['/ventas-list']">
+                            <h6>Artículos Vendidos</h6>
                             <p class="ms-card-change"> {{platosVendidosWidget}}</p>
                             <p class="fs-12">Ventas último Mes</p>
                         </a>
@@ -33,11 +33,11 @@
         <div class="col-xl-3 col-md-6">
             <div class="ms-card card-gradient-secondary ms-widget ms-infographics-widget">
                 <div class="ms-card-body media">
-                    <div class="media-body">
+                    <a class="media-body"  [routerLink]="['/ventas-list']">
                         <h6>ventas totales</h6>
                         <p class="ms-card-change"> {{ventasTotalesWidget}}</p>
                         <p class="fs-12">Ventas Totales</p>
-                    </div>
+                    </a>
                 </div>
                 <i class="flaticon-statistics"></i>
             </div>
@@ -45,47 +45,48 @@
         <div class="col-xl-3 col-md-6">
             <div class="ms-card card-gradient-warning ms-widget ms-infographics-widget">
                 <div class="ms-card-body media">
-                    <div class="media-body">
+                    <a class="media-body" [routerLink]="['/productos-list']">
                         <h6>Items de Stock</h6>
-                        <p class="ms-card-change">  {{itemsDeStockWidget}}</p>
+                        <p class="ms-card-change"> {{itemsDeStockWidget}}</p>
                         <p class="fs-12">Cantidad de Productos</p>
-                    </div>
+                    </a>
                 </div>
-                <i class="flaticon-user"></i>
+                <i class="flaticon-list"></i>
             </div>
         </div>
-        <div class="col-xl-3 col-md-6">
-            <div class="ms-card card-gradient-info ms-widget ms-infographics-widget">
-                <div class="ms-card-body media">
-                    <div class="media-body">
-                        <h6>notificaciones</h6>
-                        <p class="ms-card-change"> {{notificacionesWidget}}</p>
-                        <p class="fs-12">Notificaciones Sin Leer</p>
+        
+            <div class="col-xl-3 col-md-6">
+                <div class="ms-card card-gradient-info ms-widget ms-infographics-widget">
+                    <div class="ms-card-body media">
+                        <a class="media-body" [routerLink]="['/notificaciones-list']">
+                            <h6>notificaciones</h6>
+                            <p class="ms-card-change"> {{notificacionesWidget}}</p>
+                            <p class="fs-12">Notificaciones Sin Leer</p>
+                        </a>
                     </div>
+                    <i class="flaticon-bell"></i>
                 </div>
-                <i class="flaticon-reuse"></i>
             </div>
-        </div>
-        <!-- Users by country table -->
+       
         <div class="col-xl-6 col-md-12">
             <div class="ms-panel ms-widget ms-panel-fh">
                 <div class="ms-panel-header">
-                    <h6>Platos</h6>
-                    <p>Platos mas vendidos</p>
+                    <h6>Artículos</h6>
+                    <p>Artículos mas vendidos</p>
                 </div>
                 <div class="ms-panel-body">
                     <div class="table-responsive">
                         <table class="table table-hover mb-0">
                             <thead>
                                 <tr>
-                                    <th scope="col">Plato</th>
+                                    <th scope="col">Artículo</th>
                                     <th scope="col">Cantidad</th>
                                     <th scope="col">Representacion del total</th>
-                                    
+
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let item of top5Platos">                                    
+                                <tr *ngFor="let item of top5Platos">
                                     <td>{{item.descripcion}}</td>
                                     <td>{{item.cantidadVentas | number:'1.2-2'}}</td>
                                     <td>{{item.porcentaje | number:'1.2-2'}}%</td>
@@ -101,12 +102,12 @@
             <div class="ms-panel ms-panel-fh">
                 <div class="ms-panel-header">
                     <h6>Ventas</h6>
-                    <p>Categorias mas Vendidas</p>
+                    <p>Categorias más Vendidas</p>
                 </div>
                 <div class="ms-panel-body">
                     <div class="row">
-                        
-                        <div class="col-xl-8 col-md-8">
+
+                        <div class="col-xl-12 col-md-12">
                             <canvas baseChart [datasets]="PieChartData" [labels]="PieChartLabels"
                                 [options]="PieChartOptions" [chartType]="PieChartType">
                             </canvas>
@@ -115,8 +116,8 @@
                 </div>
             </div>
         </div>
-        <!-- User Traffic Line Chart -->
-        <div class="col-xl-7 col-md-12">
+        <!--  Line Chart -->
+        <div class="col-xl-12 col-md-12">
             <div class="ms-panel ms-panel-fh">
                 <div class="ms-panel-header">
                     <h6>Ventas</h6>
@@ -129,7 +130,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-5 col-md-12">
+        <!--  <div class="col-xl-5 col-md-12">
             <div class="ms-panel ms-panel-fh ms-facebook-engagements">
                 <div class="ms-panel-header">
                     <h6>Ventas por Plato</h6>
@@ -146,7 +147,7 @@
 
                         </select>
                     </div>
-                    <ul class="ms-list clearfix">
+                     <ul class="ms-list clearfix">
                         <li class="ms-list-item">
                             <div class="d-flex justify-content-between align-items-end">
                                 <div class="ms-graph-meta">
@@ -154,29 +155,34 @@
                                     
                                 </div>
                                 <div class="ms-graph-canvas">
-                                    <canvas baseChart [datasets]="engagedChartData" [labels]="UserpchChartLabels"
-                                        [options]="UserpchChartOptions" [chartType]="lineChartType">
+                                    <canvas baseChart  [datasets]="engagedChartData" [labels]="UserpchChartLabels"
+                                        [options]="UserpchChartOptions"  [chartType]="lineChartType">
+                                    </canvas>
+                                </div>
+                                <div class="ms-graph-canvas">
+                                    <canvas baseChart id="grafico" [datasets]="engagedChartData" [labels]="UserpchChartLabels"
+                                        [options]="UserpchChartOptions"  [chartType]="lineChartType">
                                     </canvas>
                                 </div>
                             </div>
                         </li>
-                        <li class="ms-list-item">
+                         <li class="ms-list-item">
                             <div class="d-flex justify-content-between align-items-end">
                                 <div class="ms-graph-meta">
                                     <h2>Febrero, 2022</h2>
                                     
                                 </div>
                                 <div class="ms-graph-canvas">
-                                    <canvas baseChart [datasets]="pageimmpChartData" [labels]="UserpchChartLabels"
+                                    <canvas baseChart [datasets]="pageimmpChartData" [labels]="UserpchChartLabels2"
                                         [options]="UserpchChartOptions" [chartType]="lineChartType">
                                     </canvas>
                                 </div>
                             </div>
-                        </li>
-                    </ul>
+                        </li> 
+                    </ul> 
                 </div>
             </div>
-        </div>
-      
+        </div>  -->
+
     </div>
 </div>

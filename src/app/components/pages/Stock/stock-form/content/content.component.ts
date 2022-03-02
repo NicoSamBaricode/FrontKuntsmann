@@ -62,13 +62,13 @@ export class ContentComponent implements OnInit {
 
       ]),
       marca: new FormControl(null, [
-
+        Validators.required,
       ]),
       fechaIngreso: new FormControl(null, [
-        
+        Validators.required,
       ]),
       fechaVencimiento: new FormControl(null, [
-        
+        Validators.required,
       ]),
       fechaComprobante: new FormControl(null, [
         
@@ -77,19 +77,19 @@ export class ContentComponent implements OnInit {
         
       ]),
       lote: new FormControl(null, [
-        
+        Validators.required,
       ]),
       proveedor_id: new FormControl(null, [
-        
+        Validators.required,
       ]),
       cantidad: new FormControl(null, [
-        
+        Validators.required,
       ]),
       almacen: new FormControl(null, [
-        
+        Validators.required,
       ]),
       etapa: new FormControl(null, [
-        
+        Validators.required,
       ]),
 
       unidad: new FormControl(null, [

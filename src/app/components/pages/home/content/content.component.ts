@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import { ChartOptions, ChartType, ChartDataSets, Chart } from 'chart.js';
+import { chart } from 'highcharts';
 import { Label } from 'ng2-charts';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { NotificacionesService } from 'src/app/services/notificaciones.service';
@@ -17,7 +18,9 @@ export class ContentComponent implements OnInit {
   notificacionesWidget: any = [0]
   top5Platos: any = [0]
   topCategorias: any = [0]
-  constructor(private platosService:PlatosService, private dashboardService: DashboardService, private notificacionesService: NotificacionesService) { }
+  // grafico: Chart
+  // auxiliarGrafico: any = [0]
+  constructor(private platosService: PlatosService, private dashboardService: DashboardService, private notificacionesService: NotificacionesService) { }
   // Statics
   statbox = [
     {
@@ -58,7 +61,7 @@ export class ContentComponent implements OnInit {
   ];
   public PieChartOptions: ChartOptions = {
     responsive: true,
-    
+
     title: {
       display: false,
       text: 'Categorias Mas Vendidas'
@@ -66,7 +69,7 @@ export class ContentComponent implements OnInit {
     legend: {
       display: true
     },
-    
+
   }
 
   public lineChartType: ChartType = 'line';
@@ -88,11 +91,11 @@ export class ContentComponent implements OnInit {
       backgroundColor: "rgba(53,127,250,0.4)",
       borderWidth: 1,
       data: [0]
-      
+
     }
   ];
   public UsertrafficChartOptions: ChartOptions = {
-    
+
     responsive: true,
     elements: {
       line: {
@@ -128,7 +131,7 @@ export class ContentComponent implements OnInit {
       }]
     }
   }
-  // User Purchase
+  // ventas por plato ultimo mes
   public UserpchChartLabels: Label[] = ['Sin Especificar'];
   public UserpchChartOptions: ChartOptions = {
     responsive: true,
@@ -169,32 +172,36 @@ export class ContentComponent implements OnInit {
       data: [0]
     }
   ];
-  // page-impressions
-  public pageimmpChartData: ChartDataSets[] = [
-    {
-      label: "Data",
-      borderColor: '#fd7e14',
-      pointBorderColor: '#fd7e14',
-      pointBackgroundColor: '#fd7e14',
-      pointHoverBackgroundColor: '#fd7e14',
-      pointHoverBorderColor: '#fd7e14',
-      pointBorderWidth: 0,
-      pointHoverRadius: 0,
-      pointHoverBorderWidth: 0,
-      pointRadius: 0,
-      fill: true,
-      backgroundColor: "rgba(7, 190, 110,0.3)",
-      borderWidth: 2,
-      data: [0]
-    }
-  ];
+  // // page-impressions
+  // public pageimmpChartData: ChartDataSets[] = [
+  //   {
+  //     label: "Data",
+  //     borderColor: '#fd7e14',
+  //     pointBorderColor: '#fd7e14',
+  //     pointBackgroundColor: '#fd7e14',
+  //     pointHoverBackgroundColor: '#fd7e14',
+  //     pointHoverBorderColor: '#fd7e14',
+  //     pointBorderWidth: 0,
+  //     pointHoverRadius: 0,
+  //     pointHoverBorderWidth: 0,
+  //     pointRadius: 0,
+  //     fill: true,
+  //     backgroundColor: "rgba(7, 190, 110,0.3)",
+  //     borderWidth: 2,
+  //     data: [0]
+  //   }
+  // ];
 
   public currentUserId = 1;
 
-
+   
 
 
   ngOnInit(): void {
+   
+    //const grafico = new Chart('grafico',{type:'line', data:{datasets:[{data:[1,2,3,4]}],labels:this.UsertrafficChartLabels}, options:this.UserpchChartOptions},
+    //);
+
     this.notificacionesService.cantidad().subscribe(
       (resp: any) => {
 
@@ -247,18 +254,18 @@ export class ContentComponent implements OnInit {
       (resp: any) => {
 
         let aux = resp.result.map((element) => {
-        
-         element.porcentaje=(parseFloat(element.cantidadVentas)/parseFloat(resp.total[0].cantidadVentasTotal) )*100 
-         
+
+          element.porcentaje = (parseFloat(element.cantidadVentas) / parseFloat(resp.total[0].cantidadVentasTotal)) * 100
+
           return element
 
         })
         this.top5Platos = aux
-        
+
       }
     )//falta agregar porcentaje
     this.dashboardService.platosmasvendidoscategorias().subscribe(
-      (resp: any) => {        
+      (resp: any) => {
         let cantidad = []
         let labels = []
         let aux = resp.result.map((element) => {
@@ -269,78 +276,92 @@ export class ContentComponent implements OnInit {
         })
 
         this.topCategorias = aux
-        this.PieChartData = [{data:cantidad}]        
+        this.PieChartData = [{ data: cantidad }]
         this.PieChartLabels = labels
       }
     )
     this.dashboardService.platosvendidoshistorial().subscribe(
-      (resp: any) => {        
+      (resp: any) => {
         let cantidad = []
         let labels = []
         let aux = resp.result.map((element) => {
-          
+
           cantidad.push(element.cantidadVentasHistorial)
           labels.push(element.fecha)
           return element
 
         })
 
-        this.topCategorias = aux
-        this.UsertrafficChartData = [{data:cantidad}]        
+
+        this.UsertrafficChartData = [{ data: cantidad }]
         this.UsertrafficChartLabels = labels
       }
     )
-    this.dashboardService.platosvendidoshistorial().subscribe(
-      (resp: any) => {        
-        let cantidad = []
-        let labels = []
-        let aux = resp.result.map((element) => {
-          
-          cantidad.push(element.cantidadVentasHistorial)
-          labels.push(element.fecha)
-          return element
+    // this.platosService.list().subscribe(
+    //   (resp: any) => {
 
-        })
+    //     let aux = resp.result.map((element) => {
 
-        this.topCategorias = aux
-        this.engagedChartData = [{data:cantidad}] 
-        this.pageimmpChartData = [{data:cantidad}] 
-        this.UserpchChartLabels = labels
-      }
-    )
-    this.platosService.list().subscribe(
-      (resp: any) => {        
-        
-        let aux = resp.result.map((element) => {
-         
-         
-          return element
 
-        })
+    //       return element
 
-        this.platos = aux
-        
-      }
-    )
+    //     })
 
-   
+    //     this.platos = aux
+    //     let mes = new Date()
+    //     this.dashboardService.platosvendidoshistorialmes(mes.getMonth() + 1, this.platos.id[0]).subscribe(
+    //       (resp: any) => {
+    //         let cantidad = []
+    //         let labels = []
+    //         let aux = resp.result.map((element) => {
+
+    //           cantidad.push(element.cantidadVentasHistorial)
+    //           labels.push(element.fecha)
+    //           return element
+
+    //         })
+
+            
+    //         this.engagedChartData = [{ data: cantidad }]
+    //         this.auxiliarGrafico = cantidad 
+    //         this.UserpchChartLabels = labels
+    //       }
+    //     )
+    //   }
+    // )
+
+
+
+
   }
- selectPlato(event){
-  this.platosService.list().subscribe(
-    (resp: any) => {        
-      
-      let aux = resp.result.map((element) => {
-       
-       
-        return element
+  // selectPlato(event) {
+  //   let mes = new Date()
+  //   this.dashboardService.platosvendidoshistorialmes(mes.getMonth() + 1, event.target.value).subscribe(
+  //     (resp: any) => {
+  //       let cantidad = []
 
-      })
+  //       let labels = []
+  //       let aux = resp.result.map((element) => {
+  //         cantidad.push(element.cantidadVentasHistorialMes)
 
-      this.platos = aux
-      
-    }
-  )
+  //         labels.push(element.fecha)
+  //         return element
+          
+  //       })
+  //       // let aux2 = resp.result2.map((element) => {
 
-   console.log(event.target.value)
- }
+  //       //   cantidad2.push(element.cantidadVentasHistorialMes)
+  //       //   labels.push(element.fecha)
+  //       //   return element
+
+  //       // })
+
+  //       this.grafico.update()
+  //       this.engagedChartData = [{ data: cantidad }]
+  //       this.UserpchChartLabels = labels
+
+  //       console.log(resp.result)
+  //     }
+  //   )
+  // }
 }

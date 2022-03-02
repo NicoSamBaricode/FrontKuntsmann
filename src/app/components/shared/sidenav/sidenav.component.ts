@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import navigation from '../../../data/navigation.json'
+import navigationCocina from '../../../data/navigationCocina.json'
+import navigationVentas from '../../../data/navigationVentas.json'
 import jwt from 'jwt-decode';
 
 @Component({
@@ -22,7 +24,12 @@ export class SidenavComponent implements OnInit {
     switch (rol) {
       case 1: this.navlist=navigation;
       break;
+      case 2: this.navlist=navigationVentas;
+      break;
+      case 3: this.navlist=navigationCocina;
+      break;
     }
+    
   }
 
 }

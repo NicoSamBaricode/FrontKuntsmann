@@ -28,7 +28,7 @@ export class DashboardService {
   public platosvendidoshistorial(){
     return this.http.get(`${this.url}dashboard/platosvendidoshistorial`)
   }
-  public platosvendidoshistorialmes(mes: number){
-    return this.http.get(`${this.url}dashboard//platosvendidoshistorialmes/${mes}`)
+  public platosvendidoshistorialmes(mes: number,plato : number){
+    return this.http.post(`${this.url}dashboard//platosvendidoshistorialmes/${mes}`,{'plato':plato})
   }
 }

@@ -54,13 +54,13 @@ export class ContentComponent implements OnInit {
         Validators.required        
       ]),
       bajoStock: new FormControl(null, [ //aca el nombre tiene que coincidir con el nombre la columna de la base
-        Validators.required        
+               
       ]),
       margenStock: new FormControl(0, [ //aca el nombre tiene que coincidir con el nombre la columna de la base
-        Validators.required        
+               
       ]),
       margenVencimiento: new FormControl(0, [ //aca el nombre tiene que coincidir con el nombre la columna de la base
-        Validators.required        
+              
       ]),
       
 

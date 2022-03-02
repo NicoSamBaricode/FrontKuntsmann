@@ -36,7 +36,7 @@ export class ContentComponent implements OnInit {
     this.defaultForm = new FormGroup({
       descripcion: new FormControl('', [ //aca el nombre tiene que coincidir con el nombre la columna de la base
         Validators.required,
-        Validators.minLength(4),
+        Validators.minLength(2),
       ]),
       
 

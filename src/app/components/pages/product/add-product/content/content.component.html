@@ -4,7 +4,7 @@
 
             <div class="ms-panel">
                 <div class="ms-panel-header">
-                    <h6>{{titulo}} Menú</h6>
+                    <h6>{{titulo}} Artículo</h6>
                 </div>
                 <div class="ms-panel-body">
                     <form [formGroup]="defaultForm" (validSubmit)="onSubmit()">
@@ -35,7 +35,7 @@
                                         </select>
                                     </div>
                                     <div class="col-md-3 mb-3">
-                                        <label for="validationCustom12">Imagen de Menu</label>
+                                        <label for="validationCustom12">Imagen de Artículo</label>
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" id="validatedCustomFile" accept=".png, .jpg, .jpeg, .JPEG, .JPG"
                                                 formControlName="imagen" (change)="uploadFile($event)">
