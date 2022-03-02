@@ -29,16 +29,28 @@ export class ContentComponent implements OnInit {
     columns: {
 
       tipo: {
+        title: 'asdads',
+        filter: true,
+        hide: true
+      },
+      tipoDetalle: {
         title: 'Tipo Aviso',
         filter: true
       },
       producto: {
         title: 'Producto',
+        filter: true,
+        hide: true
+      },
+
+      descripcion: {
+        title: 'Descripcion',
         filter: true
       },
       plato: {
         title: 'Plato',
-        filter: true
+        filter: true,
+        hide: true
       },
       producto_id: {
         title: 'Producto_id',
@@ -97,7 +109,7 @@ export class ContentComponent implements OnInit {
 
   };
   onUserRowSelect(event): void {
-    console.log(event.data)
+
     if (event.data['tipo'] == 'Stock') {
       
       this.router.navigate(['productos-detalle/detalle/' + event.data["producto_id"]]);
@@ -106,9 +118,9 @@ export class ContentComponent implements OnInit {
       
       this.router.navigate(['/stock-detalle-form/detalle/' + event.data["transaccion_id"]]);
     }
-    if (event.data['tipo'] == 'PrecioDesactualizado') {
+    if (event.data['tipo'] == 'Desactualizado') {
      
-      this.router.navigate(['/product-detalle/detalle/' + event.data["plato_id"]]);
+      this.router.navigate(['product/add-product/update/' + event.data["plato_id"]]);
     }
 
 
@@ -167,12 +179,16 @@ export class ContentComponent implements OnInit {
     }
     if (event.action == 'detalleAction') {
       if (event.data['tipo'] == 'Stock') {
-        alert("entro a stock")
+      
         this.router.navigate(['productos-detalle/detalle/' + event.data["producto_id"]]);
       }
       if (event.data['tipo'] == 'Vencimiento') {
-        alert("entro a Vencimiento")
+        
         this.router.navigate(['/stock-detalle-form/detalle/' + event.data["transaccion_id"]]);
+      }
+      if (event.data['tipo'] == 'Desactualizado') {
+       
+        this.router.navigate(['product/add-product/update/' + event.data["plato_id"]]);
       }
     }
 
@@ -183,11 +199,22 @@ export class ContentComponent implements OnInit {
       (resp: any) => {
 
         let aux = resp.result.map((element) => {
+          if(element.tipo == 'Stock'){
+            element.tipoDetalle = 'Bajo Stock'
+          }
+
+          if(element.tipo == 'Vencimiento'){
+            element.tipoDetalle = 'Próximo a vencer'
+          }
+
+          if(element.tipo == 'Desactualizado'){
+            element.tipoDetalle = 'Precio desactualizado'
+          }
           return element
 
         })
         this.source = new LocalDataSource(aux);
-        console.log(resp.result)
+
       }
     )
   }

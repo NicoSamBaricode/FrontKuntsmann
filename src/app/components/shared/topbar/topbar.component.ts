@@ -31,13 +31,31 @@ export class TopbarComponent implements OnInit {
 
       tipo: {
         title: 'Tipo Aviso',
+        filter: true,
+        hide:true
+      },
+
+      tipoDetalle: {
+        title: 'Tipo Aviso',
         filter: true
       },
+
+      descripcion: {
+        title: 'Descripcion',
+        filter: true
+      },
+
       producto: {
         title: 'Producto',
         filter: true
+        ,hide:true
       },
       producto_id: {
+        title: 'Producto_id',
+        filter: true,
+        hide: true,
+      },
+      plato_id: {
         title: 'Producto_id',
         filter: true,
         hide: true,
@@ -86,14 +104,17 @@ export class TopbarComponent implements OnInit {
 
   };
   onUserRowSelect(event): void {
-    console.log(event.data)
     if (event.data['tipo'] == 'Stock') {
-    
+      
       this.router.navigate(['productos-detalle/detalle/' + event.data["producto_id"]]);
     }
     if (event.data['tipo'] == 'Vencimiento') {
       
       this.router.navigate(['/stock-detalle-form/detalle/' + event.data["transaccion_id"]]);
+    }
+    if (event.data['tipo'] == 'Desactualizado') {
+     
+      this.router.navigate(['product/add-product/update/' + event.data["plato_id"]]);
     }
 
 
@@ -137,10 +158,22 @@ export class TopbarComponent implements OnInit {
         (resp: any) => {
   
           let aux = resp.result.map((element) => {
+            if(element.tipo == 'Stock'){
+              element.tipoDetalle = 'Bajo Stock'
+            }
+  
+            if(element.tipo == 'Vencimiento'){
+              element.tipoDetalle = 'Próximo a vencer'
+            }
+  
+            if(element.tipo == 'Desactualizado'){
+              element.tipoDetalle = 'Precio desactualizado'
+            }
             return element
   
           })
           this.source = new LocalDataSource(aux);
+  
         }
       )
   }
