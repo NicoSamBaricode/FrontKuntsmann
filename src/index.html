@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
@@ -21,3 +22,17 @@
   <div class="footer">Gestión Kuntsmann. Powered by <span><a href="http://www.baricode.com">Baricode</a></span> </div>
 </footer>
 </html>
+<script>
+  
+  function imprimirTodo($div,$titulo) {
+    var divToPrint = document.getElementById($div);
+    newWin = window.open("");    
+    newWin.document.write(`<link rel="stylesheet"   href="../assets/css/style.css">`)
+    newWin.document.write(`<link rel="stylesheet"   href="../styles.css">`)
+    newWin.document.write(`<title>`+$titulo+`</title>`)
+    newWin.document.write(`<body class='container-fluid'><h5>`+$titulo+`</h5></body>`)
+    newWin.document.write(divToPrint.outerHTML);
+    setTimeout(()=>{newWin.print();newWin.close()},200)   
+    
+  }
+</script>

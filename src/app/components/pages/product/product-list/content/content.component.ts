@@ -18,6 +18,7 @@ export class ContentComponent implements OnInit {
   }
 
   source: LocalDataSource;
+  source2: LocalDataSource;
   settings = {
     hideSubHeader: true,
     pager: {
@@ -87,6 +88,58 @@ export class ContentComponent implements OnInit {
       defaultStyle: false
     },
   };
+  settings2 = {
+    hideSubHeader: true,
+    pager: {
+      perPage: 1000000000000,
+    },
+
+    columns: {
+      id: {
+        title: 'Id',
+        filter: true,
+        hide: true
+      },
+      articulo_id: {
+        title: 'Id',
+        filter: true,
+       
+      },
+      descripcion: {
+        title: 'Articulo',
+        filter: true
+      },
+      precio: {
+        title: 'Precio',
+        filter: true
+      },
+      costo: {
+        title: 'Costo',
+        filter: true
+      },
+      margen: {
+        title: 'Rentabilidad',
+        filter: true
+      },
+
+
+
+    },
+    delete: {
+      confirmDelete: true,
+
+      deleteButtonContent: 'Borrar Fila',
+      saveButtonContent: 'Guardar',
+      cancelButtonContent: 'Cancelar'
+    },
+    actions: {
+      hide:true,
+      add: false,
+      edit: false,
+      delete: false,
+      defaultStyle: false
+    },
+  };
   onSearch(query: string = '') {
     if (query.length == 0) {
 
@@ -149,6 +202,7 @@ export class ContentComponent implements OnInit {
     this.platosService.list().subscribe(
       (resp: any) => {
         this.source = new LocalDataSource(resp.result);
+        this.source2= new LocalDataSource(resp.result);
       }
     )
   }

@@ -14,9 +14,17 @@
                         <div class="col-lg-3 col-md-6">
                             <input #search class="search" class="form-control" type="text" placeholder="Buscar..." (keyup)="onSearch(search.value)">
                         </div>
+                        <div class="col-lg-9 col-md-6" style="text-align: right;">
+                            <button onClick="imprimirTodo('ImprimirMovimientos','Movimientos de Stock')"
+                                class="btn btn-outline-light" style="min-width: fit-content;margin-top: 0"><i
+                                    class="fa fa-print"></i></button>
+                        </div>
                     </div>
                     <div class="table-responsive">
                         <ng2-smart-table [settings]="settings" [source]="source" (custom)="onCustom($event)" class="table w-100 thead-primary"></ng2-smart-table>
+                    </div>
+                    <div class="table-responsive"  style="display: none;">
+                        <ng2-smart-table [settings]="settings2" [source]="source2" id="ImprimirMovimientos"  (custom)="onCustom($event)" class="table w-100 thead-primary"></ng2-smart-table>
                     </div>
                 </div>
                 

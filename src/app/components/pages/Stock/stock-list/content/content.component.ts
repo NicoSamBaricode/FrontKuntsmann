@@ -21,6 +21,7 @@ export class ContentComponent implements OnInit {
   
   
   source: LocalDataSource;  
+  source2: LocalDataSource; 
   settings = {
     hideSubHeader: true,
     pager: {
@@ -111,6 +112,85 @@ export class ContentComponent implements OnInit {
       defaultStyle:false
     },
   };
+  settings2 = {
+    hideSubHeader: true,
+    pager: {
+      perPage: 1000000000000,
+    },
+
+    columns: {
+
+      id: {
+        title: 'Identificador',
+        filter: true
+      },
+      producto: {
+        title: 'Producto',
+        filter: true
+      },
+      marca: {
+        title: 'Marca',
+        filter: true,
+        
+      },
+      lote: {
+        title: 'Lote',
+        filter: true,
+        
+      },numeroComprobante: {
+        title: 'Comprobante',
+        filter: true,
+
+      },      
+      cantidad: {
+        title: 'Cantidad',
+        filter: true,
+
+      },
+      unidad: {
+        title: 'Unidad',
+        filter: true,
+
+      },fechaIngreso: {
+        title: 'Ingreso',
+        filter: true,
+
+      },
+      fechaVencimiento: {
+        title: 'Vencimiento',
+        filter: true,
+
+      },
+      etapa: {
+        title: 'Etapa',
+        filter: true,
+
+      },
+      tipo: {
+        title: 'Tipo',
+        filter: true,
+
+      },
+      usuario: {
+        title: 'Usuario',
+        filter: true,
+
+      }
+
+    },
+    
+
+    actions: {
+      hide:true,
+      columnTitle:"Acciones",
+      position: "right",
+      
+            add: false,
+      edit: false,
+      delete: false,
+      defaultStyle:false
+    },
+  };
   onSearch(query: string = '') {
     if (query.length == 0) {
 
@@ -172,6 +252,7 @@ export class ContentComponent implements OnInit {
           
           let aux = resp.result
           this.source = new LocalDataSource(aux);
+          this.source2 = new LocalDataSource(aux);
         }
       )
     } else {
@@ -180,6 +261,7 @@ export class ContentComponent implements OnInit {
           
           let aux = resp.result
           this.source = new LocalDataSource(aux);
+          this.source2 = new LocalDataSource(aux);
         }
       )
     }

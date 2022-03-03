@@ -18,6 +18,7 @@ export class ContentComponent implements OnInit {
   }
   
   source: LocalDataSource;
+  source2: LocalDataSource;
   settings = {
     hideSubHeader: true,
     pager: {
@@ -62,6 +63,44 @@ export class ContentComponent implements OnInit {
           title: '<i class="far fa-trash-alt color-red" title="delete" ></i>'
         }
       ],
+      add: false,
+      edit: false,
+      delete: false,
+      defaultStyle:false
+    },
+  };
+  settings2 = {
+    hideSubHeader: true,
+    pager: {
+      perPage:1000000000,
+    },
+
+    columns: {
+
+      descripcion: {
+        title: 'Nombre',
+        filter: true
+      },
+      unidad: {
+        title: 'Unidad de medida',
+        filter: true
+      },
+      
+
+    },
+    delete: {
+      confirmDelete: true,
+
+      deleteButtonContent: 'Borrar Fila',
+      saveButtonContent: 'Guardar',
+      cancelButtonContent: 'Cancelar'
+    },
+    actions: {
+      hiden:true,
+      columnTitle:"Acciones",
+      position: "right",
+      
+      
       add: false,
       edit: false,
       delete: false,
@@ -128,7 +167,7 @@ export class ContentComponent implements OnInit {
     this.productosService.list().subscribe(
       (resp: any) => {
         this.source = new LocalDataSource(resp.result);
-        
+        this.source2 = new LocalDataSource(resp.result);
         console.log(this.source);
       }
     )
