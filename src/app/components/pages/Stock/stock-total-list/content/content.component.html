@@ -1,7 +1,7 @@
 <div class="ms-content-wrapper">
     <div class="row">
         <div class="col-md-12">
-            
+
             <div class="ms-panel">
                 <div class="ms-panel-header">
                     <h6>Listado de Stock Total por Producto</h6>
@@ -12,20 +12,31 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-3 col-md-6">
-                            <input #search class="search" class="form-control" type="text" placeholder="Buscar..." (keyup)="onSearch(search.value)">
+                            <input #search class="search" class="form-control" type="text" placeholder="Buscar..."
+                                (keyup)="onSearch(search.value)">
+                        </div>
+                        <div class="col-lg-9 col-md-6" style="text-align: right;">
+                            <button onClick="imprimirTodo('StockProducto','Listado de Stock Total Por Producto')"
+                                class="btn btn-outline-light" style="min-width: fit-content;margin-top: 0"><i
+                                    class="fa fa-print"></i></button>
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <ng2-smart-table [settings]="settings" [source]="source" (custom)="onCustom($event)" class="table w-100 thead-primary"></ng2-smart-table>
+                        <ng2-smart-table [settings]="settings" [source]="source" (custom)="onCustom($event)"
+                            class="table w-100 thead-primary"></ng2-smart-table>
+                    </div>
+                    <div class="table-responsive" style="display: none;">
+                        <ng2-smart-table [settings]="settings3" [source]="source3" id="StockProducto"
+                            class="table w-100 thead-primary"></ng2-smart-table>
                     </div>
                 </div>
             </div>
         </div>
-        
+
     </div>
     <div class="row">
         <div class="col-md-12">
-            
+
             <div class="ms-panel">
                 <div class="ms-panel-header">
                     <h6>Listado de Stock Total Por Etapa</h6>
@@ -36,15 +47,26 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-3 col-md-6">
-                            <input #search2 class="search" class="form-control" type="text" placeholder="Buscar..." (keyup)="onSearch2(search2.value)">
+                            <input #search2 class="search" class="form-control" type="text" placeholder="Buscar..."
+                                (keyup)="onSearch2(search2.value)">
+                        </div>
+                        <div class="col-lg-9 col-md-6" style="text-align: right;">
+                            <button onClick="imprimirTodo('imprimirPorEtapa','Listado de Stock Total Por Etapa')"
+                                class="btn btn-outline-light" style="min-width: fit-content;margin-top: 0"><i
+                                    class="fa fa-print"></i></button>
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <ng2-smart-table [settings]="settings2" [source]="source2" (custom)="onCustom2($event)" class="table w-100 thead-primary"></ng2-smart-table>
+                        <ng2-smart-table [settings]="settings2" [source]="source2" (custom)="onCustom2($event)"
+                            class="table w-100 thead-primary"></ng2-smart-table>
+                    </div>
+                    <div class="table-responsive"  style="display: none;">
+                        <ng2-smart-table [settings]="settings4" [source]="source4" id="imprimirPorEtapa"
+                            class="table w-100 thead-primary"></ng2-smart-table>
                     </div>
                 </div>
             </div>
         </div>
-        
+
     </div>
 </div>

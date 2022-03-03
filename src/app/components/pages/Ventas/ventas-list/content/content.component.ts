@@ -19,6 +19,7 @@ export class ContentComponent implements OnInit {
   }
 
   source: LocalDataSource;
+  source2: LocalDataSource;
   settings = {
     hideSubHeader: true,
     pager: {
@@ -92,6 +93,72 @@ export class ContentComponent implements OnInit {
       defaultStyle: false
     },
   };
+  settings2 = {
+    hideSubHeader: true,
+    pager: {
+      perPage: 1000000000,
+    },
+    noDataMessage:'Ninguna Venta Encontrada',
+    columns: {
+      
+      id: {
+        title: 'Id',
+        filter: true
+      },
+      articulo_id: {
+        title: 'Articulo Num',
+        filter: true
+      },
+      categoria: {
+        title: 'Categoria',
+        filter: true
+      },
+      descripcion: {
+        title: 'Articulo',
+        filter: true
+      },
+     cantidad: {
+        title: 'Cantidad',
+        filter: true
+      },
+      precio: {
+        title: 'Precio',
+        filter: true
+      },
+      costo: {
+        title: 'Costo',
+        filter: true
+      },
+      margen: {
+        title: 'Rentabilidad',
+        filter: true
+      },
+      creado: {
+        title: 'Fecha',
+        filter: true
+      },
+
+
+
+    },
+    delete: {
+      confirmDelete: true,
+
+      deleteButtonContent: 'Borrar Fila',
+      saveButtonContent: 'Guardar',
+      cancelButtonContent: 'Cancelar'
+    },
+    actions: {
+      columnTitle: "Acciones",
+      position: "right",      
+      add: false,
+      edit: false,
+      delete: false,
+      defaultStyle: false,
+      hide:true,
+      
+    },
+  };
   onSearch(query: string = '') {
     if (query.length == 0) {
 
@@ -153,6 +220,7 @@ export class ContentComponent implements OnInit {
     this.ventasService.list().subscribe(
       (resp: any) => {
         this.source = new LocalDataSource(resp.result);
+        this.source2 = new LocalDataSource(resp.result);
       }
     )
   }
@@ -167,5 +235,5 @@ export class ContentComponent implements OnInit {
 
     )
   }
-
+   
 }

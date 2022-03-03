@@ -20,6 +20,8 @@ export class ContentComponent implements OnInit {
   
   source: LocalDataSource;  
   source2: LocalDataSource; 
+  source3: LocalDataSource; 
+  source4: LocalDataSource; 
   settings = {
     hideSubHeader: true,
     pager: {
@@ -64,6 +66,51 @@ export class ContentComponent implements OnInit {
           title: '<i class="fas fa-plus-square" title="Detalles" ></i>'
         }
       ],
+      add: false,
+      edit: false,
+      delete: false,
+      defaultStyle:false
+    },
+  };
+  settings3 = {
+    hideSubHeader: true,
+    pager: {
+      perPage: 100000000000000000,
+    },
+
+    columns: {
+
+      id: {
+        title: 'Identificador',
+        filter: true
+      },
+      producto: {
+        title: 'Producto',
+        filter: true
+      },
+      
+            
+      cantidad: {
+        title: 'Cantidad',
+        filter: true,
+        type: 'html',
+      },
+      unidad: {
+        title: 'Unidad',
+        filter: true,
+
+      }      
+     
+      
+    },
+    
+
+    actions: {
+      hide:true,
+      columnTitle:"Acciones",
+      position: "right",
+      
+      
       add: false,
       edit: false,
       delete: false,
@@ -121,6 +168,57 @@ export class ContentComponent implements OnInit {
           title: '<i class="fas fa-plus-square" title="Detalles" ></i>'
         }
       ],
+      add: false,
+      edit: false,
+      delete: false,
+      defaultStyle:false
+    },
+  };
+  settings4 = {
+    hideSubHeader: true,
+    pager: {
+      perPage: 10,
+    },
+
+    columns: {
+
+      id: {
+        title: 'Identificador',
+        filter: true
+      },
+      producto: {
+        title: 'Producto',
+        filter: true
+      },
+      
+            
+      cantidad: {
+        title: 'Cantidad',
+        filter: true,
+        type: 'html',
+
+      },
+      unidad: {
+        title: 'Unidad',
+        filter: true,
+
+      } ,
+      etapa: {
+        title: 'Etapa',
+        filter: true,
+
+      }      
+     
+      
+    },
+    
+
+    actions: {
+      hide:true,
+      columnTitle:"Acciones",
+      position: "right",
+      
+     
       add: false,
       edit: false,
       delete: false,
@@ -223,6 +321,7 @@ export class ContentComponent implements OnInit {
           return item;
         })
         this.source = new LocalDataSource(aux);
+        this.source3 = new LocalDataSource(aux);
       }
     )
 
@@ -236,6 +335,7 @@ export class ContentComponent implements OnInit {
           return item;
         })
         this.source2 = new LocalDataSource(aux);
+        this.source4 = new LocalDataSource(aux);
       }
     )
   }
