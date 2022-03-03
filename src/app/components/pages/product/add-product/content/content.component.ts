@@ -59,7 +59,7 @@ export class ContentComponent implements OnInit {
           this.items = response.ingredientes;
           this.defaultForm.controls["descripcion"].setValue(data["descripcion"]);
           this.defaultForm.controls["articulo_id"].setValue(data["articulo_id"]);
-          this.defaultForm.controls["imagen"].setValue(data["imagen"]);
+          //this.defaultForm.controls["imagen"].setValue(data["imagen"]);
           this.defaultForm.controls["info"].setValue(data["info"]);
           this.defaultForm.controls["preparacion"].setValue(data["preparacion"]);
           this.defaultForm.controls["costo"].setValue(data["costo"]);
@@ -67,6 +67,15 @@ export class ContentComponent implements OnInit {
           this.defaultForm.controls["margen"].setValue(data["margen"]);
           this.defaultForm.controls["auto"].setValue(data["auto"]);
           this.defaultForm.controls["categoria"].setValue(data["categoria_id"]);
+
+
+          this.platosService.imagen(data["imagen"])
+          .subscribe((response: any) => {
+            this.previewImagen = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(response));
+          }, err => {
+            console.log(err);
+          })
+
         }, error => {
           console.log(error);
           Swal.fire({
@@ -150,6 +159,8 @@ export class ContentComponent implements OnInit {
         console.log(err);
       }
       )
+
+
   }
 
 
@@ -250,6 +261,14 @@ export class ContentComponent implements OnInit {
 
         //this.defaultForm.controls["auto"].setValue(data["auto"]);
         this.defaultForm.controls["categoria"].setValue(data["categoria_id"]);
+
+
+        this.platosService.imagen(data["imagen"])
+        .subscribe((response: any) => {
+          this.previewImagen = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(response));
+        }, err => {
+          console.log(err);
+        })
       }, error => {
         console.log(error);
         Swal.fire({
@@ -260,10 +279,24 @@ export class ContentComponent implements OnInit {
       });
   }
   agregarIngredientes() {
+
+            ////////////////////////
+
+            const formData = new FormData();
+
+            let datosJson= this.defaultForm.getRawValue();
+        
+            formData.append('data', JSON.stringify( datosJson));
+            if(this.fileData){
+              formData.append('imagen', this.fileData);
+            }            
+        
+        //////////////////////////
+
     if (this.id) {
       this.addItem()
     } else {
-      this.platosService.create(this.defaultForm.value)
+      this.platosService.create(formData)
         .subscribe((response: any) => {
           this.id = response['id'];
           this.addItem()
@@ -304,14 +337,18 @@ export class ContentComponent implements OnInit {
   addItem() {
 
 
-    const formData = new FormData();
+            ////////////////////////
 
-    let datosJson= this.defaultForm.getRawValue();
+            const formData = new FormData();
 
-    formData.append('data', JSON.stringify( datosJson));
-    if(this.fileData){
-      formData.append('imagen', this.fileData);
-    }
+            let datosJson= this.defaultForm.getRawValue();
+        
+            formData.append('data', JSON.stringify( datosJson));
+            if(this.fileData){
+              formData.append('imagen', this.fileData);
+            }            
+        
+        //////////////////////////
 
 
 
@@ -321,7 +358,7 @@ export class ContentComponent implements OnInit {
 
       this.ingredientesService.create(ji)
         .subscribe((response: any) => {
-          this.platosService.update(this.id, this.defaultForm.value)
+          this.platosService.update(this.id, formData)
             .subscribe((response: any) => {
               this.getData(this.id);
             }, err => {

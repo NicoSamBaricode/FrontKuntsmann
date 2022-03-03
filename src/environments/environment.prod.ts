@@ -1,4 +1,4 @@
-const DIR ="http://localhost:3000";
+const DIR ="http://168.197.50.78";
 export const environment = {
   API_URL: DIR+"/api/",
   socket_URL: DIR,
