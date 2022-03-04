@@ -55,6 +55,10 @@ export class ContentComponent implements OnInit {
         Validators.minLength(1),
       ]),
       
+      etapa_id: new FormControl(null, [
+
+      ]),
+
       marca: new FormControl(null, [
 
       ]),
@@ -77,6 +81,7 @@ export class ContentComponent implements OnInit {
       ]),
       almacen: new FormControl(null, [
         Validators.required,
+        
       ]),
       etapa: new FormControl(null, [
         Validators.required,
@@ -162,13 +167,13 @@ export class ContentComponent implements OnInit {
         this.defaultForm.controls["producto_id"].setValue(data["producto"]);
         this.defaultForm.controls["descripcion"].setValue(data["descripcion"]);
         this.defaultForm.controls["unidad"].setValue(data["unidad"]);
-        this.defaultForm.controls["cantidadTotal"].setValue(data["cantidadTotal"]);
+        this.defaultForm.controls["cantidadTotal"].setValue(data["cantidad"]);
         this.defaultForm.controls["cantidadEfectiva"].setValue(data["cantidadEfectiva"]);
         this.defaultForm.controls["cantidad"].setValue(data["cantidad"]);
         this.defaultForm.controls["lote"].setValue(data["lote"]);
         this.defaultForm.controls["almacen"].setValue(data["almacen_id"]);
         this.defaultForm.controls["etapa"].setValue("");
-       
+        this.defaultForm.controls["etapa_id"].setValue(data["etapa"]);
       }, error => {
         console.log(error);
         Swal.fire({

@@ -186,6 +186,8 @@ export class ContentComponent implements OnInit {
     }
   }
   onCustom(event) {
+
+ 
     if (event.action == 'deleteAction') {
       Swal.fire({
         title: 'Esta por eliminar un registro',
@@ -230,9 +232,19 @@ export class ContentComponent implements OnInit {
       (resp: any) => {
         this.ngOnInit();
       }, error => {
-        console.log(error);
+        if(error.status==403){
+        Swal.fire({
+          title: 'Error',
+          text: 'No se puede eliminar una venta ya anulada',
+        })
       }
-
+      else{
+        Swal.fire({
+          title: 'Error',
+          text: 'No se pudo eliminar el registro',
+        })
+      }
+    }
     )
   }
    
