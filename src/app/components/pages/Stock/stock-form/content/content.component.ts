@@ -29,6 +29,7 @@ export class ContentComponent implements OnInit {
   update = false // para saber si es crear o actualizar
   titulo = "Agregar"
 
+  hoy = ""
   fileData: File = null;
   previewImagen = null;
 
@@ -43,7 +44,17 @@ export class ContentComponent implements OnInit {
               private etapasService: EtapasService,
               private router: Router,
   ) {
-
+    function appendLeadingZeroes(n){
+      if(n <= 9){
+        return "0" + n;
+      }
+      return n
+    }
+    
+    let current_datetime = new Date()
+    console.log(current_datetime.toString());
+    this.hoy = current_datetime.getFullYear() + "-" + appendLeadingZeroes(current_datetime.getMonth() + 1) + "-" + appendLeadingZeroes(current_datetime.getDate())
+  
   }
   
   ngOnInit(): void {
@@ -64,17 +75,18 @@ export class ContentComponent implements OnInit {
       marca: new FormControl(null, [
         Validators.required,
       ]),
-      fechaIngreso: new FormControl(null, [
+      fechaIngreso: new FormControl(this.hoy, [
         Validators.required,
       ]),
-      fechaVencimiento: new FormControl(null, [
+      fechaVencimiento: new FormControl(this.hoy, [
         Validators.required,
-      ]),
-      fechaComprobante: new FormControl(null, [
         
+      ]),
+      fechaComprobante: new FormControl(this.hoy, [
+        Validators.required,
       ]),
       numeroComprobante: new FormControl(null, [
-        
+        Validators.required,
       ]),
       lote: new FormControl(null, [
         Validators.required,
@@ -104,8 +116,9 @@ export class ContentComponent implements OnInit {
       ]),
      
     },
-
+    { validators: [this.checkFechasIngreso,this.checkFechasVencimiento,this.checkFechasComprobante] }
     );
+    
     this.productosService.list()
       .subscribe((response: any) => {
         this.productos = response.result;
@@ -150,7 +163,40 @@ export class ContentComponent implements OnInit {
 
   }
  
- 
+  checkFechasIngreso: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
+    let fecha = group.get('fechaIngreso').value;
+    
+
+    if ((fecha > "2019-01-02")&&(fecha < "2038-01-02")) {
+      return null
+    } else {
+       this.defaultForm.controls['fechaIngreso'].setErrors({ noIgual: true })
+       return { noIgual: true }
+    }
+  }
+  checkFechasVencimiento: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
+    let fecha = group.get('fechaVencimiento').value;
+    
+
+    if ((fecha > "2019-01-02")&&(fecha < "2038-01-02")) {
+      return null
+    } else {
+       this.defaultForm.controls['fechaVencimiento'].setErrors({ noIgual: true })
+       return { noIgual: true }
+    }
+  }
+  checkFechasComprobante: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
+    let fecha = group.get('fechaComprobante').value;
+    
+
+    if ((fecha > "2019-01-02")&&(fecha < "2038-01-02")) {
+      return null
+    } else {
+       this.defaultForm.controls['fechaComprobante'].setErrors({ noIgual: true })
+       return { noIgual: true }
+    }
+  }
+
  
  
    cambioUnidades(valor){
