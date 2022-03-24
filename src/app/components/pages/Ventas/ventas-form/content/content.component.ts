@@ -165,16 +165,14 @@ export class ContentComponent implements OnInit {
   onSubmit() {
     
     if (this.guardarV == 'agregar') {
-      function getIndex(code,auxs) {
-        
-        return auxs.filter(
-            function(data){ return data.plato_id == code }
-        );
-      }
+      let aux = this.articulos.filter((element:any) => {
 
-       let aux=this.articulos[getIndex(this.defaultForm.controls['plato_id'].value,this.articulos)].descripcion
-       console.log(aux)
-       this.defaultForm.controls['plato_id_traducida'].setValue(aux)
+        return element.id == this.defaultForm.controls['plato_id'].value
+
+      })
+
+       this.defaultForm.controls['plato_id_traducida'].setValue(aux[0].descripcion)
+
       this.source.append(this.defaultForm.value)
       this.defaultForm.reset()
 
