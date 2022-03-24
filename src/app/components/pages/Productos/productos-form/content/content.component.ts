@@ -149,32 +149,33 @@ export class ContentComponent implements OnInit {
       value.forEach(element => {
         data.push(element);
       });;
+      console.log(data)
+      this.productosServices.create(data)
+        .subscribe(response => {
+          console.log(response)
+          this.router.navigate(['productos-list']);
+        }, error => {
+          console.log(error);
+          // if (error.error.descripcion === 'ER_DUP_ENTRY') {
+          //   Swal.fire({
+          //     title: 'Atencion',
+          //     text: 'Ya existe ',
+          //     icon: 'warning',
+          //   })
+          // } else {
+          Swal.fire({
+            title: 'Atencion',
+            // text: 'Contactar al servicio técnico Baricode ' + error.error.descripcion,
+            icon: 'error',
+          })
+          // }
+  
+        });
+
     });
-    console.log(data)
-    this.productosServices.create(data)
-      .subscribe(response => {
-        console.log(response)
-        this.router.navigate(['productos-list']);
-      }, error => {
-        console.log(error);
-        // if (error.error.descripcion === 'ER_DUP_ENTRY') {
-        //   Swal.fire({
-        //     title: 'Atencion',
-        //     text: 'Ya existe ',
-        //     icon: 'warning',
-        //   })
-        // } else {
-        Swal.fire({
-          title: 'Atencion',
-          // text: 'Contactar al servicio técnico Baricode ' + error.error.descripcion,
-          icon: 'error',
-        })
-        // }
-
-      });
-
-
   }
+
+  
   onSubmit() {
     console.log(this.guardarV)
     if (this.update) {
