@@ -51,23 +51,30 @@
                             </div>
 
                         </div>
-                        <div class="row">
+                        <div class="row" *ngIf="!update">
                             <div class="col-md-12 derecha">
                                 <button class="btn btn-primary" type="submit" (click)="guardar('agregar')"
                                     value="Continuar">Agregar <i class="fa fa-plus"></i></button>
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row"*ngIf="!update">
                             <div class="col-md-12 derecha">
                                 <button class="btn btn-primary" type="button"(click)="guardarABase()" 
                                     >Guardar y Salir</button>
                             </div>
 
                         </div>
+                        <div class="row" *ngIf="update">
+                            <div class="col-md-12 derecha">
+                                <button class="btn btn-primary"type="submit" 
+                                    >Guardar</button>
+                            </div>
+
+                        </div>
 
                     </form>
-                    <div class="row mt-5">
+                    <div class="row mt-5" *ngIf="!update">
                         <div class="col-md-12">
                             <div class="table">
                                 <ng2-smart-table [settings]="settings" [source]="source" (custom)="onCustom($event)"

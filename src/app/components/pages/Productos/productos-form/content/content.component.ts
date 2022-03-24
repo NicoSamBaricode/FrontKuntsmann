@@ -38,7 +38,13 @@ export class ContentComponent implements OnInit {
       },
       unidad: {
         title: 'Unidad de medida',
+        filter: true,
+        hide:true
+      },
+      unidad_traducida: {
+        title: 'Unidad de medida',
         filter: true
+
       },
 
 
@@ -131,6 +137,9 @@ export class ContentComponent implements OnInit {
       margenVencimiento: new FormControl(0, [ //aca el nombre tiene que coincidir con el nombre la columna de la base
 
       ]),
+      unidad_traducida: new FormControl(null, [ //aca el nombre tiene que coincidir con el nombre la columna de la base
+
+    ]),
 
 
     }
@@ -147,8 +156,9 @@ export class ContentComponent implements OnInit {
     let data = [];
     this.source.getAll().then(value => {
       value.forEach(element => {
+        delete element.unidad_traducida
         data.push(element);
-      });;
+      });
       console.log(data)
       this.productosServices.create(data)
         .subscribe(response => {
@@ -177,12 +187,12 @@ export class ContentComponent implements OnInit {
 
   
   onSubmit() {
-    console.log(this.guardarV)
+    
     if (this.update) {
 
       this.productosServices.update(this.activatedRoute.snapshot.params.id, this.defaultForm.value)
         .subscribe((response: any) => {
-          console.log(response);
+          
           this.router.navigate(['/productos-list']);
         }, err => {
           console.log(err);
@@ -198,6 +208,8 @@ export class ContentComponent implements OnInit {
 
 
       if (this.guardarV == 'agregar') {
+        let aux=this.unidades[this.defaultForm.controls['unidad'].value-1].descripcion
+       this.defaultForm.controls['unidad_traducida'].setValue(aux)
         this.source.append(this.defaultForm.value)
         this.defaultForm.reset()
 
