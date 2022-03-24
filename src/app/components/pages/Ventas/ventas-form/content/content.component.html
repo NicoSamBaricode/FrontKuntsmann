@@ -12,11 +12,11 @@
                             
                             
                             <div class="col-md-6 mb-3">
-                                <label>Menu / Articulo</label>
+                                <label>Id / Articulo</label>
                                 <select class="form-control"
                                     formControlName="plato_id">
                                     <option [value]=articulo.id *ngFor="let articulo  of articulos">
-                                        {{articulo.descripcion}}</option>
+                                        {{articulo.articulo_id}} - {{articulo.descripcion}}</option>
 
 
                                 </select>

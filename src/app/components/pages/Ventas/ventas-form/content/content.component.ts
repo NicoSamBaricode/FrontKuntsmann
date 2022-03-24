@@ -36,6 +36,11 @@ export class ContentComponent implements OnInit {
         filter: true,
         hide: true
       },
+      articulo_id: {
+        title: 'Id',
+        filter: true,
+        
+      },
       plato_id_traducida: {
         title: 'Menu / Articulo',
         filter: true
@@ -108,7 +113,9 @@ export class ContentComponent implements OnInit {
       plato_id_traducida: new FormControl('', [ //aca el nombre tiene que coincidir con el nombre la columna de la base
       
     ]),
-
+    articulo_id: new FormControl('', [ //aca el nombre tiene que coincidir con el nombre la columna de la base
+      
+  ]),
 
     }
 
@@ -134,13 +141,14 @@ export class ContentComponent implements OnInit {
     this.source.getAll().then(value => {
       value.forEach(element => {
         delete element.plato_id_traducida
+        delete element.articulo_id
         data.push(element);
       });
       
       this.ventasService.createManual(data)
         .subscribe(response => {
           console.log(response)
-          this.router.navigate(['productos-list']);
+          this.router.navigate(['ventas-list']);
         }, error => {
           console.log(error);
           // if (error.error.descripcion === 'ER_DUP_ENTRY') {
@@ -172,7 +180,7 @@ export class ContentComponent implements OnInit {
       })
 
        this.defaultForm.controls['plato_id_traducida'].setValue(aux[0].descripcion)
-
+       this.defaultForm.controls['articulo_id'].setValue(aux[0].articulo_id)
       this.source.append(this.defaultForm.value)
       this.defaultForm.reset()
 
