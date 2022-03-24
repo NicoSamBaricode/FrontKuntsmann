@@ -15,7 +15,7 @@ export class ContentComponent implements OnInit {
   unidades:any=[];
   update = false // para saber si es crear o actualizar
   titulo = 'Agregar Nuevo'
-
+  guardarV =''
   constructor(private productosServices: ProductosService,
               private platosServices: PlatosService,
               private router: Router,
@@ -69,9 +69,13 @@ export class ContentComponent implements OnInit {
     );
   }
 
-
+  guardar(guardarV){
+    this.guardarV=guardarV
+    
+  }
 
   onSubmit() {
+    console.log(this.guardarV)
     if (this.update) {
 
       this.productosServices.update(this.activatedRoute.snapshot.params.id, this.defaultForm.value)
@@ -91,7 +95,18 @@ export class ContentComponent implements OnInit {
 
       this.productosServices.create(this.defaultForm.value)
         .subscribe(response => {
-          this.router.navigate(['productos-list']);
+          if (this.guardarV=='guardar') {
+             this.router.navigate(['productos-list']);
+          }
+          if (this.guardarV=='agregar') {
+            Swal.fire({
+              
+              text: 'Agregado con exito ',
+              icon: 'success',
+              timer: 1500,
+            })
+            this.defaultForm.reset()
+         }
         }, error => {
           console.log(error);
           if (error.error.descripcion === 'ER_DUP_ENTRY') {

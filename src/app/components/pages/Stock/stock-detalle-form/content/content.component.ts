@@ -40,12 +40,12 @@ export class ContentComponent implements OnInit {
   ) {
 
   }
-  
+
   ngOnInit(): void {
     // Default Form
     const params = this.activatedRoute.snapshot.params; // para obtener la id 
     if (params.id) {
-     
+
       this.get(params.id) // para obtener los datos
       this.detalle = true
     } else {
@@ -54,51 +54,54 @@ export class ContentComponent implements OnInit {
 
     this.defaultForm = new FormGroup({
       descripcion: new FormControl(null, [
-       
+
       ]),
       producto_id: new FormControl(null, [
-        
+
       ]),
-      
+      costoUnitario: new FormControl(null, [
+
+      ]),
+
       marca: new FormControl(null, [
 
       ]),
       fechaIngreso: new FormControl(null, [
-        
+
       ]),
       fechaVencimiento: new FormControl(null, [
-        
+
       ]),
       fechaComprobante: new FormControl(null, [
-        
+
       ]),
       numeroComprobante: new FormControl(null, [
-        
+
       ]),
       lote: new FormControl(null, [
-        
+
       ]),
       proveedor_id: new FormControl(null, [
-        
+
       ]),
       cantidad: new FormControl(null, [
-        
+
       ]),
       almacen: new FormControl(null, [
-        
+
       ]),
       etapa: new FormControl(null, [
-        
+
       ]),
 
       unidad: new FormControl(null, [
-        
+
       ]),
-     
+
       precio: new FormControl(null, [
-      
+
       ]),
-     
+
     },
 
     );
@@ -109,21 +112,21 @@ export class ContentComponent implements OnInit {
         console.log(err);
       }
       )
-      this.etapasService.list()
+    this.etapasService.list()
       .subscribe((response: any) => {
         this.etapas = response.result;
       }, (err: any) => {
         console.log(err);
       }
       )
-      this.almacenesService.list()
+    this.almacenesService.list()
       .subscribe((response: any) => {
         this.almacenes = response.result;
       }, (err: any) => {
         console.log(err);
       }
       )
-      this.proveedoresService.list()
+    this.proveedoresService.list()
       .subscribe((response: any) => {
         this.proveedores = response.result;
       }, (err: any) => {
@@ -141,45 +144,45 @@ export class ContentComponent implements OnInit {
 
 
   onSubmit() {
- 
+
     this.router.navigate(['stock-list']);
-      
-    }
-    get(id: string) {
-      this.transaccionesService.getOne(id)
-        .subscribe((response: any) => {
-          let data = response.result[0]
-  
-          this.defaultForm.controls["descripcion"].setValue(data["descripcion"]);
-          this.defaultForm.controls["producto_id"].setValue(data["producto_id"]);
-          this.defaultForm.controls["marca"].setValue(data["marca"]);
-          this.defaultForm.controls["fechaIngreso"].setValue(data["fechaIngreso"]);
-          this.defaultForm.controls["fechaVencimiento"].setValue(data["fechaVencimiento"]);
-          this.defaultForm.controls["fechaComprobante"].setValue(data["fechaComprobante"]);
-          this.defaultForm.controls["numeroComprobante"].setValue(data["numeroComprobante"]);
-          this.defaultForm.controls["lote"].setValue(data["lote"]);
-          this.defaultForm.controls["proveedor_id"].setValue(data["proveedor_id"]);
-          this.defaultForm.controls["cantidad"].setValue(data["cantidad"]);
-          this.defaultForm.controls["almacen"].setValue(data["almacen_id"]);
-          this.defaultForm.controls["etapa"].setValue(data["etapa_id"]);
-          this.defaultForm.controls["unidad"].setValue(data["unidad_id"]);
-          this.defaultForm.controls["precio"].setValue(data["costo"]);
 
-
-
-
-
-
-
-  
-          console.log(response);
-        }, error => {
-          console.log(error);
-          Swal.fire({
-            title: 'Atencion',
-            text: 'No hay conexion con base de datos' + error.error.descripcion,
-            icon: 'warning',
-          })
-        });
-    }
   }
+  get(id: string) {
+    this.transaccionesService.getOne(id)
+      .subscribe((response: any) => {
+        let data = response.result[0];
+       
+        this.defaultForm.controls["descripcion"].setValue(data["descripcion"]);
+        this.defaultForm.controls["producto_id"].setValue(data["producto_id"]);
+        this.defaultForm.controls["marca"].setValue(data["marca"]);
+        this.defaultForm.controls["fechaIngreso"].setValue(data["fechaIngreso"]);
+        this.defaultForm.controls["fechaVencimiento"].setValue(data["fechaVencimiento"]);
+        this.defaultForm.controls["fechaComprobante"].setValue(data["fechaComprobante"]);
+        this.defaultForm.controls["numeroComprobante"].setValue(data["numeroComprobante"]);
+        this.defaultForm.controls["lote"].setValue(data["lote"]);
+        this.defaultForm.controls["proveedor_id"].setValue(data["proveedor_id"]);
+        this.defaultForm.controls["cantidad"].setValue(data["cantidad"]);
+        this.defaultForm.controls["almacen"].setValue(data["almacen_id"]);
+        this.defaultForm.controls["etapa"].setValue(data["etapa_id"]);
+        this.defaultForm.controls["unidad"].setValue(data["unidad_id"]);
+        this.defaultForm.controls["precio"].setValue(data["costo"]);
+        this.defaultForm.controls["costoUnitario"].setValue(data["costoUnitario"]);
+
+
+
+
+
+
+
+
+      }, error => {
+        console.log(error);
+        Swal.fire({
+          title: 'Atencion',
+          text: 'No hay conexion con base de datos' + error.error.descripcion,
+          icon: 'warning',
+        })
+      });
+  }
+}

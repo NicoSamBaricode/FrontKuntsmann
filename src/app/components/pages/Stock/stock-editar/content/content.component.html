@@ -4,7 +4,7 @@
 
             <div class="ms-panel">
                 <div class="ms-panel-header">
-                    <h6>Detalle Movimiento Stock</h6>
+                    <h6>Modificar Ingreso de Stock</h6>
                 </div>
                 <div class="ms-panel-body">
                     <form [formGroup]="defaultForm" (validSubmit)="onSubmit()">
@@ -13,128 +13,145 @@
                                 <div class="form-row">
                                     <div class="col-md-3 mb-3">
                                         <label>Producto</label>
-                                        <select class="form-control"  formControlName="producto_id" disabled>
-                                            <option [value]=producto.id *ngFor="let producto  of productos">
+                                        <select class="form-control" formControlName="producto_id" #producto  disabled>
+                                            <option [value]=producto.id *ngFor="let producto  of productos;let i=index" >
                                                 {{producto.descripcion}}</option>
-        
-        
+
+
                                         </select>
-                                        
+
                                     </div>
-                                    
                                     <div class="col-md-3 mb-3">
                                         <label>Marca</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Ingrese Marca" disabled
+                                            <input type="text" class="form-control" placeholder="Ingrese Marca"
                                                 formControlName="marca">
                                         </div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Unidad</label>
-                                        <select class="form-control"  formControlName="unidad" disabled>
+                                        <select class="form-control" formControlName="unidad" disabled>
                                             <option [value]=unidad.id *ngFor="let unidad  of unidades">
                                                 {{unidad.descripcion}}
                                             </option>
-        
+
                                         </select>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Cantidad</label>
                                         <div class="input-group">
-                                            <input type="number" class="form-control" placeholder="Ingrese Cantidad"
-                                                formControlName="cantidad" disabled>
+                                            <input type="number" class="form-control" placeholder="Ingrese Cantidad" 
+                                                formControlName="cantidad" (change)="calculoUnitario()">
                                         </div>
                                     </div>
                                     <div class="col-md-3 mb-3">
-                                        <label>Fecha Ingreso</label>
+                                        <label>Fecha Recepción</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Ingrese Fecha Ingreso"
-                                                formControlName="fechaIngreso" disabled>
+                                            <input type="date" class="form-control" min="2019-01-02"  max="2038-01-02" placeholder="Ingrese Fecha Fecha Recepción"
+                                                formControlName="fechaIngreso">
                                         </div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Fecha Vencimiento</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Ingrese Fecha Vencimiento"
-                                                formControlName="fechaVencimiento" disabled>
+                                            <input type="date" class="form-control" min="2019-01-02"  max="2038-01-02"
+                                                placeholder="Ingrese Fecha Vencimiento"
+                                                formControlName="fechaVencimiento">
                                         </div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Fecha Comprobante</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Ingrese Fecha Comprobante"
-                                                formControlName="fechaComprobante" disabled>
+                                            <input type="date" class="form-control"  min="2019-01-02"  max="2038-01-02"
+                                                placeholder="Ingrese Fecha Comprobante"
+                                                formControlName="fechaComprobante">
                                         </div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Numero de Comprobante</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Ingrese Numero de comprobante"
-                                                formControlName="numeroComprobante" disabled>
+                                            <input type="text" class="form-control"
+                                                placeholder="Ingrese Numero de comprobante"
+                                                formControlName="numeroComprobante">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Numero de Transaccion</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control"
+                                                
+                                                formControlName="numeroTransaccion" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Lote</label>
                                         <div class="input-group">
                                             <input type="text" class="form-control" placeholder="Ingrese lote"
-                                                formControlName="lote" disabled>
+                                                formControlName="lote">
                                         </div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Proveedor</label>
-                                        <select class="form-control"  formControlName="proveedor_id" disabled>
+                                        <select class="form-control" formControlName="proveedor_id">
                                             <option [value]=proveedor.id *ngFor="let proveedor  of proveedores">
                                                 {{proveedor.descripcion}}
                                             </option>
-        
+
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Tipo Pago Proveedor</label>
+                                        <select class="form-control" formControlName="proveedor_tipo_pago">
+                                            <option [value]=tipo_proveedor_.id *ngFor="let tipo_proveedor_  of tipo_proveedores">{{tipo_proveedor_.descripcion}}</option>
+                           
                                         </select>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Precio Unitario</label>
                                         <div class="input-group">
-                                            <input type="number" class="form-control"
-                                                formControlName="costoUnitario" disabled>
+                                            <input type="number" class="form-control" 
+                                                formControlName="costoUnitario" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Subtotal</label>
                                         <div class="input-group">
-                                            <input type="number" class="form-control" placeholder="Ingrese Costo"
-                                                formControlName="precio" disabled>
+                                            <input type="number" class="form-control" (change)="calculoUnitario()"
+                                                formControlName="costo">
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-md-3 mb-3">
                                         <label>Almacén de Destino</label>
-                                        <select class="form-control"   formControlName="almacen" disabled>
+                                        <select class="form-control" formControlName="almacen">
                                             <option [value]=almacen.id *ngFor="let almacen  of almacenes">
                                                 {{almacen.descripcion}}
                                             </option>
-        
+
                                         </select>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Etapa</label>
-                                        <select class="form-control"   formControlName="etapa" disabled>
+                                        <select class="form-control" formControlName="etapa">
                                             <option [value]=etapa.id *ngFor="let etapa  of etapas">
                                                 {{etapa.descripcion}}
                                             </option>
-        
+
                                         </select>
                                     </div>
-                                    
+                                   
 
                                 </div>
                                 <div class="form-row ">
                                     <div class="col-md-12 mb-3">
                                         <label>Descripcion</label>
                                         <div class="input-group">
-                                            <textarea class="form-control" formControlName="descripcion" disabled
+                                            <textarea class="form-control" formControlName="descripcion"
                                                 id="exampleFormControlTextarea1" rows="3"
                                                 placeholder="Ingrese Descripción"></textarea>
                                         </div>
                                     </div>
-                                   
+
 
 
 
@@ -143,22 +160,22 @@
 
                                 <div class="row">
                                     <div class="col-md-12 derecha flotante">
-                                        <button class="btn btn-primary" type="submit">Volver</button>
+                                        <button class="btn btn-primary" type="submit">Guardar</button>
                                     </div>
                                 </div>
-        
-                              
-                                
-                                
-        
-                                </div>
+
+
 
 
 
                             </div>
-                            
-                        
-                       
+
+
+
+                        </div>
+
+
+
                     </form>
                 </div>
 

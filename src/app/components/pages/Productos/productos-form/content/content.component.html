@@ -20,15 +20,16 @@
                                 <label for="validationCustom02">Unidad de medida</label>
                                 <div class="input-group">
                                     <select class="form-control" aria-label="UnidadMedida" id="validationCustom02"
-                                        formControlName="unidad">                                        
-                                        <option [value]=unidad.id *ngFor="let unidad of unidades">{{unidad.descripcion}}</option>
+                                        formControlName="unidad">
+                                        <option [value]=unidad.id *ngFor="let unidad of unidades">{{unidad.descripcion}}
+                                        </option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
-                               <label for="validationCustom03">Avisar Bajo Stock</label>
+                                <label for="validationCustom03">Avisar Bajo Stock</label>
                                 <div class="form-group">
-                                     
+
                                     <input type="checkbox" class="form-check-input centrar" placeholder="Ingrese Nombre"
                                         formControlName="bajoStock" id="validationCustom03">
                                 </div>
@@ -43,7 +44,8 @@
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom05">Dias de Aviso Previo Vencimiento Mercaderia </label>
                                 <div class="input-group">
-                                    <input type="number" class="form-control" placeholder="Ingrese cuantos dias antes del vencimiento desea recibir un aviso"
+                                    <input type="number" class="form-control"
+                                        placeholder="Ingrese cuantos dias antes del vencimiento desea recibir un aviso"
                                         formControlName="margenVencimiento" id="validationCustom05">
                                 </div>
                             </div>
@@ -53,10 +55,16 @@
 
                         <div class="row">
                             <div class="col-md-12 derecha">
-                                <button class="btn btn-primary" type="submit">Guardar</button>
+                                <button class="btn btn-primary" (click)="guardar('guardar')" type="submit" value="Guardar" >Guardar y Salir</button>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 derecha">
+                                <button class="btn btn-primary" type="submit" (click)="guardar('agregar')"value="Continuar">Guardar y
+                                    Continuar</button>
                             </div>
                         </div>
-
                     </form>
                 </div>
             </div>

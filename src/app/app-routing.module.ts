@@ -110,6 +110,7 @@ const routes: Routes = [
   { path: 'stock-detalle-form', loadChildren: () => import('./components/pages/Stock/stock-detalle-form/stock-detalle-form.module').then(m => m.StockDetalleFormModule) },
   { path: 'product-detalle', loadChildren: () => import('./components/pages/product/product-detalle/product-detalle.module').then(m => m.ProductDetalleModule) },
   { path: 'productos-detalle', loadChildren: () => import('./components/pages/Productos/productos-detalle/productos-detalle.module').then(m => m.ProductosDetalleModule) },
+  { path: 'stock-editar', loadChildren: () => import('./components/pages/Stock/stock-editar/stock-editar.module').then(m => m.StockEditarModule) },
  
 ];
 

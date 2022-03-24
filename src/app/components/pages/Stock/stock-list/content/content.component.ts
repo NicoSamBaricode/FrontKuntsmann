@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import data from '../../../../../data/usuarios.json';
 import { LocalDataSource } from 'ng2-smart-table';
 import { TransaccionesService } from 'src/app/services/transacciones.service';
-
+import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -15,6 +15,7 @@ export class ContentComponent implements OnInit {
   public data = data;
   update = false // para saber si es crear o actualizar
   titulo="Movimientos de Stock Historico"
+  
   constructor(private transaccionesService: TransaccionesService, private router: Router, private activatedRoute: ActivatedRoute) {
 
   }
@@ -29,7 +30,11 @@ export class ContentComponent implements OnInit {
     },
 
     columns: {
-
+      transaccion_id: {
+        title: 'n° Transacción',
+        filter: true,
+        
+      },
       id: {
         title: 'Identificador',
         filter: true
@@ -104,6 +109,10 @@ export class ContentComponent implements OnInit {
         {
           name: 'deleteAction',
           title: '<i class="fas fa-plus-square" title="Detalles" ></i>'
+        },
+        {
+          name: 'editarAction',
+          title: '<i class="fas fa-edit" title="Editar" ></i>'
         }
       ],
       add: false,
@@ -119,7 +128,11 @@ export class ContentComponent implements OnInit {
     },
 
     columns: {
-
+      transaccion_id: {
+        title: 'n° Transacción',
+        filter: true,
+        
+      },
       id: {
         title: 'Identificador',
         filter: true
@@ -175,7 +188,13 @@ export class ContentComponent implements OnInit {
         title: 'Usuario',
         filter: true,
 
-      }
+      },
+      estado: {
+        title: 'estado',
+        filter: true,
+        hide:true,
+      },
+     
 
     },
     
@@ -226,7 +245,8 @@ export class ContentComponent implements OnInit {
         {
           field: 'tipo',
           search: query
-        },
+        }
+        
 
       ], false);
     }
@@ -238,6 +258,18 @@ export class ContentComponent implements OnInit {
     }
     if (event.action == 'editAction') {
       this.router.navigate(['/transferenciaStock-form/' + event.data["id"]]);
+    }
+    if (event.action == 'editarAction') {
+      if (event.data['estado']==1) {
+        this.router.navigate(['/stock-editar/' + event.data["id"]]);
+      }else{
+        Swal.fire({
+          title: 'Atencion',
+          text: 'No se puede editar, ya existe un movimiento registrado',
+          icon: 'warning',
+        })
+      }
+            
     }
 
   }
