@@ -13,7 +13,7 @@ import { LocalDataSource } from 'ng2-smart-table';
 export class ContentComponent implements OnInit {
   // Table
 
-  constructor(private platosService: PlatosService, private router: Router) {
+  constructor(private platosService: PlatosService, private router: Router ) {
 
   }
 
@@ -144,6 +144,7 @@ export class ContentComponent implements OnInit {
     if (query.length == 0) {
 
       this.source.reset();
+      this.source2.reset();
     } else {
       this.source.setFilter([
         // fields we want to include in the search
@@ -159,8 +160,22 @@ export class ContentComponent implements OnInit {
 
 
       ], false);
+      this.source2.setFilter([
+        // fields we want to include in the search
 
+        {
+          field: 'descripcion',
+          search: query
+        },
+        {
+          field: 'id',
+          search: query
+        },
+
+
+      ], false);
     }
+    
   }
   onCustom(event) {
     if (event.action == 'deleteAction') {

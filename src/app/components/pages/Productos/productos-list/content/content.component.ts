@@ -111,6 +111,7 @@ export class ContentComponent implements OnInit {
     if (query.length == 0) {
 
       this.source.reset();
+      this.source2.reset();
     } else {
       this.source.setFilter([
         // fields we want to include in the search
@@ -122,8 +123,17 @@ export class ContentComponent implements OnInit {
        
 
       ], false);
+      this.source2.setFilter([
+        // fields we want to include in the search
 
-      console.log(query, this.source);
+        {
+          field: 'descripcion',
+          search: query
+        },
+       
+
+      ], false);
+     
 
     }
   }

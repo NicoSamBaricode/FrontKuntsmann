@@ -229,8 +229,42 @@ export class ContentComponent implements OnInit {
     if (query.length == 0) {
 
       this.source.reset();
+      this.source3.reset();
     } else {
       this.source.setFilter([
+        // fields we want to include in the search
+
+        {
+          field: 'id',
+          search: query
+        },
+        {
+          field: 'producto',
+          search: query
+        },
+        {
+          field: 'marca',
+          search: query
+        },
+        {
+          field: 'numeroComprobante',
+          search: query
+        },
+        {
+          field: 'etapa',
+          search: query
+        },
+        {
+          field: 'usuario',
+          search: query
+        },
+        {
+          field: 'tipo',
+          search: query
+        },
+
+      ], false);
+      this.source3.setFilter([
         // fields we want to include in the search
 
         {
@@ -269,8 +303,30 @@ export class ContentComponent implements OnInit {
     if (query.length == 0) {
 
       this.source2.reset();
+      this.source4.reset();
     } else {
       this.source2.setFilter([
+        // fields we want to include in the search
+
+        {
+          field: 'id',
+          search: query
+        },
+        {
+          field: 'producto',
+          search: query
+        },
+       
+        
+        {
+          field: 'etapa',
+          search: query
+        },
+        
+        
+
+      ], false);
+      this.source4.setFilter([
         // fields we want to include in the search
 
         {

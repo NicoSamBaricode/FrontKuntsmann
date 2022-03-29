@@ -182,6 +182,24 @@ export class ContentComponent implements OnInit {
 
 
       ], false);
+      this.source2.setFilter([
+        // seteo el filtro para la tabla 2
+
+        {
+          field: 'descripcion',
+          search: query
+        },
+        {
+          field: 'categoria',
+          search: query
+        },
+        {
+          field: 'id',
+          search: query
+        },
+
+
+      ], false);
 
     }
   }
