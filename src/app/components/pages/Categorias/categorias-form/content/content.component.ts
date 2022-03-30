@@ -3,7 +3,7 @@ import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn,
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriasService } from 'src/app/services/categorias.service';
 import Swal from 'sweetalert2';
-
+import { LocalDataSource } from 'ng2-smart-table';
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
@@ -13,16 +13,86 @@ export class ContentComponent implements OnInit {
   defaultForm: FormGroup;
   update = false // para saber si es crear o actualizar
   titulo = 'Agregar Nueva'
-
-  constructor(private proveedoresServices: CategoriasService,
+  guardarV = ''
+  constructor(private categoriasServices: CategoriasService,
     private router: Router,
     private activatedRoute: ActivatedRoute) {
 
   }
+  source: LocalDataSource;
+  settings = {
+    hideSubHeader: true,
+    pager: {
+      perPage: 10,
+    },
+    noDataMessage: 'Ninguna Categoria Agregada',
+    mode: external,
+    columns: {
 
+
+      id: {
+        
+        filter: true,
+        hide: true
+      },
+      descripcion: {
+      
+        title: 'Nombre Categoria',
+        filter: true
+
+      },
+      
+
+
+    },
+    delete: {
+
+      deleteButtonContent: '<i class="far fa-trash-alt color-red" title="delete" ></i> ',
+
+    },
+    actions: {
+      columnTitle: "Acciones",
+      position: "right",
+
+
+      add: false,
+      edit: false,
+      delete: true,
+      defaultStyle: false
+    },
+  };
+  onCustom(event) {
+    if (event.action == 'deleteAction') {
+      Swal.fire({
+        title: 'Esta por eliminar un registro',
+        text: "Esta seguro?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, Borrar!',
+        cancelButtonText: 'Cancelar'
+
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // this.deleteAceptado(event.data["id"]);
+          
+          Swal.fire(
+            'Registro eliminado con exito!',
+            '',
+            'success'
+          )
+        }
+      })
+
+
+
+    }
+
+  }
   ngOnInit(): void {
     // Default Form
-
+    this.source = new LocalDataSource();
     const params = this.activatedRoute.snapshot.params; // para obtener la id del usuario
 
     if (params.id) {
@@ -45,12 +115,48 @@ export class ContentComponent implements OnInit {
     );
   }
 
+  guardar(guardarV) {
+    this.guardarV = guardarV
 
+  }
+  guardarABase() {
+    
+    let data = [];
+    this.source.getAll().then(value => {
+      value.forEach(element => {
+       
+        data.push(element);
+      });
+      
+      this.categoriasServices.create(data)
+        .subscribe(response => {
+          console.log(response)
+          this.router.navigate(['categorias-list']);
+        }, error => {
+          console.log(error);
+          // if (error.error.descripcion === 'ER_DUP_ENTRY') {
+          //   Swal.fire({
+          //     title: 'Atencion',
+          //     text: 'Ya existe ',
+          //     icon: 'warning',
+          //   })
+          // } else {
+          Swal.fire({
+            title: 'Atencion',
+            // text: 'Contactar al servicio técnico Baricode ' + error.error.descripcion,
+            icon: 'error',
+          })
+          // }
+
+        });
+
+    });
+  }
 
   onSubmit() {
     if (this.update) {
 
-      this.proveedoresServices.update(this.activatedRoute.snapshot.params.id, this.defaultForm.value)
+      this.categoriasServices.update(this.activatedRoute.snapshot.params.id, this.defaultForm.value)
         .subscribe((response: any) => {
           console.log(response);
           this.router.navigate(['/categorias-list']);
@@ -65,32 +171,38 @@ export class ContentComponent implements OnInit {
 
     } else {
 
-      this.proveedoresServices.create(this.defaultForm.value)
-        .subscribe(response => {
-          this.router.navigate(['categorias-list']);
-        }, error => {
-          console.log(error);
-          if (error.error.descripcion === 'ER_DUP_ENTRY') {
-            Swal.fire({
-              title: 'Atencion',
-              text: 'Ya existe ',
-              icon: 'warning',
-            })
-          } else {
-            Swal.fire({
-              title: 'Atencion',
-              text: 'Contactar al servicio técnico Baricode ' + error.error.descripcion,
-              icon: 'error',
-            })
-          }
+      // this.categoriasServices.create(this.defaultForm.value)
+      //   .subscribe(response => {
+      //     this.router.navigate(['categorias-list']);
+      //   }, error => {
+      //     console.log(error);
+      //     if (error.error.descripcion === 'ER_DUP_ENTRY') {
+      //       Swal.fire({
+      //         title: 'Atencion',
+      //         text: 'Ya existe ',
+      //         icon: 'warning',
+      //       })
+      //     } else {
+      //       Swal.fire({
+      //         title: 'Atencion',
+      //         text: 'Contactar al servicio técnico Baricode ' + error.error.descripcion,
+      //         icon: 'error',
+      //       })
+      //     }
 
-        });
+      //   });
+      if (this.guardarV == 'agregar') {
+       
+        this.source.append(this.defaultForm.value)
+        this.defaultForm.reset()
+  
+      }
     }
 
   }
 
   getDatos(id: string) {
-    this.proveedoresServices.getOne(id)
+    this.categoriasServices.getOne(id)
       .subscribe((response: any) => {
         let data = response.result[0]
 
