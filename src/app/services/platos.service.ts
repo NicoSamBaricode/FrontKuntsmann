@@ -22,6 +22,9 @@ export class PlatosService {
     return this.http.get(`${this.url}unidades`)
   }
 
+  public listFactores(){
+    return this.http.get(`${this.url}unidades/factores`)
+  }
   public getOne(id:string){
     return this.http.get(`${this.url}platos/one/${id}`)
   }

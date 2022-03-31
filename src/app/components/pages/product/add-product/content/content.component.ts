@@ -19,10 +19,12 @@ export class ContentComponent implements OnInit {
   id = null
   defaultForm: FormGroup;
   unidades: any = []
+  factores: any = []
   unidadesF: any = []
   ingredientes: any = []
   productos: any = []
   items: any = []
+  costos: any = []
   categorias: any = []
   imagen :any = 0
   update = false // para saber si es crear o actualizar
@@ -58,6 +60,14 @@ export class ContentComponent implements OnInit {
         .subscribe((response: any) => {
           let data = response.result[0]
           this.items = response.ingredientes;
+
+          this.items = this.items.map (x=>{
+            if(x.costo==null)
+            x.costo="Sin datos"
+            return x;
+          })
+
+
           this.defaultForm.controls["descripcion"].setValue(data["descripcion"]);
           this.defaultForm.controls["articulo_id"].setValue(data["articulo_id"]);
           //this.defaultForm.controls["imagen"].setValue(data["imagen"]);
@@ -156,6 +166,15 @@ export class ContentComponent implements OnInit {
         console.log(err);
       }
       )
+
+      this.platosService.listFactores()
+      .subscribe((response: any) => {
+        this.factores = response.result;
+      }, (err: any) => {
+        console.log(err);
+      }
+      )
+
     this.categoriasService.list()
       .subscribe((response: any) => {
         this.categorias = response.result;
@@ -166,7 +185,7 @@ export class ContentComponent implements OnInit {
 
       this.platosService.costo()
       .subscribe((response: any) => {
-        console.log(response);
+        this.costos= response.result;
       }, (err: any) => {
         console.log(err);
       })
@@ -209,7 +228,7 @@ export class ContentComponent implements OnInit {
         
     
     //////////////////////////
-
+    if(!this.update){
     this.platosService.create(formData)
     .subscribe(response => {
       this.router.navigate(['/product/product-list']);
@@ -230,48 +249,20 @@ export class ContentComponent implements OnInit {
       }
 
     });
-
-
-
-
-/*
-    if (this.update || this.id) {
-      this.getData(this.id);
-      this.platosService.update(this.id, formData)
-        .subscribe((response: any) => {
-          this.router.navigate(['/product/product-list']);
-        }, err => {
-          console.log(err);
-          Swal.fire({
-            title: 'Atencion',
-            text: 'No se puede guardar' + err.error.descripcion,
-            icon: 'warning',
-          })
-        })
-
-    } else {
-
-      this.platosService.create(formData)
-        .subscribe(response => {
-          this.router.navigate(['/product/product-list']);
-        }, error => {
-          console.log(error);
-          if (error.error.descripcion === 'ER_DUP_ENTRY') {
-            Swal.fire({
-              title: 'Atencion',
-              text: 'Ya existe ',
-              icon: 'warning',
-            })
-          } else {
-            Swal.fire({
-              title: 'Atencion',
-              text: 'Contactar al servicio técnico Baricode ' + error.error.descripcion,
-              icon: 'error',
-            })
-          }
-
-        });
-    }*/
+  }
+    else{
+    this.platosService.update(this.id, formData)
+    .subscribe((response: any) => {
+      this.router.navigate(['/product/product-list']);
+    }, err => {
+      console.log(err);
+      Swal.fire({
+        title: 'Atencion',
+        text: 'No se puede guardar' + err.error.descripcion,
+        icon: 'warning',
+      })
+    })
+  }
 
   }
 
@@ -317,7 +308,15 @@ export class ContentComponent implements OnInit {
   agregarIngredientes() {
     let producto = this.productos.filter(x => x.id == this.ingredientes.producto_id)[0]
     let unidad = this.unidades.filter(x => x.id == this.ingredientes.unidad)[0]
-    console.log(unidad);
+    let costo = this.costos.filter(x => x.id == this.ingredientes.producto_id)[0]
+    
+    if (costo.costoUnitario){
+      let factor = this.calculoFactor(this.ingredientes.unidad,producto.unidad_id)
+
+      costo = parseFloat((costo.costoUnitario * this.ingredientes.cantidad * factor).toFixed(2));
+    }else{
+      costo="Sin datos";
+    }
 
     this.items.push({
 
@@ -325,64 +324,26 @@ export class ContentComponent implements OnInit {
       descripcion: producto.descripcion,
       cantidad: this.ingredientes.cantidad,
       unidad:unidad.descripcion,
+      costo: costo,
       unidad_id: this.ingredientes.unidad,
     });
 
-
-    console.log(this.items)
-    /*        ////////////////////////
-
-            const formData = new FormData();
-
-            let datosJson= this.defaultForm.getRawValue();
-        
-            formData.append('data', JSON.stringify( datosJson));
-            if(this.fileData){
-              formData.append('imagen', this.fileData);
-            }            
-        
-        //////////////////////////
-
-    if (this.id) {
-      this.addItem()
-    } else {
-      this.platosService.create(formData)
-        .subscribe((response: any) => {
-          this.id = response['id'];
-          this.addItem()
-        }, error => {
-          console.log(error);
-          if (error.error.descripcion === 'ER_DUP_ENTRY') {
-            Swal.fire({
-              title: 'Atencion',
-              text: 'Ya existe ',
-              icon: 'warning',
-            })
-          } else {
-            Swal.fire({
-              title: 'Atencion',
-              text: 'Contactar al servicio técnico Baricode ' + error.error.descripcion,
-              icon: 'error',
-            })
-          }
-
-        });
+    this.costo();
     }
 
-*/
+  calculoFactor(unidadIngrediente, unidadProducto):number{
+
+    let factor = this.factores.filter(x=>(x.de == unidadIngrediente && x.a == unidadProducto))[0]
+
+    return factor.factor
   }
+
 
   eliminar_ingrediente(id: string) {
 
     this.items.splice(id, 1);
 
-    /*this.ingredientesService.delete(id)
-      .subscribe((response: any) => {
-
-        this.getData(this.id);
-      }, (err: any) => {
-        console.log(err);
-      });*/
+    this.costo()
   }
 
   cambio(){
@@ -449,22 +410,27 @@ export class ContentComponent implements OnInit {
 
   changeAuto(event) {
     let costo = 0;
+      costo = this.costo()
+  }
+
+  costo(){
+    let costo = 0
+    for (let i = 0; i < this.items.length; i++) {
+      if (this.items[i].costo!="Sin datos") {
+       costo = costo + parseFloat(this.items[i].costo);
+      } else {
+       costo = costo + 0;
+      }
+    }
     if (this.defaultForm.get('auto').value) {
 
-      for (let i = 0; i < this.items.length; i++) {
-
-        if (this.items[i].costo) {
-          costo = costo + parseFloat(this.items[i].costo);
-        } else {
-          costo = costo + 0;
-        }
-      }
       this.defaultForm.controls['costo'].setValue(costo);
       this.defaultForm.controls['costo'].disable();
 
     } else {
       this.defaultForm.controls['costo'].enable();
     }
+    return costo
   }
 
   imagenSeleccionada(event) {
