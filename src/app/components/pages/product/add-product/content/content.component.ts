@@ -306,6 +306,8 @@ export class ContentComponent implements OnInit {
       });
   }
   agregarIngredientes() {
+    if (!!this.ingredientes.producto_id && !!this.ingredientes.cantidad && !!this.ingredientes.unidad) {
+
     let producto = this.productos.filter(x => x.id == this.ingredientes.producto_id)[0]
     let unidad = this.unidades.filter(x => x.id == this.ingredientes.unidad)[0]
     let costo = this.costos.filter(x => x.id == this.ingredientes.producto_id)[0]
@@ -329,6 +331,13 @@ export class ContentComponent implements OnInit {
     });
 
     this.costo();
+  }else{
+    Swal.fire({
+      title: 'Atencion',
+      text: 'Debe llenar ingrediente, cantidad y unidad',
+      icon: 'warning',
+    })
+  }
     }
 
   calculoFactor(unidadIngrediente, unidadProducto):number{
@@ -351,61 +360,6 @@ export class ContentComponent implements OnInit {
     let unidad = this.unidades.filter(x => x.id == producto.unidad_id)[0]
     this.unidadesF= this.unidades.filter(x => x.clase == unidad.clase)
     this.ingredientes.unidad=this.unidadesF[0].id
-  }
-
-
-
-  addItem() {
-
-
-            ////////////////////////
-
-            const formData = new FormData();
-
-            let datosJson= this.defaultForm.getRawValue();
-        
-            formData.append('data', JSON.stringify( datosJson));
-            if(this.fileData){
-              formData.append('imagen', this.fileData);
-            }            
-        
-        //////////////////////////
-
-
-
-    if (!!this.ingredientes.producto_id && !!this.ingredientes.cantidad && !!this.ingredientes.unidad) {
-
-      let ji = { "plato_id": this.id, "producto_id": this.ingredientes.producto_id, "cantidad": this.ingredientes.cantidad, "unidad": this.ingredientes.unidad }
-
-      this.ingredientesService.create(ji)
-        .subscribe((response: any) => {
-          this.platosService.update(this.id, formData)
-            .subscribe((response: any) => {
-              this.getData(this.id);
-            }, err => {
-              console.log(err);
-              Swal.fire({
-                title: 'Atencion',
-                text: 'No se puede guardar' + err.error.descripcion,
-                icon: 'warning',
-              })
-            })
-
-        }, (err: any) => {
-          console.log(err)
-        }
-        )
-
-
-
-    } else {
-      Swal.fire({
-        title: 'Atencion',
-        text: 'Debe llenar ingrediente, cantidad y unidad',
-        icon: 'warning',
-      })
-    }
-
   }
 
   changeAuto(event) {
