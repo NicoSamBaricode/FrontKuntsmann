@@ -14,6 +14,10 @@ export class PlatosService {
     return this.http.get(`${this.url}platos`)
   }
 
+  public costo(){
+    return this.http.get(`${this.url}platos/costo`)
+  }
+
   public listUnidades(){
     return this.http.get(`${this.url}unidades`)
   }

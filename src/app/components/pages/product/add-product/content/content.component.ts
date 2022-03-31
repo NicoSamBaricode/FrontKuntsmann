@@ -19,6 +19,7 @@ export class ContentComponent implements OnInit {
   id = null
   defaultForm: FormGroup;
   unidades: any = []
+  unidadesF: any = []
   ingredientes: any = []
   productos: any = []
   items: any = []
@@ -120,6 +121,9 @@ export class ContentComponent implements OnInit {
       auto: new FormControl(null, [
 
       ]),
+      ingredientes: new FormControl(null, [
+
+      ]),
       precio: new FormControl(null, [
         Validators.required
       ]),
@@ -160,6 +164,13 @@ export class ContentComponent implements OnInit {
       }
       )
 
+      this.platosService.costo()
+      .subscribe((response: any) => {
+        console.log(response);
+      }, (err: any) => {
+        console.log(err);
+      })
+
 
   }
 
@@ -188,7 +199,7 @@ export class ContentComponent implements OnInit {
         ////////////////////////
 
         const formData = new FormData();
-
+        this.defaultForm.controls["ingredientes"].setValue(this.items);
         let datosJson= this.defaultForm.getRawValue();
     
         formData.append('data', JSON.stringify( datosJson));
@@ -199,6 +210,31 @@ export class ContentComponent implements OnInit {
     
     //////////////////////////
 
+    this.platosService.create(formData)
+    .subscribe(response => {
+      this.router.navigate(['/product/product-list']);
+    }, error => {
+      console.log(error);
+      if (error.error.descripcion === 'ER_DUP_ENTRY') {
+        Swal.fire({
+          title: 'Atencion',
+          text: 'Ya existe ',
+          icon: 'warning',
+        })
+      } else {
+        Swal.fire({
+          title: 'Atencion',
+          text: 'Contactar al servicio técnico Baricode ' + error.error.descripcion,
+          icon: 'error',
+        })
+      }
+
+    });
+
+
+
+
+/*
     if (this.update || this.id) {
       this.getData(this.id);
       this.platosService.update(this.id, formData)
@@ -235,7 +271,7 @@ export class ContentComponent implements OnInit {
           }
 
         });
-    }
+    }*/
 
   }
 
@@ -279,8 +315,22 @@ export class ContentComponent implements OnInit {
       });
   }
   agregarIngredientes() {
+    let producto = this.productos.filter(x => x.id == this.ingredientes.producto_id)[0]
+    let unidad = this.unidades.filter(x => x.id == this.ingredientes.unidad)[0]
+    console.log(unidad);
 
-            ////////////////////////
+    this.items.push({
+
+      producto_id: this.ingredientes.producto_id,
+      descripcion: producto.descripcion,
+      cantidad: this.ingredientes.cantidad,
+      unidad:unidad.descripcion,
+      unidad_id: this.ingredientes.unidad,
+    });
+
+
+    console.log(this.items)
+    /*        ////////////////////////
 
             const formData = new FormData();
 
@@ -319,17 +369,27 @@ export class ContentComponent implements OnInit {
         });
     }
 
-
+*/
   }
 
   eliminar_ingrediente(id: string) {
-    this.ingredientesService.delete(id)
+
+    this.items.splice(id, 1);
+
+    /*this.ingredientesService.delete(id)
       .subscribe((response: any) => {
 
         this.getData(this.id);
       }, (err: any) => {
         console.log(err);
-      });
+      });*/
+  }
+
+  cambio(){
+    let producto = this.productos.filter(x => x.id == this.ingredientes.producto_id)[0]
+    let unidad = this.unidades.filter(x => x.id == producto.unidad_id)[0]
+    this.unidadesF= this.unidades.filter(x => x.clase == unidad.clase)
+    this.ingredientes.unidad=this.unidadesF[0].id
   }
 
 
