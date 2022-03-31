@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import navigation from '../../../data/navigation.json'
-import navigationCocina from '../../../data/navigationCocina.json'
-import navigationVentas from '../../../data/navigationVentas.json'
+import navigationAdmin from '../../../data/navigationAdmin.json'
+import navigationProduccion from '../../../data/navigationProduccion.json'
+import navigationCompras from '../../../data/navigationCompras.json'
+import navigationConsultor from '../../../data/navigationConsultor.json'
 import jwt from 'jwt-decode';
 
 @Component({
@@ -22,11 +23,13 @@ export class SidenavComponent implements OnInit {
   ngOnInit(): void {
     const rol = jwt(localStorage.getItem('Token'))["rol"];
     switch (rol) {
-      case 1: this.navlist=navigation;
+      case 1: this.navlist=navigationAdmin;
       break;
-      case 2: this.navlist=navigationVentas;
+      case 2: this.navlist=navigationCompras;
       break;
-      case 3: this.navlist=navigationCocina;
+      case 3: this.navlist=navigationProduccion;
+      break;
+      case 4: this.navlist=navigationConsultor;
       break;
     }
     

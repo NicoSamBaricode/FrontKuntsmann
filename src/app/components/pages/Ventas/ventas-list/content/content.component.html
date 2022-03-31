@@ -20,8 +20,12 @@
                                     class="fa fa-print"></i></button>
                         </div>
                     </div>
-                    <div class="table-responsive">
+                    <div class="table-responsive" *ngIf="rol==1 || rol==3">
                         <ng2-smart-table [settings]="settings" [source]="source" (custom)="onCustom($event)"
+                            class="table w-100 thead-primary"></ng2-smart-table>
+                    </div>
+                    <div class="table-responsive"*ngIf="rol==2 || rol==4">
+                        <ng2-smart-table [settings]="settingsRestringido" [source]="source" (custom)="onCustom($event)"
                             class="table w-100 thead-primary"></ng2-smart-table>
                     </div>
 

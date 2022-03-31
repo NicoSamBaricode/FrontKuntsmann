@@ -1,25 +1,4 @@
 [
-   
-    
-    {
-        "id": 4,
-        "linktext": "Proveedores",
-        "iconclass": "fa fa-truck fs-16",
-        "icon": "",
-        "child": true,
-        "submenu": [
-            {
-                "id": 4.1,
-                "linktext": "Ingresar Proveedor",
-                "link": "/proveedores-form"
-            },
-            {
-                "id": 4.2,
-                "linktext": "Listar Proveedores",
-                "link": "/proveedores-list"
-            }
-        ]
-    },
     {
         "id": 2,
         "linktext": "Artículos",
@@ -38,25 +17,20 @@
                 "link": "/product/product-list"
             }
            
-           
         ]
     },
     {
-        "id": 5,
-        "linktext": "Almacenes",
-        "iconclass": "fa fa-archive fs-16",
+        "id": 4,
+        "linktext": "Proveedores",
+        "iconclass": "fa fa-truck fs-16",
         "icon": "",
         "child": true,
         "submenu": [
+           
             {
-                "id": 5.1,
-                "linktext": "Ingresar Nuevo Almacen",
-                "link": "/almacenes-form"
-            },
-            {
-                "id": 5.2,
-                "linktext": "Listado de Almacenes",
-                "link": "/almacenes-list"
+                "id": 4.2,
+                "linktext": "Listar Proveedores",
+                "link": "/proveedores-list"
             }
         ]
     },
@@ -79,25 +53,7 @@
             }
         ]
     },
-    {
-        "id": 7,
-        "linktext": "Etapas",
-        "iconclass": "fa fa-angle-double-right fs-16",
-        "icon": "",
-        "child": true,
-        "submenu": [
-            {
-                "id": 7.1,
-                "linktext": "Ingresar Etapa",
-                "link": "/etapas-form"
-            },
-            {
-                "id": 7.2,
-                "linktext": "Listar Etapas",
-                "link": "/etapas-list"
-            }
-        ]
-    },
+    
     {
         "id": 8,
         "linktext": "Productos",
@@ -105,11 +61,7 @@
         "icon": "",
         "child": true,
         "submenu": [
-            {
-                "id": 8.1,
-                "linktext": "Ingresar Producto",
-                "link": "/productos-form"
-            },
+            
             {
                 "id": 8.2,
                 "linktext": "Listar Productos",
@@ -139,8 +91,6 @@
                 "linktext": "Listar Total",
                 "link": "/stockTotal-list"
             }
-           
-            
         ]
     },
     {
@@ -167,6 +117,5 @@
             }
         ]
     }
-    
     
 ]

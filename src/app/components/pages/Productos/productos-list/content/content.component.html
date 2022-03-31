@@ -20,8 +20,11 @@
                                     class="fa fa-print"></i></button>
                         </div>
                     </div>
-                    <div class="table-responsive">
+                    <div class="table-responsive" *ngIf="rol==1 || rol==2" >
                         <ng2-smart-table [settings]="settings" [source]="source" (custom)="onCustom($event)" class="table w-100 thead-primary"></ng2-smart-table>
+                    </div>
+                    <div class="table-responsive"*ngIf="rol==3 || rol==4" >
+                        <ng2-smart-table [settings]="settingsRestringido" [source]="source" (custom)="onCustom($event)" class="table w-100 thead-primary"></ng2-smart-table>
                     </div>
                     <div class="table-responsive" style="display: none;">
                         <ng2-smart-table [settings]="settings2"  id="ImprimirProductos" [source]="source2"  class="table w-100 "></ng2-smart-table>

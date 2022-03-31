@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-
+import jwt from 'jwt-decode';
 import { PlatosService } from 'src/app/services/platos.service';
 import Swal, { SweetAlertOptions } from 'sweetalert2';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
@@ -12,9 +12,9 @@ import { LocalDataSource } from 'ng2-smart-table';
 })
 export class ContentComponent implements OnInit {
   // Table
-
+  rol: number;
   constructor(private platosService: PlatosService, private router: Router ) {
-
+    this.rol = jwt(localStorage.getItem('Token'))["rol"];
   }
 
   source: LocalDataSource;
@@ -80,6 +80,68 @@ export class ContentComponent implements OnInit {
           name: 'deleteAction',
           title: '<i class="far fa-trash-alt color-red" title="Borrar" ></i>'
         },
+        
+      ],
+      add: false,
+      edit: false,
+      delete: false,
+      defaultStyle: false
+    },
+  };
+  settingsRestringido = {
+    hideSubHeader: true,
+    pager: {
+      perPage: 10,
+    },
+
+    columns: {
+      id: {
+        title: 'Id',
+        filter: true,
+        hide: true
+      },
+      articulo_id: {
+        title: 'Id',
+        filter: true,
+       
+      },
+      descripcion: {
+        title: 'Articulo',
+        filter: true
+      },
+      precio: {
+        title: 'Precio',
+        filter: true
+      },
+      costo: {
+        title: 'Costo',
+        filter: true
+      },
+      margen: {
+        title: 'Rentabilidad',
+        filter: true
+      },
+
+
+
+    },
+    delete: {
+      confirmDelete: true,
+
+      deleteButtonContent: 'Borrar Fila',
+      saveButtonContent: 'Guardar',
+      cancelButtonContent: 'Cancelar'
+    },
+    actions: {
+      columnTitle: "Acciones",
+      position: "right",
+
+      custom: [
+        {
+          name: 'detalleAction',
+          title: '<i class="fa fa-plus-circle" title="Detalles" ></i>'
+        },
+       
         
       ],
       add: false,

@@ -4,7 +4,7 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { TransaccionesService } from 'src/app/services/transacciones.service';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import jwt from 'jwt-decode';
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
@@ -14,15 +14,15 @@ export class ContentComponent implements OnInit {
   // Table
   public data = data;
   update = false // para saber si es crear o actualizar
-  titulo="Movimientos de Stock Historico"
-  
+  titulo = "Movimientos de Stock Historico"
+  rol: number;
   constructor(private transaccionesService: TransaccionesService, private router: Router, private activatedRoute: ActivatedRoute) {
-
+    this.rol = jwt(localStorage.getItem('Token'))["rol"];
   }
-  
-  
-  source: LocalDataSource;  
-  source2: LocalDataSource; 
+
+
+  source: LocalDataSource;
+  source2: LocalDataSource;
   settings = {
     hideSubHeader: true,
     pager: {
@@ -33,7 +33,7 @@ export class ContentComponent implements OnInit {
       transaccion_id: {
         title: 'n° Transacción',
         filter: true,
-        
+
       },
       id: {
         title: 'Identificador',
@@ -46,17 +46,17 @@ export class ContentComponent implements OnInit {
       marca: {
         title: 'Marca',
         filter: true,
-        
+
       },
       lote: {
         title: 'Lote',
         filter: true,
-        
-      },numeroComprobante: {
+
+      }, numeroComprobante: {
         title: 'Comprobante',
         filter: true,
 
-      },      
+      },
       cantidad: {
         title: 'Cantidad',
         filter: true,
@@ -66,7 +66,7 @@ export class ContentComponent implements OnInit {
         title: 'Unidad',
         filter: true,
 
-      },fechaIngreso: {
+      }, fechaIngreso: {
         title: 'Ingreso',
         filter: true,
 
@@ -93,12 +93,12 @@ export class ContentComponent implements OnInit {
       }
 
     },
-    
+
 
     actions: {
-      columnTitle:"Acciones",
+      columnTitle: "Acciones",
       position: "right",
-      
+
       custom: [
 
         {
@@ -118,20 +118,20 @@ export class ContentComponent implements OnInit {
       add: false,
       edit: false,
       delete: false,
-      defaultStyle:false
+      defaultStyle: false
     },
   };
-  settings2 = {
+  settingsRestringido = {
     hideSubHeader: true,
     pager: {
-      perPage: 1000000000000,
+      perPage: 10,
     },
 
     columns: {
       transaccion_id: {
         title: 'n° Transacción',
         filter: true,
-        
+
       },
       id: {
         title: 'Identificador',
@@ -144,17 +144,17 @@ export class ContentComponent implements OnInit {
       marca: {
         title: 'Marca',
         filter: true,
-        
+
       },
       lote: {
         title: 'Lote',
         filter: true,
-        
-      },numeroComprobante: {
+
+      }, numeroComprobante: {
         title: 'Comprobante',
         filter: true,
 
-      },      
+      },
       cantidad: {
         title: 'Cantidad',
         filter: true,
@@ -164,7 +164,90 @@ export class ContentComponent implements OnInit {
         title: 'Unidad',
         filter: true,
 
-      },fechaIngreso: {
+      }, fechaIngreso: {
+        title: 'Ingreso',
+        filter: true,
+
+      },
+      fechaVencimiento: {
+        title: 'Vencimiento',
+        filter: true,
+
+      },
+      etapa: {
+        title: 'Etapa',
+        filter: true,
+
+      },
+      tipo: {
+        title: 'Tipo',
+        filter: true,
+
+      },
+      usuario: {
+        title: 'Usuario',
+        filter: true,
+
+      }
+
+    },
+
+
+    actions: {
+      columnTitle: "Acciones",
+      position: "right",
+
+      hide: true,
+      add: false,
+      edit: false,
+      delete: false,
+      defaultStyle: false
+    },
+  };
+  settings2 = {
+    hideSubHeader: true,
+    pager: {
+      perPage: 1000000000000,
+    },
+
+    columns: {
+      transaccion_id: {
+        title: 'n° Transacción',
+        filter: true,
+
+      },
+      id: {
+        title: 'Identificador',
+        filter: true
+      },
+      producto: {
+        title: 'Producto',
+        filter: true
+      },
+      marca: {
+        title: 'Marca',
+        filter: true,
+
+      },
+      lote: {
+        title: 'Lote',
+        filter: true,
+
+      }, numeroComprobante: {
+        title: 'Comprobante',
+        filter: true,
+
+      },
+      cantidad: {
+        title: 'Cantidad',
+        filter: true,
+
+      },
+      unidad: {
+        title: 'Unidad',
+        filter: true,
+
+      }, fechaIngreso: {
         title: 'Ingreso',
         filter: true,
 
@@ -192,22 +275,22 @@ export class ContentComponent implements OnInit {
       estado: {
         title: 'estado',
         filter: true,
-        hide:true,
+        hide: true,
       },
-     
+
 
     },
-    
+
 
     actions: {
-      hide:true,
-      columnTitle:"Acciones",
+      hide: true,
+      columnTitle: "Acciones",
       position: "right",
-      
-            add: false,
+
+      add: false,
       edit: false,
       delete: false,
-      defaultStyle:false
+      defaultStyle: false
     },
   };
   onSearch(query: string = '') {
@@ -247,7 +330,7 @@ export class ContentComponent implements OnInit {
           field: 'tipo',
           search: query
         }
-        
+
 
       ], false);
       this.source2.setFilter([
@@ -281,7 +364,7 @@ export class ContentComponent implements OnInit {
           field: 'tipo',
           search: query
         }
-        
+
 
       ], false);
     }
@@ -295,16 +378,16 @@ export class ContentComponent implements OnInit {
       this.router.navigate(['/transferenciaStock-form/' + event.data["id"]]);
     }
     if (event.action == 'editarAction') {
-      if (event.data['estado']==1) {
+      if (event.data['estado'] == 1) {
         this.router.navigate(['/stock-editar/' + event.data["id"]]);
-      }else{
+      } else {
         Swal.fire({
           title: 'Atencion',
           text: 'No se puede editar, ya existe un movimiento registrado',
           icon: 'warning',
         })
       }
-            
+
     }
 
   }
@@ -315,8 +398,8 @@ export class ContentComponent implements OnInit {
     if (params.id) {
       this.titulo = "Detalle de movimientos por producto"
       this.transaccionesService.productoList(params.id).subscribe(
-        (resp: any) => {        
-          
+        (resp: any) => {
+
           let aux = resp.result
           this.source = new LocalDataSource(aux);
           this.source2 = new LocalDataSource(aux);
@@ -324,15 +407,15 @@ export class ContentComponent implements OnInit {
       )
     } else {
       this.transaccionesService.list().subscribe(
-        (resp: any) => {        
-          
+        (resp: any) => {
+
           let aux = resp.result
           this.source = new LocalDataSource(aux);
           this.source2 = new LocalDataSource(aux);
         }
       )
     }
-    
+
   }
- 
+
 }

@@ -1,0 +1,93 @@
+[
+   
+    
+    {
+        "id": 4,
+        "linktext": "Proveedores",
+        "iconclass": "fa fa-truck fs-16",
+        "icon": "",
+        "child": true,
+        "submenu": [
+           
+            {
+                "id": 4.2,
+                "linktext": "Listar Proveedores",
+                "link": "/proveedores-list"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "linktext": "Artículos",
+        "iconclass": "fa fa-tasks fs-16",
+        "icon": "",
+        "child": true,
+        "submenu": [
+                     
+            {
+                "id": 2.2,
+                "linktext": "Listado de Artículo",
+                "link": "/product/product-list"
+            }
+           
+           
+        ]
+    },
+    
+   
+    
+    {
+        "id": 8,
+        "linktext": "Productos",
+        "iconclass": "fa fa-shopping-cart fs-16",
+        "icon": "",
+        "child": true,
+        "submenu": [
+         
+            {
+                "id": 8.2,
+                "linktext": "Listar Productos",
+                "link": "/productos-list"
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "linktext": "Stock",
+        "iconclass": "fa fa-retweet fs-16",
+        "icon": "",
+        "child": true,
+        "submenu": [
+           
+            {
+                "id": 9.2,
+                "linktext": "Listar Movimientos",
+                "link": "/stock-list"
+            },
+            {
+                "id": 9.3,
+                "linktext": "Listar Total",
+                "link": "/stockTotal-list"
+            }
+           
+            
+        ]
+    },
+    {
+        "id": 10,
+        "linktext": "Ventas",
+        "iconclass": "fa fa-clipboard fs-16",
+        "icon": "",
+        "child": true,
+        "submenu": [
+          
+            {
+                "id": 10.3,
+                "linktext": "Listar Ventas",
+                "link": "/ventas-list"
+            }
+        ]
+    }
+    
+    
+]

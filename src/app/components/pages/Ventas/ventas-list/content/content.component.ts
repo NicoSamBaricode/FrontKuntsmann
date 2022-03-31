@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-
+import jwt from 'jwt-decode';
 
 import { VentasService } from 'src/app/services/ventas.service';
 import Swal, { SweetAlertOptions } from 'sweetalert2';
@@ -13,9 +13,9 @@ import { LocalDataSource } from 'ng2-smart-table';
 })
 export class ContentComponent implements OnInit {
   // Table
-
+  rol: number;
   constructor(private ventasService: VentasService, private router: Router) {
-
+    this.rol = jwt(localStorage.getItem('Token'))["rol"];
   }
 
   source: LocalDataSource;
@@ -87,6 +87,72 @@ export class ContentComponent implements OnInit {
           title: '<i class="far fa-trash-alt color-red" title="Anular" ></i>'
         }
       ],
+      add: false,
+      edit: false,
+      delete: false,
+      defaultStyle: false
+    },
+  };
+  settingsRestringido = {
+    hideSubHeader: true,
+    pager: {
+      perPage: 10,
+    },
+    noDataMessage:'Ninguna Venta Encontrada',
+    columns: {
+      
+      id: {
+        title: 'Id',
+        filter: true
+      },
+      articulo_id: {
+        title: 'Articulo Num',
+        filter: true
+      },
+      categoria: {
+        title: 'Categoria',
+        filter: true
+      },
+      descripcion: {
+        title: 'Articulo',
+        filter: true
+      },
+     cantidad: {
+        title: 'Cantidad',
+        filter: true
+      },
+      precio: {
+        title: 'Precio',
+        filter: true
+      },
+      costo: {
+        title: 'Costo',
+        filter: true
+      },
+      margen: {
+        title: 'Rentabilidad',
+        filter: true
+      },
+      creado: {
+        title: 'Fecha',
+        filter: true
+      },
+
+
+
+    },
+    delete: {
+      confirmDelete: true,
+
+      deleteButtonContent: 'Borrar Fila',
+      saveButtonContent: 'Guardar',
+      cancelButtonContent: 'Cancelar'
+    },
+    actions: {
+      columnTitle: "Acciones",
+      position: "right",
+
+      hide:true,
       add: false,
       edit: false,
       delete: false,

@@ -5,6 +5,7 @@ import Swal, { SweetAlertOptions } from 'sweetalert2';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { Router } from '@angular/router';
 import { LocalDataSource } from 'ng2-smart-table';
+import jwt from 'jwt-decode';
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
@@ -12,9 +13,9 @@ import { LocalDataSource } from 'ng2-smart-table';
 })
 export class ContentComponent implements OnInit {
   // Table
-  
+  rol:number ;
   constructor(private proveedoresService: ProveedoresService, private router:Router) {
-
+   this.rol = jwt(localStorage.getItem('Token'))["rol"];
   }
   source: LocalDataSource;  
   settings = {
@@ -62,13 +63,61 @@ export class ContentComponent implements OnInit {
 
         {
           name: 'editAction',
-          title: '<i class="far fa-edit" title="Edit"></i>'
+          title: '<i class="far fa-edit" title="Edit" ></i>'
         },
         {
           name: 'deleteAction',
           title: '<i class="far fa-trash-alt color-red" title="delete" ></i>'
         }
       ],
+      add: false,
+      edit: false,
+      delete: false,
+      defaultStyle:false
+    },
+  };
+  settingsRestringido = {
+    hideSubHeader: true,
+    pager: {
+      perPage: 10,
+    },
+
+    columns: {
+
+      descripcion: {
+        title: 'Nombre',
+        filter: true
+      },
+      cuil: {
+        title: 'Cuil',
+        filter: true
+      },
+      direccion: {
+        title: 'Direccion',
+        filter: true
+      },
+      telefono: {
+        title: 'Telefono',
+        filter: true
+      },
+      email: {
+        title: 'Email',
+        filter: true
+      },
+
+    },
+    delete: {
+      confirmDelete: true,
+
+      deleteButtonContent: 'Borrar Fila',
+      saveButtonContent: 'Guardar',
+      cancelButtonContent: 'Cancelar'
+    },
+    actions: {
+      columnTitle:"Acciones",
+      position: "right",
+      
+      hide:true,
       add: false,
       edit: false,
       delete: false,

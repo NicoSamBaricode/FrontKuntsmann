@@ -1,5 +1,5 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
-
+import jwt from 'jwt-decode';
 import { ProductosService } from 'src/app/services/productos.service';
 import Swal, { SweetAlertOptions } from 'sweetalert2';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
@@ -12,9 +12,9 @@ import { LocalDataSource } from 'ng2-smart-table';
 })
 export class ContentComponent implements OnInit {
   // Table
-  
+  rol: number;
   constructor(private productosService: ProductosService, private router:Router) {
-
+    this.rol = jwt(localStorage.getItem('Token'))["rol"];
   }
   
   source: LocalDataSource;
@@ -73,6 +73,44 @@ export class ContentComponent implements OnInit {
     hideSubHeader: true,
     pager: {
       perPage:1000000000,
+    },
+
+    columns: {
+
+      descripcion: {
+        title: 'Nombre',
+        filter: true
+      },
+      unidad: {
+        title: 'Unidad de medida',
+        filter: true
+      },
+      
+
+    },
+    delete: {
+      confirmDelete: true,
+
+      deleteButtonContent: 'Borrar Fila',
+      saveButtonContent: 'Guardar',
+      cancelButtonContent: 'Cancelar'
+    },
+    actions: {
+      hiden:true,
+      columnTitle:"Acciones",
+      position: "right",
+      
+      
+      add: false,
+      edit: false,
+      delete: false,
+      defaultStyle:false
+    },
+  };
+  settingsRestringido = {
+    hideSubHeader: true,
+    pager: {
+      perPage:10,
     },
 
     columns: {
