@@ -384,7 +384,15 @@ export class ContentComponent implements OnInit {
     } else {
       this.defaultForm.controls['costo'].enable();
     }
+    this.margen();
     return costo
+  }
+
+  margen(){
+    let costo = this.defaultForm.get('costo').value
+    let precio = this.defaultForm.get('precio').value
+
+    this.defaultForm.controls['margen'].setValue(parseFloat(((precio - costo)).toFixed(2)));
   }
 
   imagenSeleccionada(event) {
